@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initData() {
-  const DATA_VERSION = 'v2_105_tools_linked_col_ad';
+  const DATA_VERSION = 'v3_253_tools_all_years';
   const savedVersion = localStorage.getItem('tool_maint_data_version');
   const savedTools = localStorage.getItem('tool_maint_tools');
   const savedWO = localStorage.getItem('tool_maint_workorders');
@@ -337,6 +337,7 @@ function renderRegistry() {
 
 function filterTools() {
   const searchTerm = (document.getElementById('registry-search')?.value || '').toLowerCase();
+  const yearFilter = document.getElementById('filter-year')?.value || 'ALL';
   const critFilter = document.getElementById('filter-criticality')?.value || 'ALL';
   const statusFilter = document.getElementById('filter-status')?.value || 'ALL';
   const custFilter = document.getElementById('filter-customer')?.value || 'ALL';
@@ -350,11 +351,14 @@ function filterTools() {
       (t.matchedToolShotId && t.matchedToolShotId.toLowerCase().includes(searchTerm)) ||
       (t.material && t.material.toLowerCase().includes(searchTerm));
 
+    const matchesYear = yearFilter === 'ALL' || String(t.year) === String(yearFilter);
     const matchesCrit = critFilter === 'ALL' || t.criticality === critFilter;
     const matchesStatus = statusFilter === 'ALL' || t.healthStatus === statusFilter;
-    const matchesCust = custFilter === 'ALL' || t.customer === custFilter || (custFilter === 'STL' && t.customer && t.customer.includes('STL'));
+    const matchesCust = custFilter === 'ALL' || 
+      (t.customer && t.customer.toLowerCase().includes(custFilter.toLowerCase())) ||
+      (custFilter === 'STL' && t.customer && t.customer.includes('STL'));
 
-    return matchesSearch && matchesCrit && matchesStatus && matchesCust;
+    return matchesSearch && matchesYear && matchesCrit && matchesStatus && matchesCust;
   });
 
   renderToolsGrid(filtered);
@@ -393,7 +397,10 @@ function renderToolsGrid(tools) {
           <div>
             <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
               <span class="part-code">${tool.partNumber}</span>
-              <span style="font-size: 11px; font-weight: 700; color: #1e40af; background: #dbeafe; padding: 2px 6px; border-radius: 4px;">${tool.customer || 'JRTL'}</span>
+              <div style="display: flex; gap: 4px; align-items: center;">
+                <span style="font-size: 11px; font-weight: 700; color: #065f46; background: #d1fae5; padding: 2px 6px; border-radius: 4px;">${tool.year || '2024'}</span>
+                <span style="font-size: 11px; font-weight: 700; color: #1e40af; background: #dbeafe; padding: 2px 6px; border-radius: 4px;">${tool.customer || 'JRTL'}</span>
+              </div>
             </div>
             <div class="part-title">${tool.description}</div>
           </div>
@@ -447,6 +454,7 @@ function renderToolsTable(tools) {
     const strokePct = Math.min(100, Math.round((tool.strokesCurrent / tool.strokesMax) * 100));
     const tr = document.createElement('tr');
     tr.innerHTML = `
+      <td><span class="badge" style="background:#d1fae5;color:#047857;font-weight:700;font-size:11px;padding:3px 8px;border-radius:4px;">${tool.year || '2024'}</span></td>
       <td>
         <img src="${tool.image || 'images/image1.png'}" class="table-thumb" alt="${tool.partNumber}" onclick="openLightbox('${tool.image}', '${tool.partNumber}', '${tool.description}')" style="cursor: pointer;">
       </td>
@@ -1112,9 +1120,9 @@ function handleSaveMaintenanceLog(e) {
 
 function exportData(format) {
   if (format === 'csv') {
-    let csv = 'ID,Part Number,Description,Criticality,Tool ID,Tool Type,Press Tonnage,Material,Current Strokes,Max Strokes,Health Status,Pipeline Status,Samples Qty,Location,Technician\n';
+    let csv = 'ID,Year,Part Number,Description,Customer,Criticality,Tool ID,Linked Die ID,Col AD Shots,Press Tonnage,Mech No,Material,Thickness,Current Strokes,Max Strokes,Health Status,Pipeline Status,Samples Qty,Location,Technician\n';
     appState.tools.forEach(t => {
-      csv += `"${t.id}","${t.partNumber}","${t.description}","${t.criticality}","${t.toolId}","${t.toolType || ''}","${t.pressTonnage || ''}","${t.material || ''}",${t.strokesCurrent},${t.strokesMax},"${t.healthStatus}","${t.pipelineStatus}",${t.samplesQty || 0},"${t.location || ''}","${t.assignedTech || ''}"\n`;
+      csv += `"${t.id}","${t.year || ''}","${t.partNumber}","${(t.description || '').replace(/"/g, '""')}","${t.customer || ''}","${t.criticality}","${t.toolId}","${t.matchedToolShotId || ''}",${t.colAD_ToolShot || 0},"${t.pressTonnage || ''}","${t.mechNo || ''}","${t.material || ''}","${t.thickness || ''}",${t.strokesCurrent},${t.strokesMax},"${t.healthStatus}","${t.pipelineStatus}",${t.samplesQty || 0},"${t.location || ''}","${t.assignedTech || ''}"\n`;
     });
 
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });

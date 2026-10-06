@@ -284,13 +284,21 @@
             </div>
 
             <div class="filter-group">
+              <select id="filter-year" class="filter-select" onchange="filterTools()">
+                <option value="ALL">All Years (253 Tools)</option>
+                <option value="2024">2024 (105 Tools)</option>
+                <option value="2025">2025 (126 Tools)</option>
+                <option value="2026">2026 (22 Tools)</option>
+              </select>
+
               <select id="filter-customer" class="filter-select" onchange="filterTools()">
-                <option value="ALL">All Customers (105 Tools)</option>
+                <option value="ALL">All Customers (253 Tools)</option>
                 <option value="STL">STL (Schneider Electric)</option>
-                <option value="SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant)">SumiRiko (Automotive)</option>
+                <option value="SumiRiko">SumiRiko (Automotive)</option>
                 <option value="SEMB">SEMB (Batam Coils)</option>
                 <option value="JOYSON">JOYSON Safety</option>
                 <option value="TESLA">TESLA Motors</option>
+                <option value="TSKT">TSKT</option>
               </select>
 
               <select id="filter-criticality" class="filter-select" onchange="filterTools()">
@@ -328,6 +336,7 @@
             <table class="data-table">
               <thead>
                 <tr>
+                  <th>Year</th>
                   <th>Image</th>
                   <th>Part Number</th>
                   <th>Part Name</th>

@@ -11,3 +11,7 @@ Desktop.ini
 
 ~$*
 
+# Temporary extraction directories and large raw downloads
+full_workbook.xlsx
+wb_extracted/
+ts_extracted/
