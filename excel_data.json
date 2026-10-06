@@ -1,0 +1,324 @@
+﻿{
+    "rows":  [
+                 {
+                     "Row":  1,
+                     "A":  "Part Number",
+                     "B":  "Description",
+                     "C":  "Criticality",
+                     "D":  "Samples qty",
+                     "E":  "Status",
+                     "F":  "Picture",
+                     "G":  "Remarks"
+                 },
+                 {
+                     "Row":  2,
+                     "A":  "S1A28862",
+                     "B":  "Terminal plug-in low rating",
+                     "C":  "MAJOR",
+                     "D":  "10",
+                     "E":  "Sent to JR-TH ,3-Sep-2026",
+                     "F":  null,
+                     "G":  "Samples received"
+                 },
+                 {
+                     "Row":  3,
+                     "A":  "S1A28863",
+                     "B":  "Terminal plug-in high rating",
+                     "C":  "MAJOR",
+                     "D":  "10",
+                     "E":  "Sent to JR-TH ,3-Sep-2026",
+                     "F":  null,
+                     "G":  "Samples received"
+                 },
+                 {
+                     "Row":  4,
+                     "A":  "GHJ16013AA",
+                     "B":  "Spreader1 4P",
+                     "C":  "MINOR",
+                     "D":  "10",
+                     "E":  "Sent to JR-TH ,3-Sep-2026",
+                     "F":  null,
+                     "G":  "Samples received"
+                 },
+                 {
+                     "Row":  5,
+                     "A":  "GHJ16016AA",
+                     "B":  "Spreader4 4P",
+                     "C":  "MINOR",
+                     "D":  "10",
+                     "E":  "Sent to JR-TH ,3-Sep-2026",
+                     "F":  null,
+                     "G":  "Samples received"
+                 },
+                 {
+                     "Row":  6,
+                     "A":  "GHJ16014AA",
+                     "B":  "Spreader2 4P",
+                     "C":  "MINOR",
+                     "D":  "10",
+                     "E":  "Sent to JR-TH ,3-Sep-2026",
+                     "F":  null,
+                     "G":  "Samples received"
+                 },
+                 {
+                     "Row":  7,
+                     "A":  "GHJ16015AA",
+                     "B":  "Spreader3 4P",
+                     "C":  "MINOR",
+                     "D":  "10",
+                     "E":  "Sent to JR-TH ,3-Sep-2026",
+                     "F":  null,
+                     "G":  "Samples received"
+                 },
+                 {
+                     "Row":  8,
+                     "A":  "48187114AA",
+                     "B":  "PLATE, SLIDE",
+                     "C":  "MINOR",
+                     "D":  "10",
+                     "E":  "Sent to JR-TH ,3-Sep-2026",
+                     "F":  null,
+                     "G":  "Finished Trial \nand Sample Submission"
+                 },
+                 {
+                     "Row":  9,
+                     "A":  "48187099AA",
+                     "B":  "PLATE, CAM",
+                     "C":  "MINOR",
+                     "D":  "10",
+                     "E":  "Sent to JR-TH ,3-Sep-2026",
+                     "F":  null,
+                     "G":  "Samples received"
+                 },
+                 {
+                     "Row":  10,
+                     "A":  "48187081AA",
+                     "B":  "CLAMP, SHAFT",
+                     "C":  "CRITICAL",
+                     "D":  "30",
+                     "E":  "Sent to JR-TH ,3-Sep-2026",
+                     "F":  null,
+                     "G":  "Samples received"
+                 },
+                 {
+                     "Row":  11,
+                     "A":  "48187077AA",
+                     "B":  "LEVER, DOOR LOCK",
+                     "C":  "CRITICAL",
+                     "D":  "30",
+                     "E":  "Sent to JR-TH ,3-Sep-2026",
+                     "F":  null,
+                     "G":  "Samples received"
+                 },
+                 {
+                     "Row":  12,
+                     "A":  "48187083AA",
+                     "B":  "STRIKER-PLATE",
+                     "C":  "MINOR",
+                     "D":  "10",
+                     "E":  "Sent to JR-TH ,3-Sep-2026",
+                     "F":  null,
+                     "G":  "Samples received"
+                 },
+                 {
+                     "Row":  13,
+                     "A":  "48187082AA",
+                     "B":  "LOCK, SHAFT",
+                     "C":  "CRITICAL",
+                     "D":  "30",
+                     "E":  "Sent to JR-TH ,3-Sep-2026",
+                     "F":  null,
+                     "G":  "Samples received"
+                 },
+                 {
+                     "Row":  14,
+                     "A":  "48187087AA",
+                     "B":  "LEVER, SHAFT RELEASE",
+                     "C":  "CRITICAL",
+                     "D":  "30",
+                     "E":  "Sent to JR-TH ,3-Sep-2026",
+                     "F":  null,
+                     "G":  "Finished Trial \nand Sample Submission"
+                 },
+                 {
+                     "Row":  15,
+                     "A":  null,
+                     "B":  null,
+                     "C":  null,
+                     "D":  null,
+                     "E":  null,
+                     "F":  null,
+                     "G":  null
+                 },
+                 {
+                     "Row":  16,
+                     "A":  "Samples in pipeline:",
+                     "B":  null,
+                     "C":  null,
+                     "D":  null,
+                     "E":  null,
+                     "F":  null,
+                     "G":  null
+                 },
+                 {
+                     "Row":  17,
+                     "A":  "Part Number",
+                     "B":  "Description",
+                     "C":  "Criticality",
+                     "D":  "Samples Required",
+                     "E":  "Status",
+                     "F":  "Picture",
+                     "G":  "Remarks"
+                 },
+                 {
+                     "Row":  18,
+                     "A":  "48187076AA",
+                     "B":  "LATCH, UVR",
+                     "C":  "CRITICAL",
+                     "D":  "30",
+                     "E":  "Samples Preparation in progress",
+                     "F":  null,
+                     "G":  "Finished Trial \nand Sample Submission"
+                 },
+                 {
+                     "Row":  19,
+                     "A":  "S1B22575",
+                     "B":  "TERMINAL Connection(ithSILVER TIP)",
+                     "C":  "MAJOR",
+                     "D":  "10",
+                     "E":  "Samples Preparation in progress",
+                     "F":  null,
+                     "G":  "Samples not yet Received"
+                 },
+                 {
+                     "Row":  20,
+                     "A":  "S1B22372",
+                     "B":  "TERMINAL Connection(/O SILVER TIP)",
+                     "C":  "MAJOR",
+                     "D":  "10",
+                     "E":  "Samples Preparation in progress",
+                     "F":  null,
+                     "G":  "Samples not yet Received"
+                 },
+                 {
+                     "Row":  21,
+                     "A":  "S1A23987",
+                     "B":  "ARC STACK LOW",
+                     "C":  "CRITICAL",
+                     "D":  "30",
+                     "E":  "Samples Preparation in progress",
+                     "F":  null,
+                     "G":  "Samples not yet Received"
+                 },
+                 {
+                     "Row":  22,
+                     "A":  "48187145AA",
+                     "B":  "STAPLE",
+                     "C":  "CRITICAL",
+                     "D":  "30",
+                     "E":  "Samples Preparation in progress",
+                     "F":  null,
+                     "G":  "Samples not yet Received"
+                 }
+             ],
+    "images":  [
+                   {
+                       "fromCol":  5,
+                       "fromRow":  12,
+                       "toCol":  5,
+                       "toRow":  12,
+                       "image":  "image1.png"
+                   },
+                   {
+                       "fromCol":  5,
+                       "fromRow":  10,
+                       "toCol":  5,
+                       "toRow":  10,
+                       "image":  "image2.png"
+                   },
+                   {
+                       "fromCol":  5,
+                       "fromRow":  11,
+                       "toCol":  5,
+                       "toRow":  11,
+                       "image":  "image3.png"
+                   },
+                   {
+                       "fromCol":  5,
+                       "fromRow":  8,
+                       "toCol":  5,
+                       "toRow":  8,
+                       "image":  "image4.png"
+                   },
+                   {
+                       "fromCol":  5,
+                       "fromRow":  9,
+                       "toCol":  5,
+                       "toRow":  9,
+                       "image":  "image5.png"
+                   },
+                   {
+                       "fromCol":  5,
+                       "fromRow":  4,
+                       "toCol":  5,
+                       "toRow":  4,
+                       "image":  "image6.png"
+                   },
+                   {
+                       "fromCol":  5,
+                       "fromRow":  6,
+                       "toCol":  5,
+                       "toRow":  6,
+                       "image":  "image7.png"
+                   },
+                   {
+                       "fromCol":  5,
+                       "fromRow":  3,
+                       "toCol":  5,
+                       "toRow":  3,
+                       "image":  "image8.png"
+                   },
+                   {
+                       "fromCol":  5,
+                       "fromRow":  5,
+                       "toCol":  5,
+                       "toRow":  5,
+                       "image":  "image9.png"
+                   },
+                   {
+                       "fromCol":  5,
+                       "fromRow":  2,
+                       "toCol":  5,
+                       "toRow":  2,
+                       "image":  "image10.png"
+                   },
+                   {
+                       "fromCol":  5,
+                       "fromRow":  1,
+                       "toCol":  5,
+                       "toRow":  1,
+                       "image":  "image11.png"
+                   },
+                   {
+                       "fromCol":  5,
+                       "fromRow":  13,
+                       "toCol":  5,
+                       "toRow":  13,
+                       "image":  "image12.png"
+                   },
+                   {
+                       "fromCol":  5,
+                       "fromRow":  7,
+                       "toCol":  5,
+                       "toRow":  7,
+                       "image":  "image13.png"
+                   },
+                   {
+                       "fromCol":  5,
+                       "fromRow":  17,
+                       "toCol":  5,
+                       "toRow":  17,
+                       "image":  "image14.png"
+                   }
+               ]
+}

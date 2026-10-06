@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tool Maintenance & Lifecycle Management | GP-CoS LAIR</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Chart.js for data visualization -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+          </svg>
+        </div>
+        <div class="sidebar-title">
+          <h1>TOOL-MAINT</h1>
+          <p>GP-CoS • LAIR Suite</p>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-label">Core Operations</div>
+        <a class="nav-item active" data-tab="dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="9"></rect>
+            <rect x="14" y="3" width="7" height="5"></rect>
+            <rect x="14" y="12" width="7" height="9"></rect>
+            <rect x="3" y="16" width="7" height="5"></rect>
+          </svg>
+          <span>Dashboard</span>
+        </a>
+        <a class="nav-item" data-tab="registry">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 20h9"></path>
+            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+          </svg>
+          <span>Tools & Dies Registry</span>
+          <span class="badge" id="sidebar-tools-count">18</span>
+        </a>
+        <a class="nav-item" data-tab="workorders">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+          <span>Work Orders (PM/CM)</span>
+          <span class="badge" id="sidebar-wo-badge">3</span>
+        </a>
+
+        <div class="nav-label">Quality & Tracking</div>
+        <a class="nav-item" data-tab="pipeline">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <span>GP-CoS / LAIR Pipeline</span>
+        </a>
+        <a class="nav-item" data-tab="gallery">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+            <polyline points="21 15 16 10 5 21"></polyline>
+          </svg>
+          <span>Visual Part Inspector</span>
+        </a>
+        <a class="nav-item" data-tab="history">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 3v5h5"></path>
+            <path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"></path>
+            <path d="M12 7v5l4 2"></path>
+          </svg>
+          <span>Maintenance Logs</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="plant-status">
+          <span class="status-dot"></span>
+          <span>Plant JR-TH Online</span>
+        </div>
+        <span style="font-family: monospace; font-size: 11px; opacity: 0.7;">v2.4</span>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Top Bar -->
+      <header class="top-bar">
+        <div class="page-header-info">
+          <h2 id="current-page-title">Dashboard & Operations Overview</h2>
+          <p id="current-page-subtitle">Real-time status of tooling assets, PM compliance, and LAIR sample pipeline</p>
+        </div>
+        <div class="top-actions">
+          <button class="btn btn-secondary btn-sm" onclick="exportData('csv')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Export CSV
+          </button>
+          <button class="btn btn-secondary btn-sm" onclick="printReport()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 6 2 18 2 18 9"></polyline>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+              <rect x="6" y="14" width="12" height="8"></rect>
+            </svg>
+            Print Report
+          </button>
+          <button class="btn btn-primary btn-sm" onclick="openNewWorkOrderModal()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            New Work Order
+          </button>
+          <button class="btn btn-outline-primary btn-sm" onclick="openAddToolModal()">
+            + Add Tool
+          </button>
+        </div>
+      </header>
+
+      <!-- Content Views -->
+      <div class="content-body">
+        
+        <!-- ================= TAB 1: DASHBOARD ================= -->
+        <section id="view-dashboard" class="tab-view">
+          <!-- KPI Stats Grid -->
+          <div class="stats-grid">
+            <div class="kpi-card kpi-blue">
+              <div class="kpi-header">
+                <span class="kpi-title">Total Tool Assets</span>
+                <div class="kpi-icon">🛠️</div>
+              </div>
+              <div class="kpi-value" id="kpi-total-tools">18</div>
+              <div class="kpi-subtext">
+                <span>14 Active in Production, 4 In Prep</span>
+              </div>
+            </div>
+
+            <div class="kpi-card kpi-red">
+              <div class="kpi-header">
+                <span class="kpi-title">Critical Tools</span>
+                <div class="kpi-icon">⚠️</div>
+              </div>
+              <div class="kpi-value" id="kpi-critical-tools">7</div>
+              <div class="kpi-subtext">
+                <span class="trend-badge alert">Requires Daily Monitoring</span>
+              </div>
+            </div>
+
+            <div class="kpi-card kpi-green">
+              <div class="kpi-header">
+                <span class="kpi-title">PM Compliance Rate</span>
+                <div class="kpi-icon">✅</div>
+              </div>
+              <div class="kpi-value" id="kpi-pm-compliance">94.2%</div>
+              <div class="kpi-subtext">
+                <span class="trend-badge up">+2.1%</span>
+                <span>vs last cycle</span>
+              </div>
+            </div>
+
+            <div class="kpi-card kpi-purple">
+              <div class="kpi-header">
+                <span class="kpi-title">LAIR Samples Sent</span>
+                <div class="kpi-icon">📦</div>
+              </div>
+              <div class="kpi-value" id="kpi-samples-sent">130 pcs</div>
+              <div class="kpi-subtext">
+                <span>Sent to JR-TH plant</span>
+              </div>
+            </div>
+
+            <div class="kpi-card kpi-amber">
+              <div class="kpi-header">
+                <span class="kpi-title">Active Work Orders</span>
+                <div class="kpi-icon">⚡</div>
+              </div>
+              <div class="kpi-value" id="kpi-active-wo">3</div>
+              <div class="kpi-subtext">
+                <span class="trend-badge alert">1 Urgent (Shaft Lock)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charts and Summary Row -->
+          <div class="dashboard-row">
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">Tooling Criticality & Stroke Life Distribution</h3>
+                  <p class="card-subtitle">Stroke accumulation vs preventive maintenance limit</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <canvas id="strokeChart" height="240"></canvas>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">Criticality Breakdown</h3>
+                  <p class="card-subtitle">CRITICAL vs MAJOR vs MINOR</p>
+                </div>
+              </div>
+              <div class="card-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <div style="width: 200px; height: 200px;">
+                  <canvas id="criticalityDonut"></canvas>
+                </div>
+                <div style="display: flex; gap: 16px; margin-top: 16px; font-size: 12px; font-weight: 600;">
+                  <span style="color: #ef4444;">● Critical (7)</span>
+                  <span style="color: #f59e0b;">● Major (4)</span>
+                  <span style="color: #0ea5e9;">● Minor (7)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Urgent Attention Table & Recent Events -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="12"></line>
+                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                Tools Requiring Immediate Attention
+              </h3>
+              <button class="btn btn-secondary btn-sm" onclick="switchTab('registry')">View All Tools</button>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Part Number</th>
+                    <th>Description</th>
+                    <th>Tool ID</th>
+                    <th>Criticality</th>
+                    <th>Current / Max Strokes</th>
+                    <th>Health Status</th>
+                    <th>Assigned Tech</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="urgent-tools-tbody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= TAB 2: TOOLS & DIES REGISTRY ================= -->
+        <section id="view-registry" class="tab-view" style="display: none;">
+          <!-- Filter & Search Bar -->
+          <div class="filter-bar">
+            <div class="search-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="registry-search" placeholder="Search by part number, description, tool ID..." oninput="filterTools()">
+            </div>
+
+            <div class="filter-group">
+              <select id="filter-criticality" class="filter-select" onchange="filterTools()">
+                <option value="ALL">All Criticalities</option>
+                <option value="CRITICAL">Critical</option>
+                <option value="MAJOR">Major</option>
+                <option value="MINOR">Minor</option>
+              </select>
+
+              <select id="filter-status" class="filter-select" onchange="filterTools()">
+                <option value="ALL">All Health Statuses</option>
+                <option value="Operational">Operational</option>
+                <option value="Maintenance Due">Maintenance Due</option>
+                <option value="Critical Attention">Critical Attention</option>
+                <option value="Trial In Progress">Trial In Progress</option>
+                <option value="Pipeline Pending">Pipeline Pending</option>
+              </select>
+
+              <div class="view-toggle">
+                <button class="toggle-btn active" id="view-mode-grid" onclick="setViewMode('grid')">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                </button>
+                <button class="toggle-btn" id="view-mode-table" onclick="setViewMode('table')">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grid Container -->
+          <div id="registry-grid-container" class="tools-grid">
+            <!-- Populated by JS -->
+          </div>
+
+          <!-- Table Container -->
+          <div id="registry-table-container" class="table-responsive" style="display: none;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Part Number</th>
+                  <th>Description</th>
+                  <th>Tool ID</th>
+                  <th>Criticality</th>
+                  <th>Strokes Meter</th>
+                  <th>Health Status</th>
+                  <th>Next PM Due</th>
+                  <th>Location</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="registry-table-tbody">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ================= TAB 3: WORK ORDERS (PM/CM) ================= -->
+        <section id="view-workorders" class="tab-view" style="display: none;">
+          <div class="filter-bar">
+            <h3 style="font-size: 16px; font-weight: 700;">Active & Scheduled Maintenance Orders</h3>
+            <button class="btn btn-primary btn-sm" onclick="openNewWorkOrderModal()">
+              + Create Work Order
+            </button>
+          </div>
+
+          <div class="work-orders-grid" id="work-orders-container">
+            <!-- Populated by JS -->
+          </div>
+        </section>
+
+        <!-- ================= TAB 4: GP-CoS / LAIR PIPELINE ================= -->
+        <section id="view-pipeline" class="tab-view" style="display: none;">
+          <div class="card" style="margin-bottom: 24px;">
+            <div class="card-header">
+              <h3 class="card-title">GP-CoS Trial & Sample Pipeline Status</h3>
+              <span class="badge-criticality minor">Schneider Electric JR-TH Plant Review</span>
+            </div>
+            <div class="card-body">
+              <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 18px;">
+                Tracking prototype trials, sample submissions, and physical sample inspection milestones across Global Procurement Change of Source (GP-CoS) and Line Assembly Industrial Readiness (LAIR).
+              </p>
+              
+              <!-- Pipeline progress stages -->
+              <div style="display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 180px; padding: 14px; background: #ecfdf5; border-radius: var(--radius-md); border-left: 4px solid #10b981;">
+                  <div style="font-size: 11px; color: #065f46; font-weight: 700;">STAGE 1: RECEIVED AT PLANT</div>
+                  <div style="font-size: 20px; font-weight: 800; color: #065f46; margin: 4px 0;">11 Parts</div>
+                  <div style="font-size: 11px; color: #047857;">Samples physical receipt verified</div>
+                </div>
+
+                <div style="flex: 1; min-width: 180px; padding: 14px; background: #eff6ff; border-radius: var(--radius-md); border-left: 4px solid #2563eb;">
+                  <div style="font-size: 11px; color: #1e40af; font-weight: 700;">STAGE 2: TRIAL FINISHED</div>
+                  <div style="font-size: 20px; font-weight: 800; color: #1e40af; margin: 4px 0;">3 Parts</div>
+                  <div style="font-size: 11px; color: #1d4ed8;">Sample submission approved</div>
+                </div>
+
+                <div style="flex: 1; min-width: 180px; padding: 14px; background: #fffbeb; border-radius: var(--radius-md); border-left: 4px solid #f59e0b;">
+                  <div style="font-size: 11px; color: #92400e; font-weight: 700;">STAGE 3: PREPARATION IN PROGRESS</div>
+                  <div style="font-size: 20px; font-weight: 800; color: #92400e; margin: 4px 0;">4 Parts</div>
+                  <div style="font-size: 11px; color: #b45309;">Tool alignment & sample press pending</div>
+                </div>
+              </div>
+
+              <!-- Pipeline Table -->
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Image</th>
+                      <th>Part Number</th>
+                      <th>Description</th>
+                      <th>Criticality</th>
+                      <th>Samples Qty / Req</th>
+                      <th>Status & Dispatch</th>
+                      <th>Remarks / Quality State</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="pipeline-table-tbody">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= TAB 5: VISUAL PART INSPECTOR GALLERY ================= -->
+        <section id="view-gallery" class="tab-view" style="display: none;">
+          <div class="filter-bar">
+            <div>
+              <h3 style="font-size: 16px; font-weight: 700;">Tooling & Component Visual Inspection Gallery</h3>
+              <p style="font-size: 12px; color: var(--text-muted);">High-resolution CAD captures and component images extracted from LAIR repository</p>
+            </div>
+            <button class="btn btn-secondary btn-sm" onclick="exportData('json')">Download Image Manifest</button>
+          </div>
+
+          <div class="gallery-grid" id="gallery-container">
+            <!-- Populated by JS -->
+          </div>
+        </section>
+
+        <!-- ================= TAB 6: MAINTENANCE LOGS & HISTORY ================= -->
+        <section id="view-history" class="tab-view" style="display: none;">
+          <div class="filter-bar">
+            <h3 style="font-size: 16px; font-weight: 700;">Tooling Maintenance Log & Audit Trail</h3>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-secondary btn-sm" onclick="openLogMaintenanceModal()">+ Log Maintenance Event</button>
+              <button class="btn btn-primary btn-sm" onclick="exportData('csv')">Export Audit Logs</button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Log ID</th>
+                  <th>Date</th>
+                  <th>Part Number</th>
+                  <th>Tool ID</th>
+                  <th>Maintenance Type</th>
+                  <th>Technician</th>
+                  <th>Strokes</th>
+                  <th>Downtime (hrs)</th>
+                  <th>Actions Taken</th>
+                  <th>Outcome</th>
+                </tr>
+              </thead>
+              <tbody id="history-table-tbody">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ================= MODALS ================= -->
+
+  <!-- Tool Detail Modal -->
+  <div class="modal-backdrop" id="modal-tool-detail">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title" id="modal-tool-title">Tool Specifications & Life Cycle</h3>
+          <p style="font-size: 12px; color: var(--text-muted);" id="modal-tool-subtitle">Comprehensive tooling telemetry</p>
+        </div>
+        <button class="modal-close" onclick="closeModal('modal-tool-detail')">&times;</button>
+      </div>
+      <div class="modal-body" id="modal-tool-body">
+        <!-- Injected by JS -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('modal-tool-detail')">Close</button>
+        <button class="btn btn-outline-primary" id="modal-tool-edit-btn">Edit Specs</button>
+        <button class="btn btn-primary" id="modal-tool-wo-btn">Create Work Order</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Work Order Modal -->
+  <div class="modal-backdrop" id="modal-new-wo">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title">Create Maintenance Work Order</h3>
+        <button class="modal-close" onclick="closeModal('modal-new-wo')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-new-wo" onsubmit="handleSaveWorkOrder(event)" class="form-grid">
+          <div class="form-group full-width">
+            <label class="form-label">Select Target Tool / Part</label>
+            <select class="form-control" id="wo-tool-select" required onchange="handleWoToolSelect(this.value)">
+              <!-- Options populated by JS -->
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Order Type</label>
+            <select class="form-control" id="wo-type" required>
+              <option value="Preventive Maintenance (PM)">Preventive Maintenance (PM)</option>
+              <option value="Corrective Maintenance (CM)">Corrective Maintenance (CM)</option>
+              <option value="Tool Sharpening & Grinding">Tool Sharpening & Grinding</option>
+              <option value="Trial Tooling Modification">Trial Tooling Modification</option>
+              <option value="Annual Overhaul">Annual Overhaul</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Priority</label>
+            <select class="form-control" id="wo-priority" required>
+              <option value="URGENT">URGENT (Critical Tooling)</option>
+              <option value="HIGH" selected>HIGH</option>
+              <option value="MEDIUM">MEDIUM</option>
+              <option value="LOW">LOW</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Assigned Technician</label>
+            <input type="text" class="form-control" id="wo-tech" value="R. Sudhakar" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Target Completion Date</label>
+            <input type="date" class="form-control" id="wo-due" required>
+          </div>
+
+          <div class="form-group full-width">
+            <label class="form-label">Problem / Task Description</label>
+            <textarea class="form-control" id="wo-desc" placeholder="Detail the observed wear, burrs, tolerance deviations or routine maintenance reason..." required></textarea>
+          </div>
+
+          <div class="form-group full-width">
+            <label class="form-label">Action Plan</label>
+            <textarea class="form-control" id="wo-action" placeholder="Step-by-step procedures for the toolroom technician..." required></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('modal-new-wo')">Cancel</button>
+        <button class="btn btn-primary" type="submit" form="form-new-wo">Create Order</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add / Edit Tool Modal -->
+  <div class="modal-backdrop" id="modal-edit-tool">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-edit-tool-title">Add / Edit Tool Asset</h3>
+        <button class="modal-close" onclick="closeModal('modal-edit-tool')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-tool" onsubmit="handleSaveTool(event)" class="form-grid">
+          <input type="hidden" id="edit-tool-id">
+
+          <div class="form-group">
+            <label class="form-label">Part Number</label>
+            <input type="text" class="form-control" id="edit-part-num" required placeholder="e.g. 48187081AA">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Part Description</label>
+            <input type="text" class="form-control" id="edit-desc" required placeholder="e.g. CLAMP, SHAFT">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Criticality</label>
+            <select class="form-control" id="edit-criticality" required>
+              <option value="CRITICAL">CRITICAL</option>
+              <option value="MAJOR">MAJOR</option>
+              <option value="MINOR">MINOR</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Tool ID</label>
+            <input type="text" class="form-control" id="edit-tool-id-input" required placeholder="e.g. DIE-CLP-7081-CRIT">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <input type="text" class="form-control" id="edit-category" placeholder="e.g. Shaft & Mechanism Locking">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Tool Type</label>
+            <input type="text" class="form-control" id="edit-type" placeholder="e.g. High Precision Multi-Stage Die">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Press / Machine Tonnage</label>
+            <input type="text" class="form-control" id="edit-tonnage" placeholder="e.g. 200T Komatsu">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Raw Material Specification</label>
+            <input type="text" class="form-control" id="edit-material" placeholder="e.g. Alloy Steel AISI 4140">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Current Strokes</label>
+            <input type="number" class="form-control" id="edit-strokes-curr" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Max Tool Stroke Life</label>
+            <input type="number" class="form-control" id="edit-strokes-max" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Health Status</label>
+            <select class="form-control" id="edit-health-status" required>
+              <option value="Operational">Operational</option>
+              <option value="Maintenance Due">Maintenance Due</option>
+              <option value="Critical Attention">Critical Attention</option>
+              <option value="Inspection Due">Inspection Due</option>
+              <option value="Trial In Progress">Trial In Progress</option>
+              <option value="Pipeline Pending">Pipeline Pending</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">LAIR Pipeline Status</label>
+            <select class="form-control" id="edit-pipeline-status" required>
+              <option value="Sent to JR-TH">Sent to JR-TH</option>
+              <option value="Samples Preparation in progress">Samples Preparation in progress</option>
+              <option value="Finished Trial and Sample Submission">Finished Trial and Sample Submission</option>
+              <option value="Internal Tooling Validation">Internal Tooling Validation</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Samples Qty / Required</label>
+            <input type="number" class="form-control" id="edit-samples-qty" value="10">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Plant Location</label>
+            <input type="text" class="form-control" id="edit-location" placeholder="e.g. Bay 4 - Precision Press P07">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Part Image</label>
+            <select class="form-control" id="edit-image-select">
+              <option value="images/image1.png">Image 1 (Lock, Shaft)</option>
+              <option value="images/image2.png">Image 2 (Lever, Door Lock)</option>
+              <option value="images/image3.png">Image 3 (Striker-Plate)</option>
+              <option value="images/image4.png">Image 4 (Plate, Cam)</option>
+              <option value="images/image5.png">Image 5 (Clamp, Shaft)</option>
+              <option value="images/image6.png">Image 6 (Spreader4)</option>
+              <option value="images/image7.png">Image 7 (Spreader3)</option>
+              <option value="images/image8.png">Image 8 (Spreader1)</option>
+              <option value="images/image9.png">Image 9 (Spreader2)</option>
+              <option value="images/image10.png">Image 10 (Terminal High Rating)</option>
+              <option value="images/image11.png">Image 11 (Terminal Low Rating)</option>
+              <option value="images/image12.png">Image 12 (Lever, Shaft Release)</option>
+              <option value="images/image13.png">Image 13 (Plate, Slide)</option>
+              <option value="images/image14.png">Image 14 (Latch, UVR)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Assigned Technician</label>
+            <input type="text" class="form-control" id="edit-assigned-tech" value="R. Sudhakar">
+          </div>
+
+          <div class="form-group full-width">
+            <label class="form-label">Engineering / Quality Notes</label>
+            <textarea class="form-control" id="edit-notes" placeholder="Tolerances, critical dimensions, inspection instructions..."></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('modal-edit-tool')">Cancel</button>
+        <button class="btn btn-primary" type="submit" form="form-tool">Save Tool Specs</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Log Quick Maintenance Modal -->
+  <div class="modal-backdrop" id="modal-log-maint">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title">Log Maintenance Event</h3>
+        <button class="modal-close" onclick="closeModal('modal-log-maint')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-log-maint" onsubmit="handleSaveMaintenanceLog(event)" class="form-grid">
+          <div class="form-group full-width">
+            <label class="form-label">Tool / Part</label>
+            <select class="form-control" id="log-tool-select" required>
+              <!-- Populated by JS -->
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Maintenance Date</label>
+            <input type="date" class="form-control" id="log-date" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Type</label>
+            <select class="form-control" id="log-type" required>
+              <option value="Preventive Maintenance">Preventive Maintenance</option>
+              <option value="Corrective Maintenance">Corrective Maintenance</option>
+              <option value="Tool Sharpening">Tool Sharpening</option>
+              <option value="Die Modification">Die Modification</option>
+              <option value="Routine Inspection">Routine Inspection</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Technician</label>
+            <input type="text" class="form-control" id="log-tech" value="R. Sudhakar" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Downtime (Hours)</label>
+            <input type="number" step="0.5" class="form-control" id="log-downtime" value="2.5" required>
+          </div>
+
+          <div class="form-group full-width">
+            <label class="form-label">Maintenance Actions Performed</label>
+            <textarea class="form-control" id="log-actions" placeholder="E.g. Reground punch 0.1mm, ultrasonic cleaned guide bushing, lubricated..." required></textarea>
+          </div>
+
+          <div class="form-group full-width">
+            <label class="form-label">Inspection Outcome & Result</label>
+            <input type="text" class="form-control" id="log-outcome" placeholder="E.g. Dimensional check passed. Reset stroke counter." required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('modal-log-maint')">Cancel</button>
+        <button class="btn btn-primary" type="submit" form="form-log-maint">Record Event</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- High-Res Image Inspection Lightbox -->
+  <div class="modal-backdrop" id="modal-lightbox">
+    <div class="modal-dialog modal-lg" style="background: #0f172a; border-color: #334155;">
+      <div class="modal-header" style="border-color: #1e293b;">
+        <div>
+          <h3 class="modal-title" style="color: white;" id="lightbox-title">Component Optical Inspection</h3>
+          <p style="font-size: 12px; color: #94a3b8;" id="lightbox-desc">Detailed drawing/photograph review</p>
+        </div>
+        <button class="modal-close" style="color: white;" onclick="closeModal('modal-lightbox')">&times;</button>
+      </div>
+      <div class="modal-body lightbox-body">
+        <div class="lightbox-img-wrap" id="lightbox-wrap">
+          <img src="" id="lightbox-image" class="lightbox-img" alt="Component Inspection">
+        </div>
+        <div class="lightbox-controls">
+          <button class="btn btn-secondary btn-sm" onclick="zoomImage(1.2)">🔍 Zoom In</button>
+          <button class="btn btn-secondary btn-sm" onclick="zoomImage(0.8)">🔍 Zoom Out</button>
+          <button class="btn btn-secondary btn-sm" onclick="resetZoom()">↺ Reset</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Printable Area for Job Sheet -->
+  <div id="printable-report" class="print-area" style="display: none;"></div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
