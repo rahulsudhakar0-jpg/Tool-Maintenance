@@ -43,7 +43,7 @@ if (document.readyState === 'loading') {
 }
 
 function initData() {
-  const DATA_VERSION = 'v4_253_tools_all_years';
+  const DATA_VERSION = 'v5_253_tools_with_matched_images';
   const savedVersion = localStorage.getItem('tool_maint_data_version');
   const savedTools = localStorage.getItem('tool_maint_tools');
   const savedWO = localStorage.getItem('tool_maint_workorders');
