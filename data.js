@@ -1,12 +1,8 @@
 /**
  * Tool Maintenance Web Application - Consolidated Multi-Year Dataset (2024, 2025, 2026)
  * Total Tools: 253
- * 2024 Tools: 105
- * 2025 Tools: 126
- * 2026 Tools: 22
- * Matched with Column B Part Pictures from Google Sheet
  * Stroke values linked to Column AD 'Good quantity' sum from OEE Production Logs
- * Generated: 2026-10-06T07:22:46.279Z
+ * Daily Synchronized: 2026-10-06T07:54:18.731Z
  */
 
 var INITIAL_DATA = {
@@ -20,8 +16,9 @@ var INITIAL_DATA = {
         "datasetVersion": "3.0-MultiYear-Unified",
         "consolidatedFile": "unified_tools_2024_2025_2026.csv",
         "primarySheetSource": "JRTL Tooling Lists 2024, 2025, 2026 (Google Sheets)",
-        "strokeDataSource": "OEE-2026 (Col AD Good Quantity Sum across Press Logs)",
-        "lastUpdated": "2026-10-06T07:22:46.267Z"
+        "strokeDataSource": "OEE-2026 (Col AD Good Quantity Sum across 13 Press Logs)",
+        "lastUpdated": "2026-10-06T07:54:18.731Z",
+        "lastOeeSync": "2026-10-06T07:54:18.731Z"
     },
     "tools": [
         {
@@ -8459,9 +8456,9 @@ var INITIAL_DATA = {
             "pipelineStatus": "Mass Production Ramp-Up",
             "statusDate": "2026-10-06",
             "image": "images/tools/tool_TL-154.jpg",
-            "strokesCurrent": 15628,
+            "strokesCurrent": 6826,
             "strokesMax": 10000000,
-            "colAD_ToolShot": 15628,
+            "colAD_ToolShot": 6826,
             "actualToolShot": 0,
             "warrantyToolShots": 0,
             "currentTotalShot": 0,
@@ -8475,9 +8472,9 @@ var INITIAL_DATA = {
             "lastPmDate": "2026-08-15",
             "nextPmDate": "2026-10-15",
             "notes": "Year: 2025 | Material:  ( mm) | Speed:  SPM | Blanking gap:  | Linked Die: Catalog Die.",
-            "oeeRuns": 23,
-            "oeePresses": "8# GTX-500T, 9# OCP-110T, 11# 200T, 12# 200T",
-            "matchedOeePart": "SB-104A-1-1",
+            "oeeRuns": 5,
+            "oeePresses": "8# GTX-500T",
+            "matchedOeePart": "SB-104A-1-2",
             "strokeWearPercent": 0
         },
         {
@@ -14799,9 +14796,9 @@ var INITIAL_DATA = {
     ]
 };
 
-if (typeof window !== 'undefined') {
-    window.INITIAL_DATA = INITIAL_DATA;
-}
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = INITIAL_DATA;
+}
+if (typeof window !== 'undefined') {
+    window.INITIAL_DATA = INITIAL_DATA;
 }

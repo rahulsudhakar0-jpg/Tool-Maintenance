@@ -1,0 +1,38 @@
+name: Daily OEE Good Quantity Sync
+
+on:
+  schedule:
+    # Runs daily at 00:00 UTC (07:00 AM Bangkok/Thailand plant time)
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub UI anytime
+
+permissions:
+  contents: write
+
+jobs:
+  sync-oee:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run Daily OEE Column AD Sync
+        run: node sync_daily_oee.js
+
+      - name: Commit and Push if updated
+        run: |
+          git config --global user.name "GitHub Actions [Daily OEE Sync]"
+          git config --global user.email "actions@github.com"
+          git add data.js excel_data.json oee_good_quantities_summary.json
+          if git diff --staged --quiet; then
+            echo "No new production changes logged today in Google Sheet."
+          else
+            git commit -m "Automated Daily OEE Sync: Updated Column AD Good Quantity production strokes"
+            git push origin main
+            echo "Successfully pushed daily OEE update to main!"
+          fi

@@ -49,6 +49,7 @@ function initApp() {
   updateGoogleSheetsBadge();
   setupGlobalClickHandlers();
   syncSlideBar();
+  checkAutoOeeSync();
 
   // If Google Sheets URL is set, fetch latest data in background
   if (appState.googleSheetsUrl) {
@@ -2106,6 +2107,209 @@ function getStrokeColor(pct) {
 // ==========================================================================
 // Google Sheets Cloud Database Integration
 // ==========================================================================
+
+// ==========================================================================
+// Daily OEE Production Sync (Column AD Good Quantity)
+// ==========================================================================
+
+const OEE_SHEET_ID = '1-3RKcRJC_ENe-xCWMIYYHqYYaKj0cyCG8n-MwMWQMXM';
+
+const OEE_PRESS_SHEETS = [
+  { name: '1# OCP-80T', gid: '587870018' },
+  { name: '2# MHS-80T', gid: '2065750272' },
+  { name: '3# OCP-110T', gid: '1363407651' },
+  { name: '4# SN1-110T', gid: '280483646' },
+  { name: '5# OCP-110T', gid: '1314347229' },
+  { name: '6# STD-150T', gid: '43426348' },
+  { name: '7# GTX-300T', gid: '236922057' },
+  { name: '8# GTX-500T', gid: '323827484' },
+  { name: '9# OCP-110T', gid: '1496168527' },
+  { name: '10# OCP-260 T', gid: '804228985' },
+  { name: '11# 200T', gid: '797360584' },
+  { name: '12# 200T', gid: '190763615' },
+  { name: '13# 110T', gid: '659449304' }
+];
+
+async function syncLiveOeeStrokes(silent = false) {
+  const btn = document.getElementById('btn-sync-oee');
+  const btnText = document.getElementById('sync-oee-text');
+  const indicator = document.getElementById('sync-oee-indicator');
+
+  if (btnText) btnText.textContent = '⏳ Syncing 13 Presses...';
+  if (indicator) indicator.style.backgroundColor = '#f59e0b';
+
+  const allPartsGoodQty = {};
+  let successfulSheets = 0;
+
+  try {
+    const promises = OEE_PRESS_SHEETS.map(async (ps) => {
+      try {
+        const url = `https://docs.google.com/spreadsheets/d/${OEE_SHEET_ID}/gviz/tq?tqx=out:json&gid=${ps.gid}`;
+        const res = await fetch(url);
+        if (!res.ok) return;
+        const text = await res.text();
+        const m = text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\);?/);
+        if (!m) return;
+        const data = JSON.parse(m[1]);
+        if (!data.table || !data.table.rows) return;
+
+        let colPartNo = 10;
+        let colPartName = 9;
+        let colGoodQty = 29;
+
+        data.table.cols.forEach((c, idx) => {
+          const lbl = (c.label || c.id || '').toLowerCase();
+          if (lbl.includes('part no') || lbl.includes('part_no')) colPartNo = idx;
+          if (lbl.includes('product name') || lbl.includes('产品名称')) colPartName = idx;
+          if (lbl.includes('good quantity') || lbl.includes('合格数')) colGoodQty = idx;
+        });
+
+        data.table.rows.forEach(r => {
+          const c = r.c || [];
+          const partNo = c[colPartNo] ? String(c[colPartNo].v !== null ? c[colPartNo].v : c[colPartNo].f || '').trim() : '';
+          const partName = c[colPartName] ? String(c[colPartName].v !== null ? c[colPartName].v : c[colPartName].f || '').trim() : '';
+          const goodQty = c[colGoodQty] ? Number(c[colGoodQty].v) || 0 : 0;
+
+          if (partNo && goodQty > 0) {
+            const cleanPartNo = partNo.replace(/[\r\n]+/g, ' ').trim();
+            if (!allPartsGoodQty[cleanPartNo]) {
+              allPartsGoodQty[cleanPartNo] = {
+                partNo: cleanPartNo,
+                partName: partName.replace(/[\r\n]+/g, ' ').trim(),
+                totalGoodQuantity: 0,
+                runs: 0,
+                presses: []
+              };
+            }
+            allPartsGoodQty[cleanPartNo].totalGoodQuantity += goodQty;
+            allPartsGoodQty[cleanPartNo].runs++;
+            if (!allPartsGoodQty[cleanPartNo].presses.includes(ps.name)) {
+              allPartsGoodQty[cleanPartNo].presses.push(ps.name);
+            }
+          }
+        });
+        successfulSheets++;
+      } catch (err) {
+        console.warn(`Failed to sync ${ps.name}:`, err);
+      }
+    });
+
+    await Promise.all(promises);
+
+    if (successfulSheets > 0) {
+      const oeeMapExact = new Map();
+      const oeeMapNorm = new Map();
+
+      Object.values(allPartsGoodQty).forEach(item => {
+        oeeMapExact.set(item.partNo.toLowerCase(), item);
+        const norm = item.partNo.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+        if (norm) {
+          if (!oeeMapNorm.has(norm) || oeeMapNorm.get(norm).totalGoodQuantity < item.totalGoodQuantity) {
+            oeeMapNorm.set(norm, item);
+          }
+        }
+      });
+
+      let updatedCount = 0;
+
+      appState.tools.forEach(tool => {
+        const rawPn = tool.partNumber || '';
+        const cleanPn = rawPn.toLowerCase().trim();
+        const normPn = rawPn.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+
+        let match = oeeMapExact.get(cleanPn);
+
+        if (!match) {
+          const tokens = rawPn.split(/[\/&, \s]+/);
+          for (const tok of tokens) {
+            const tokClean = tok.toLowerCase().trim();
+            const tokNorm = tok.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+            if (tokClean && oeeMapExact.has(tokClean)) {
+              match = oeeMapExact.get(tokClean);
+              break;
+            }
+            if (tokNorm && oeeMapNorm.has(tokNorm)) {
+              match = oeeMapNorm.get(tokNorm);
+              break;
+            }
+          }
+        }
+
+        if (!match && normPn) {
+          match = oeeMapNorm.get(normPn);
+        }
+
+        if (!match) {
+          for (const [k, v] of oeeMapNorm.entries()) {
+            if (k.length >= 6 && (normPn.includes(k) || k.includes(normPn))) {
+              match = v;
+              break;
+            }
+          }
+        }
+
+        if (match && match.totalGoodQuantity > 0) {
+          tool.strokesCurrent = match.totalGoodQuantity;
+          tool.colAD_ToolShot = match.totalGoodQuantity;
+          tool.oeeRuns = match.runs;
+          tool.oeePresses = match.presses.join(', ');
+          tool.matchedOeePart = match.partNo;
+
+          const wearPct = Math.round((tool.strokesCurrent / tool.strokesMax) * 100);
+          tool.strokeWearPercent = wearPct;
+
+          if (wearPct >= 90) {
+            tool.healthStatus = 'Critical Attention';
+          } else if (wearPct >= 75) {
+            tool.healthStatus = 'Maintenance Due';
+          } else {
+            tool.healthStatus = 'Operational';
+          }
+
+          updatedCount++;
+        }
+      });
+
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      localStorage.setItem('tool_maint_last_oee_sync_date', now.toDateString());
+      localStorage.setItem('tool_maint_last_oee_sync_time', timeStr);
+      saveState();
+      renderCurrentTab();
+
+      if (btnText) btnText.textContent = `✓ Synced (${timeStr})`;
+      if (indicator) indicator.style.backgroundColor = '#10b981';
+
+      if (!silent) {
+        const totalSum = Object.values(allPartsGoodQty).reduce((s, p) => s + p.totalGoodQuantity, 0);
+        alert(`✅ Daily OEE Synchronization Complete!\n\n• Successfully queried all ${successfulSheets} of 13 press machines\n• Updated ${updatedCount} tooling parts with live Column AD Good Quantity\n• Total cumulative good quantity calculated: ${totalSum.toLocaleString()} strokes`);
+      }
+    }
+  } catch (err) {
+    console.error('Error during live OEE sync:', err);
+    if (btnText) btnText.textContent = '🔄 Sync OEE Daily';
+    if (indicator) indicator.style.backgroundColor = '#ef4444';
+    if (!silent) alert('Could not complete live OEE sync. Check internet connection or Google Sheets permissions.');
+  }
+}
+
+function checkAutoOeeSync() {
+  const lastSyncDate = localStorage.getItem('tool_maint_last_oee_sync_date');
+  const today = new Date().toDateString();
+  const lastTime = localStorage.getItem('tool_maint_last_oee_sync_time');
+
+  const btnText = document.getElementById('sync-oee-text');
+  if (lastTime && btnText) {
+    btnText.textContent = `✓ Synced (${lastTime})`;
+  }
+
+  // Auto-sync in background if not synced today
+  if (lastSyncDate !== today) {
+    setTimeout(() => {
+      syncLiveOeeStrokes(true);
+    }, 1500);
+  }
+}
 
 const DEFAULT_GS_URL = "https://docs.google.com/spreadsheets/d/1GJT6p_Yfn7Lda-kYgH7-lFofOO0GOn1ZfwWjTlGXm2c/edit";
 

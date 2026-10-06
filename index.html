@@ -99,6 +99,10 @@
           <p id="current-page-subtitle">Real-time status of tooling assets, PM compliance, and LAIR sample pipeline</p>
         </div>
         <div class="top-actions">
+          <button class="btn btn-secondary btn-sm" id="btn-sync-oee" onclick="syncLiveOeeStrokes(false)" title="Sync latest Good quantity from OEE Google Sheet (Col AD across 13 press machines)">
+            <span id="sync-oee-indicator" style="width: 8px; height: 8px; border-radius: 50%; background-color: #10b981; display: inline-block;"></span>
+            <span id="sync-oee-text">🔄 Sync OEE Daily (Col AD)</span>
+          </button>
           <button class="btn btn-secondary btn-sm" id="btn-google-sheets" onclick="openGoogleSheetsModal()" title="Connect & Sync with Google Sheets Database">
             <span id="gs-status-indicator" style="width: 8px; height: 8px; border-radius: 50%; background-color: #94a3b8; display: inline-block;"></span>
             <span id="gs-btn-text">Google Sheets DB</span>
