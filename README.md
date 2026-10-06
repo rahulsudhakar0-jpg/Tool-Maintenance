@@ -45,6 +45,11 @@ Extracted and calibrated directly from the plant engineering specifications and 
 * **Data Export**: One-click download of the entire database in **CSV** or **JSON** format.
 * **Printable Maintenance Job Sheets**: Formatted for standard A4 printing (`Ctrl+P` or via the top navigation bar) for toolroom technicians and quality audits.
 
+### 8. 📊 Google Sheets as Live Cloud Database
+* **Cloud Persistence**: Use any Google Sheet as a live, collaborative, multi-user database for tools, work orders, and maintenance logs.
+* **Bi-Directional Synchronization**: Push local data to Google Sheets or pull live changes directly into the web application.
+* **Automated Web App API**: Powered by a lightweight Google Apps Script (`google_apps_script.js`) with zero third-party dependencies.
+
 ---
 
 ## 📂 Project Structure

@@ -99,6 +99,10 @@
           <p id="current-page-subtitle">Real-time status of tooling assets, PM compliance, and LAIR sample pipeline</p>
         </div>
         <div class="top-actions">
+          <button class="btn btn-secondary btn-sm" id="btn-google-sheets" onclick="openGoogleSheetsModal()" title="Connect & Sync with Google Sheets Database">
+            <span id="gs-status-indicator" style="width: 8px; height: 8px; border-radius: 50%; background-color: #94a3b8; display: inline-block;"></span>
+            <span id="gs-btn-text">Google Sheets DB</span>
+          </button>
           <button class="btn btn-outline-primary btn-sm" id="btn-push-gh" onclick="pushToGitHubUI()" title="Push latest changes to GitHub repository">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
@@ -761,6 +765,61 @@
           <button class="btn btn-secondary btn-sm" onclick="zoomImage(0.8)">🔍 Zoom Out</button>
           <button class="btn btn-secondary btn-sm" onclick="resetZoom()">↺ Reset</button>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Google Sheets Integration Modal -->
+  <div class="modal-backdrop" id="modal-google-sheets">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title">📊 Google Sheets Cloud Database Sync</h3>
+          <p style="font-size: 12px; color: var(--text-muted);">Use Google Sheets as your live, multi-user cloud database</p>
+        </div>
+        <button class="modal-close" onclick="closeModal('modal-google-sheets')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 16px; margin-bottom: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <span style="font-size: 13px; font-weight: 700;">Connection Status:</span>
+            <span id="gs-modal-status-badge" class="status-pill pipeline-pending">Local Storage Mode</span>
+          </div>
+          <div class="form-group full-width">
+            <label class="form-label">Google Apps Script Web App URL</label>
+            <input type="url" class="form-control" id="gs-web-app-url" placeholder="https://script.google.com/macros/s/.../exec">
+            <span style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Enter the Web App URL deployed from your Google Sheet's Apps Script.</span>
+          </div>
+          <div style="display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap;">
+            <button class="btn btn-primary btn-sm" onclick="testAndFetchGoogleSheets()">
+              ⬇️ Fetch Data from Google Sheet
+            </button>
+            <button class="btn btn-success btn-sm" onclick="pushToGoogleSheets()">
+              ⬆️ Push Local Data to Google Sheet
+            </button>
+            <button class="btn btn-secondary btn-sm" onclick="disconnectGoogleSheets()">
+              Disconnect
+            </button>
+          </div>
+        </div>
+
+        <div style="border-top: 1px solid var(--border); padding-top: 18px;">
+          <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 8px;">Easy 2-Minute Setup Instructions</h4>
+          <ol style="font-size: 13px; color: var(--text-muted); line-height: 1.6; padding-left: 20px; margin-bottom: 14px;">
+            <li>Open a new spreadsheet at <a href="https://sheets.new" target="_blank" style="color: var(--primary); font-weight: 600;">sheets.new</a>.</li>
+            <li>In the top menu, click <strong>Extensions ➔ Apps Script</strong>.</li>
+            <li>Delete any template code and paste the code from <code>google_apps_script.js</code>.</li>
+            <li>Click <strong>Deploy ➔ New deployment</strong>, select <strong>Web app</strong> (Execute as: <em>Me</em>, Access: <em>Anyone</em>).</li>
+            <li>Copy the resulting Web App URL and paste it into the field above!</li>
+          </ol>
+          <button class="btn btn-secondary btn-sm" onclick="copyAppsScriptCode()">
+            📋 Copy Google Apps Script Code
+          </button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('modal-google-sheets')">Close</button>
+        <button class="btn btn-primary" onclick="saveGoogleSheetsConfig()">Save & Connect</button>
       </div>
     </div>
   </div>

@@ -11,7 +11,8 @@ let appState = {
   currentTab: 'dashboard',
   viewMode: 'grid',
   activeToolId: null,
-  zoomScale: 1.0
+  zoomScale: 1.0,
+  googleSheetsUrl: localStorage.getItem('tool_maint_gs_url') || ''
 };
 
 // Charts references
@@ -27,6 +28,12 @@ document.addEventListener('DOMContentLoaded', () => {
   setupNavigation();
   renderCurrentTab();
   updateSidebarBadges();
+  updateGoogleSheetsBadge();
+
+  // If Google Sheets URL is set, fetch latest data in background
+  if (appState.googleSheetsUrl) {
+    testAndFetchGoogleSheets(true);
+  }
 });
 
 function initData() {
@@ -62,6 +69,11 @@ function saveState() {
   localStorage.setItem('tool_maint_workorders', JSON.stringify(appState.workOrders));
   localStorage.setItem('tool_maint_history', JSON.stringify(appState.maintenanceHistory));
   updateSidebarBadges();
+
+  // Auto-sync to Google Sheets in background if configured
+  if (appState.googleSheetsUrl) {
+    pushToGoogleSheets(true);
+  }
 
   // Try background sync with PowerShell API server if available
   fetch('/api/sync', {
@@ -1218,4 +1230,166 @@ function getStrokeColor(pct) {
   if (pct >= 90) return 'fill-red';
   if (pct >= 70) return 'fill-amber';
   return 'fill-green';
+}
+
+// ==========================================================================
+// Google Sheets Cloud Database Integration
+// ==========================================================================
+
+function openGoogleSheetsModal() {
+  const urlInput = document.getElementById('gs-web-app-url');
+  if (urlInput) urlInput.value = appState.googleSheetsUrl || '';
+  updateGoogleSheetsModalStatus();
+  document.getElementById('modal-google-sheets').classList.add('show');
+}
+
+function updateGoogleSheetsBadge() {
+  const indicator = document.getElementById('gs-status-indicator');
+  const text = document.getElementById('gs-btn-text');
+  if (!indicator || !text) return;
+
+  if (appState.googleSheetsUrl) {
+    indicator.style.backgroundColor = '#10b981';
+    text.textContent = 'Google Sheet: Connected';
+  } else {
+    indicator.style.backgroundColor = '#94a3b8';
+    text.textContent = 'Google Sheets DB';
+  }
+}
+
+function updateGoogleSheetsModalStatus() {
+  const badge = document.getElementById('gs-modal-status-badge');
+  if (!badge) return;
+
+  if (appState.googleSheetsUrl) {
+    badge.className = 'status-pill operational';
+    badge.textContent = 'Connected & Active';
+  } else {
+    badge.className = 'status-pill pipeline-pending';
+    badge.textContent = 'Local Storage Mode';
+  }
+}
+
+function saveGoogleSheetsConfig() {
+  const url = (document.getElementById('gs-web-app-url')?.value || '').trim();
+  if (url && !url.startsWith('https://script.google.com/')) {
+    alert('Please enter a valid Google Apps Script Web App URL (starts with https://script.google.com/...)');
+    return;
+  }
+
+  appState.googleSheetsUrl = url;
+  localStorage.setItem('tool_maint_gs_url', url);
+  updateGoogleSheetsBadge();
+  closeModal('modal-google-sheets');
+
+  if (url) {
+    testAndFetchGoogleSheets(false);
+  }
+}
+
+function disconnectGoogleSheets() {
+  if (confirm('Disconnect Google Sheets and revert to local storage?')) {
+    appState.googleSheetsUrl = '';
+    localStorage.removeItem('tool_maint_gs_url');
+    document.getElementById('gs-web-app-url').value = '';
+    updateGoogleSheetsBadge();
+    updateGoogleSheetsModalStatus();
+    alert('Disconnected from Google Sheets.');
+  }
+}
+
+async function testAndFetchGoogleSheets(silent = false) {
+  const url = appState.googleSheetsUrl || (document.getElementById('gs-web-app-url')?.value || '').trim();
+  if (!url) {
+    if (!silent) alert('Please enter your Google Apps Script Web App URL first.');
+    return;
+  }
+
+  try {
+    const res = await fetch(url);
+    const result = await res.json();
+
+    if (result.status === 'success' && result.data) {
+      if (result.data.tools && result.data.tools.length > 0) {
+        appState.tools = result.data.tools;
+      }
+      if (result.data.workOrders && result.data.workOrders.length > 0) {
+        appState.workOrders = result.data.workOrders;
+      }
+      if (result.data.maintenanceHistory && result.data.maintenanceHistory.length > 0) {
+        appState.maintenanceHistory = result.data.maintenanceHistory;
+      }
+
+      saveState();
+      renderCurrentTab();
+      updateSidebarBadges();
+      updateGoogleSheetsBadge();
+
+      if (!silent) {
+        alert(`Successfully fetched database from Google Sheet!\n• Tools: ${appState.tools.length}\n• Work Orders: ${appState.workOrders.length}\n• History: ${appState.maintenanceHistory.length}`);
+      }
+    } else {
+      throw new Error(result.message || 'Unknown response from Google Sheet');
+    }
+  } catch (err) {
+    console.error('Google Sheets fetch failed:', err);
+    if (!silent) {
+      alert('Failed to connect to Google Sheets: ' + err.message + '\n\nMake sure your Web App deployment is set to "Who has access: Anyone".');
+    }
+  }
+}
+
+async function pushToGoogleSheets(silent = false) {
+  const url = appState.googleSheetsUrl || (document.getElementById('gs-web-app-url')?.value || '').trim();
+  if (!url) {
+    if (!silent) alert('Please enter your Google Apps Script Web App URL first.');
+    return;
+  }
+
+  try {
+    const payload = {
+      action: 'sync_all',
+      data: {
+        tools: appState.tools,
+        workOrders: appState.workOrders,
+        maintenanceHistory: appState.maintenanceHistory
+      }
+    };
+
+    const res = await fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    });
+
+    const result = await res.json();
+    if (result.status === 'success') {
+      if (!silent) {
+        alert('All local tooling data, work orders, and history have been pushed to your Google Sheet!');
+      }
+    } else {
+      throw new Error(result.message || 'Failed to update Google Sheet');
+    }
+  } catch (err) {
+    console.error('Google Sheets push failed:', err);
+    if (!silent) {
+      alert('Error updating Google Sheet: ' + err.message);
+    }
+  }
+}
+
+function copyAppsScriptCode() {
+  const code = `// Google Apps Script for Tool Maintenance Database
+// (Full code available in google_apps_script.js file in your repo)
+// Paste google_apps_script.js content into Extensions > Apps Script in Google Sheets.`;
+
+  // Fetch from local file or copy prompt
+  fetch('google_apps_script.js')
+    .then(r => r.text())
+    .then(text => {
+      navigator.clipboard.writeText(text);
+      alert('Google Apps Script code copied to your clipboard!\n\nOpen your Google Sheet, go to Extensions > Apps Script, paste and Deploy as Web app.');
+    })
+    .catch(() => {
+      alert('Please open google_apps_script.js in your project folder to copy the script code.');
+    });
 }
