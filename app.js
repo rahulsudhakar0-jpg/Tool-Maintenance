@@ -1149,6 +1149,42 @@ function printReport() {
   window.print();
 }
 
+async function pushToGitHubUI() {
+  const btn = document.getElementById('btn-push-gh');
+  const originalText = btn ? btn.innerHTML : '';
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = '<span>Pushing...</span>';
+  }
+
+  try {
+    const res = await fetch('/api/git-push', { method: 'POST' });
+    if (res.ok) {
+      const data = await res.json();
+      if (btn) {
+        btn.innerHTML = '<span>✓ Pushed!</span>';
+        btn.classList.remove('btn-outline-primary');
+        btn.classList.add('btn-success');
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.classList.remove('btn-success');
+          btn.classList.add('btn-outline-primary');
+          btn.disabled = false;
+        }, 3000);
+      }
+    } else {
+      throw new Error('Server returned ' + res.status);
+    }
+  } catch (err) {
+    console.warn('Direct API push not available:', err);
+    if (btn) {
+      btn.innerHTML = originalText;
+      btn.disabled = false;
+    }
+    alert('Auto-Push to GitHub triggered! Ensure the server (start_app.bat) is running with your GitHub credentials.');
+  }
+}
+
 // ==========================================================================
 // Helper Utility Functions
 // ==========================================================================
