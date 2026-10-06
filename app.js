@@ -9,10 +9,26 @@ let appState = {
   workOrders: [],
   maintenanceHistory: [],
   currentTab: 'dashboard',
-  viewMode: 'grid',
+  viewMode: localStorage.getItem('tool_maint_view_mode') || 'table',
   activeToolId: null,
   zoomScale: 1.0,
-  googleSheetsUrl: localStorage.getItem('tool_maint_gs_url') || ''
+  googleSheetsUrl: localStorage.getItem('tool_maint_gs_url') || '',
+  sortColumn: null,
+  sortDirection: 'asc',
+  columnFilters: {},
+  visibleColumns: {
+    year: true,
+    image: true,
+    partNumber: true,
+    partName: true,
+    customer: true,
+    matchedToolShotId: true,
+    pressTonnage: true,
+    colAD_ToolShot: true,
+    strokesCurrent: true,
+    strokeWearPercent: true,
+    healthStatus: true
+  }
 };
 
 // Charts references
@@ -26,9 +42,11 @@ let donutChartInstance = null;
 function initApp() {
   initData();
   setupNavigation();
+  setViewMode(appState.viewMode);
   renderCurrentTab();
   updateSidebarBadges();
   updateGoogleSheetsBadge();
+  setupGlobalClickHandlers();
 
   // If Google Sheets URL is set, fetch latest data in background
   if (appState.googleSheetsUrl) {
@@ -43,11 +61,18 @@ if (document.readyState === 'loading') {
 }
 
 function initData() {
-  const DATA_VERSION = 'v6_oee_good_quantity_strokes';
+  const DATA_VERSION = 'v7_filter_views_column_sorting';
   const savedVersion = localStorage.getItem('tool_maint_data_version');
   const savedTools = localStorage.getItem('tool_maint_tools');
   const savedWO = localStorage.getItem('tool_maint_workorders');
   const savedHist = localStorage.getItem('tool_maint_history');
+  const savedCols = localStorage.getItem('tool_maint_visible_columns');
+
+  if (savedCols) {
+    try {
+      appState.visibleColumns = Object.assign(appState.visibleColumns, JSON.parse(savedCols));
+    } catch (e) {}
+  }
 
   let isLoaded = false;
   if (savedVersion === DATA_VERSION && savedTools && savedWO && savedHist) {
@@ -364,33 +389,724 @@ function renderRegistry() {
 }
 
 function filterTools() {
-  const searchTerm = (document.getElementById('registry-search')?.value || '').toLowerCase();
+  const searchInput = document.getElementById('registry-search');
+  const searchTerm = (searchInput ? searchInput.value : '').toLowerCase().trim();
   const yearFilter = document.getElementById('filter-year')?.value || 'ALL';
-  const critFilter = document.getElementById('filter-criticality')?.value || 'ALL';
-  const statusFilter = document.getElementById('filter-status')?.value || 'ALL';
+  const pressFilter = document.getElementById('filter-press')?.value || 'ALL';
+  const colAdFilter = document.getElementById('filter-col-ad')?.value || 'ALL';
   const custFilter = document.getElementById('filter-customer')?.value || 'ALL';
+  const statusFilter = document.getElementById('filter-status')?.value || 'ALL';
+  const critFilter = document.getElementById('filter-criticality')?.value || 'ALL';
 
   const filtered = appState.tools.filter(t => {
-    const matchesSearch = 
-      t.partNumber.toLowerCase().includes(searchTerm) ||
-      t.description.toLowerCase().includes(searchTerm) ||
-      t.toolId.toLowerCase().includes(searchTerm) ||
-      (t.customer && t.customer.toLowerCase().includes(searchTerm)) ||
-      (t.matchedToolShotId && t.matchedToolShotId.toLowerCase().includes(searchTerm)) ||
-      (t.material && t.material.toLowerCase().includes(searchTerm));
+    // Search Term
+    if (searchTerm) {
+      const pNum = (t.partNumber || '').toLowerCase();
+      const desc = (t.description || t.partName || '').toLowerCase();
+      const tId = (t.toolId || '').toLowerCase();
+      const cust = (t.customer || '').toLowerCase();
+      const die = (t.matchedToolShotId || '').toLowerCase();
+      const press = (t.pressTonnage || '').toLowerCase();
+      const mech = (t.mechNo || '').toLowerCase();
+      const mat = (t.material || '').toLowerCase();
 
-    const matchesYear = yearFilter === 'ALL' || String(t.year) === String(yearFilter);
-    const matchesCrit = critFilter === 'ALL' || t.criticality === critFilter;
-    const matchesStatus = statusFilter === 'ALL' || t.healthStatus === statusFilter;
-    const matchesCust = custFilter === 'ALL' || 
-      (t.customer && t.customer.toLowerCase().includes(custFilter.toLowerCase())) ||
-      (custFilter === 'STL' && t.customer && t.customer.includes('STL'));
+      const matched = pNum.includes(searchTerm) ||
+                      desc.includes(searchTerm) ||
+                      tId.includes(searchTerm) ||
+                      cust.includes(searchTerm) ||
+                      die.includes(searchTerm) ||
+                      press.includes(searchTerm) ||
+                      mech.includes(searchTerm) ||
+                      mat.includes(searchTerm);
+      if (!matched) return false;
+    }
 
-    return matchesSearch && matchesYear && matchesCrit && matchesStatus && matchesCust;
+    // Year Filter
+    if (yearFilter !== 'ALL' && String(t.year) !== String(yearFilter)) {
+      return false;
+    }
+
+    // Press / Mech Filter
+    if (pressFilter !== 'ALL') {
+      const pTonnage = (t.pressTonnage || '').toUpperCase();
+      const mech = (t.mechNo || '').toUpperCase();
+      if (pressFilter === '80T') {
+        const is80 = pTonnage.includes('80') || mech.includes('1#') || mech.includes('2#');
+        if (!is80) return false;
+      } else if (pressFilter === '110T') {
+        const is110 = pTonnage.includes('110') || ['3#', '4#', '5#', '9#', '13#'].some(m => mech.includes(m));
+        if (!is110) return false;
+      } else if (pressFilter === '150T') {
+        const is150 = pTonnage.includes('150') || mech.includes('6#');
+        if (!is150) return false;
+      } else if (pressFilter === '200T') {
+        const is200 = pTonnage.includes('200') || mech.includes('11#') || mech.includes('12#');
+        if (!is200) return false;
+      } else if (pressFilter === '260T+') {
+        const isHeavy = pTonnage.includes('260') || pTonnage.includes('300') || pTonnage.includes('500');
+        if (!isHeavy) return false;
+      }
+    }
+
+    // Col AD Shots Filter
+    if (colAdFilter !== 'ALL') {
+      const hasShots = Boolean(t.colAD_ToolShot && Number(t.colAD_ToolShot) > 0);
+      if (colAdFilter === 'HAS_COL_AD' && !hasShots) return false;
+      if (colAdFilter === 'NO_COL_AD' && hasShots) return false;
+    }
+
+    // Customer Filter
+    if (custFilter !== 'ALL') {
+      const c = (t.customer || '').toUpperCase();
+      if (custFilter === 'STL' && !c.includes('STL')) return false;
+      else if (custFilter === 'SumiRiko' && !c.includes('SUMIRIKO')) return false;
+      else if (custFilter === 'SEMB' && !c.includes('SEMB')) return false;
+      else if (custFilter === 'JOYSON' && !c.includes('JOYSON')) return false;
+      else if (custFilter === 'TESLA' && !c.includes('TESLA')) return false;
+      else if (custFilter === 'TSKT' && !c.includes('TSKT')) return false;
+      else if (!c.includes(custFilter.toUpperCase())) return false;
+    }
+
+    // Health Status Filter
+    if (statusFilter !== 'ALL' && t.healthStatus !== statusFilter) {
+      return false;
+    }
+
+    // Criticality Filter
+    if (critFilter !== 'ALL' && (t.criticality || '').toUpperCase() !== critFilter.toUpperCase()) {
+      return false;
+    }
+
+    // Column Filters from popovers
+    if (appState.columnFilters) {
+      for (const key in appState.columnFilters) {
+        const val = appState.columnFilters[key];
+        if (!val || val === 'ALL') continue;
+        if (key === 'partNumber' && !t.partNumber.toLowerCase().includes(val.toLowerCase())) return false;
+        if (key === 'partName' && !(t.description || t.partName || '').toLowerCase().includes(val.toLowerCase())) return false;
+        if (key === 'matchedToolShotId' && !(t.matchedToolShotId || t.toolId || '').toLowerCase().includes(val.toLowerCase())) return false;
+        if (key === 'strokeWearPercent') {
+          const wear = (Number(t.strokesCurrent) / (Number(t.strokesMax) || 1)) * 100;
+          if (val === 'OVER_LIMIT' && wear < 100) return false;
+          if (val === 'HIGH_WEAR' && (wear < 80 || wear >= 100)) return false;
+          if (val === 'NORMAL' && wear >= 80) return false;
+        }
+        if (key === 'strokesRange') {
+          const strokes = Number(t.strokesCurrent) || 0;
+          if (val === 'OVER_10M' && strokes < 10000000) return false;
+          if (val === 'OVER_1M' && strokes < 1000000) return false;
+          if (val === 'UNDER_1M' && strokes >= 1000000) return false;
+        }
+      }
+    }
+
+    return true;
   });
 
+  // Sorting
+  if (appState.sortColumn) {
+    filtered.sort((a, b) => {
+      let valA, valB;
+      switch (appState.sortColumn) {
+        case 'year':
+          valA = Number(a.year) || 0;
+          valB = Number(b.year) || 0;
+          break;
+        case 'partNumber':
+          valA = (a.partNumber || '').toLowerCase();
+          valB = (b.partNumber || '').toLowerCase();
+          break;
+        case 'partName':
+          valA = (a.description || a.partName || '').toLowerCase();
+          valB = (b.description || b.partName || '').toLowerCase();
+          break;
+        case 'customer':
+          valA = (a.customer || '').toLowerCase();
+          valB = (b.customer || '').toLowerCase();
+          break;
+        case 'matchedToolShotId':
+          valA = (a.matchedToolShotId || a.toolId || '').toLowerCase();
+          valB = (b.matchedToolShotId || b.toolId || '').toLowerCase();
+          break;
+        case 'pressTonnage':
+          valA = parseInt(String(a.pressTonnage || '').replace(/\D/g, '')) || 0;
+          valB = parseInt(String(b.pressTonnage || '').replace(/\D/g, '')) || 0;
+          break;
+        case 'colAD_ToolShot':
+          valA = Number(a.colAD_ToolShot) || 0;
+          valB = Number(b.colAD_ToolShot) || 0;
+          break;
+        case 'strokesCurrent':
+          valA = Number(a.strokesCurrent) || 0;
+          valB = Number(b.strokesCurrent) || 0;
+          break;
+        case 'strokeWearPercent':
+          valA = (Number(a.strokesCurrent) / (Number(a.strokesMax) || 1)) * 100;
+          valB = (Number(b.strokesCurrent) / (Number(b.strokesMax) || 1)) * 100;
+          break;
+        case 'healthStatus':
+          valA = (a.healthStatus || '').toLowerCase();
+          valB = (b.healthStatus || '').toLowerCase();
+          break;
+        default:
+          valA = '';
+          valB = '';
+      }
+
+      if (valA < valB) return appState.sortDirection === 'asc' ? -1 : 1;
+      if (valA > valB) return appState.sortDirection === 'asc' ? 1 : -1;
+      return 0;
+    });
+  }
+
+  updateSortAndFilterIndicators();
+  updateActiveFilterChips(filtered.length);
   renderToolsGrid(filtered);
   renderToolsTable(filtered);
+  applyColumnVisibility();
+}
+
+function sortTable(colKey) {
+  if (appState.sortColumn === colKey) {
+    appState.sortDirection = appState.sortDirection === 'asc' ? 'desc' : 'asc';
+  } else {
+    appState.sortColumn = colKey;
+    const isNum = ['colAD_ToolShot', 'strokesCurrent', 'strokeWearPercent', 'year'].includes(colKey);
+    appState.sortDirection = isNum ? 'desc' : 'asc';
+  }
+  filterTools();
+}
+
+function updateSortAndFilterIndicators() {
+  const sortCols = ['year', 'partNumber', 'partName', 'customer', 'matchedToolShotId', 'pressTonnage', 'colAD_ToolShot', 'strokesCurrent', 'strokeWearPercent', 'healthStatus'];
+  
+  sortCols.forEach(col => {
+    const icon = document.getElementById(`sort-icon-${col}`);
+    const th = document.querySelector(`th[data-col="${col}"]`);
+    const filterBtn = document.getElementById(`btn-col-filter-${col}`);
+
+    if (icon) {
+      if (appState.sortColumn === col) {
+        icon.textContent = appState.sortDirection === 'asc' ? '▲' : '▼';
+        if (th) th.classList.add('th-sorted');
+      } else {
+        icon.textContent = '↕';
+        if (th) th.classList.remove('th-sorted');
+      }
+    }
+
+    let isFiltered = false;
+    const yearVal = document.getElementById('filter-year')?.value;
+    const pressVal = document.getElementById('filter-press')?.value;
+    const colAdVal = document.getElementById('filter-col-ad')?.value;
+    const custVal = document.getElementById('filter-customer')?.value;
+    const statusVal = document.getElementById('filter-status')?.value;
+
+    if (col === 'year' && yearVal && yearVal !== 'ALL') isFiltered = true;
+    if (col === 'pressTonnage' && pressVal && pressVal !== 'ALL') isFiltered = true;
+    if (col === 'colAD_ToolShot' && colAdVal && colAdVal !== 'ALL') isFiltered = true;
+    if (col === 'customer' && custVal && custVal !== 'ALL') isFiltered = true;
+    if (col === 'healthStatus' && statusVal && statusVal !== 'ALL') isFiltered = true;
+    if (appState.columnFilters && appState.columnFilters[col] && appState.columnFilters[col] !== 'ALL') isFiltered = true;
+
+    if (filterBtn) {
+      filterBtn.classList.toggle('active', isFiltered);
+    }
+    if (th) {
+      th.classList.toggle('th-filtered', isFiltered);
+    }
+  });
+}
+
+function updateActiveFilterChips(filteredCount) {
+  const badgeText = document.getElementById('filter-count-text');
+  const chipsContainer = document.getElementById('active-filter-chips');
+  if (!badgeText || !chipsContainer) return;
+
+  const total = appState.tools.length;
+  if (filteredCount === total) {
+    badgeText.textContent = `Showing all ${total} Tools`;
+  } else {
+    badgeText.textContent = `Showing ${filteredCount} of ${total} Tools`;
+  }
+
+  const chips = [];
+
+  const presetVal = document.getElementById('filter-view-preset')?.value;
+  if (presetVal && presetVal !== 'ALL') {
+    const presetLabel = document.getElementById('filter-view-preset')?.selectedOptions[0]?.textContent || presetVal;
+    chips.push(`<span class="filter-chip">View: ${presetLabel} <span class="filter-chip-remove" onclick="removeFilter('preset')">✕</span></span>`);
+  }
+
+  const yearVal = document.getElementById('filter-year')?.value;
+  if (yearVal && yearVal !== 'ALL') {
+    chips.push(`<span class="filter-chip">Year: ${yearVal} <span class="filter-chip-remove" onclick="removeFilter('year')">✕</span></span>`);
+  }
+
+  const pressVal = document.getElementById('filter-press')?.value;
+  if (pressVal && pressVal !== 'ALL') {
+    chips.push(`<span class="filter-chip">Press: ${pressVal} <span class="filter-chip-remove" onclick="removeFilter('press')">✕</span></span>`);
+  }
+
+  const colAdVal = document.getElementById('filter-col-ad')?.value;
+  if (colAdVal && colAdVal !== 'ALL') {
+    const label = colAdVal === 'HAS_COL_AD' ? 'Has Col AD Shots' : 'No Col AD Data';
+    chips.push(`<span class="filter-chip">Col AD: ${label} <span class="filter-chip-remove" onclick="removeFilter('colAd')">✕</span></span>`);
+  }
+
+  const custVal = document.getElementById('filter-customer')?.value;
+  if (custVal && custVal !== 'ALL') {
+    chips.push(`<span class="filter-chip">Customer: ${custVal} <span class="filter-chip-remove" onclick="removeFilter('customer')">✕</span></span>`);
+  }
+
+  const statusVal = document.getElementById('filter-status')?.value;
+  if (statusVal && statusVal !== 'ALL') {
+    chips.push(`<span class="filter-chip">Status: ${statusVal} <span class="filter-chip-remove" onclick="removeFilter('status')">✕</span></span>`);
+  }
+
+  const critVal = document.getElementById('filter-criticality')?.value;
+  if (critVal && critVal !== 'ALL') {
+    chips.push(`<span class="filter-chip">Criticality: ${critVal} <span class="filter-chip-remove" onclick="removeFilter('criticality')">✕</span></span>`);
+  }
+
+  const searchVal = document.getElementById('registry-search')?.value;
+  if (searchVal && searchVal.trim()) {
+    chips.push(`<span class="filter-chip">Search: "${searchVal.trim()}" <span class="filter-chip-remove" onclick="removeFilter('search')">✕</span></span>`);
+  }
+
+  if (appState.columnFilters) {
+    for (const k in appState.columnFilters) {
+      const v = appState.columnFilters[k];
+      if (v && v !== 'ALL') {
+        chips.push(`<span class="filter-chip">${k}: ${v} <span class="filter-chip-remove" onclick="clearColumnFilter('${k}')">✕</span></span>`);
+      }
+    }
+  }
+
+  if (appState.sortColumn) {
+    const colLabels = {
+      year: 'Year', partNumber: 'Part No', partName: 'Part Name', customer: 'Customer',
+      matchedToolShotId: 'Linked Die', pressTonnage: 'Press', colAD_ToolShot: 'Col AD Shots',
+      strokesCurrent: 'Strokes', strokeWearPercent: 'Life %', healthStatus: 'Status'
+    };
+    const cName = colLabels[appState.sortColumn] || appState.sortColumn;
+    const arrow = appState.sortDirection === 'asc' ? '▲' : '▼';
+    chips.push(`<span class="filter-chip" style="background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;">Sort: ${cName} ${arrow} <span class="filter-chip-remove" onclick="removeFilter('sort')">✕</span></span>`);
+  }
+
+  chipsContainer.innerHTML = chips.join('');
+}
+
+function removeFilter(type) {
+  if (type === 'preset') {
+    const el = document.getElementById('filter-view-preset');
+    if (el) el.value = 'ALL';
+  } else if (type === 'year') {
+    const el = document.getElementById('filter-year');
+    if (el) el.value = 'ALL';
+  } else if (type === 'press') {
+    const el = document.getElementById('filter-press');
+    if (el) el.value = 'ALL';
+  } else if (type === 'colAd') {
+    const el = document.getElementById('filter-col-ad');
+    if (el) el.value = 'ALL';
+  } else if (type === 'customer') {
+    const el = document.getElementById('filter-customer');
+    if (el) el.value = 'ALL';
+  } else if (type === 'status') {
+    const el = document.getElementById('filter-status');
+    if (el) el.value = 'ALL';
+  } else if (type === 'criticality') {
+    const el = document.getElementById('filter-criticality');
+    if (el) el.value = 'ALL';
+  } else if (type === 'search') {
+    const el = document.getElementById('registry-search');
+    if (el) el.value = '';
+  } else if (type === 'sort') {
+    appState.sortColumn = null;
+    appState.sortDirection = 'asc';
+  }
+  filterTools();
+}
+
+function applyViewPreset(preset) {
+  const searchInput = document.getElementById('registry-search');
+  const yearSelect = document.getElementById('filter-year');
+  const pressSelect = document.getElementById('filter-press');
+  const colAdSelect = document.getElementById('filter-col-ad');
+  const custSelect = document.getElementById('filter-customer');
+  const statusSelect = document.getElementById('filter-status');
+  const critSelect = document.getElementById('filter-criticality');
+
+  if (searchInput) searchInput.value = '';
+  if (yearSelect) yearSelect.value = 'ALL';
+  if (pressSelect) pressSelect.value = 'ALL';
+  if (colAdSelect) colAdSelect.value = 'ALL';
+  if (custSelect) custSelect.value = 'ALL';
+  if (statusSelect) statusSelect.value = 'ALL';
+  if (critSelect) critSelect.value = 'ALL';
+  appState.columnFilters = {};
+
+  switch (preset) {
+    case '150T':
+      if (pressSelect) pressSelect.value = '150T';
+      appState.sortColumn = 'colAD_ToolShot';
+      appState.sortDirection = 'desc';
+      break;
+    case '110T':
+      if (pressSelect) pressSelect.value = '110T';
+      appState.sortColumn = 'colAD_ToolShot';
+      appState.sortDirection = 'desc';
+      break;
+    case '80T':
+      if (pressSelect) pressSelect.value = '80T';
+      appState.sortColumn = 'strokesCurrent';
+      appState.sortDirection = 'desc';
+      break;
+    case 'HEAVY':
+      if (pressSelect) pressSelect.value = '260T+';
+      break;
+    case 'HAS_COL_AD':
+      if (colAdSelect) colAdSelect.value = 'HAS_COL_AD';
+      appState.sortColumn = 'colAD_ToolShot';
+      appState.sortDirection = 'desc';
+      break;
+    case 'HIGH_WEAR':
+      appState.sortColumn = 'strokeWearPercent';
+      appState.sortDirection = 'desc';
+      appState.columnFilters.strokeWearPercent = 'HIGH_WEAR';
+      break;
+    case 'OVER_LIMIT':
+      if (statusSelect) statusSelect.value = 'Critical Attention';
+      appState.sortColumn = 'strokeWearPercent';
+      appState.sortDirection = 'desc';
+      break;
+    case 'STL':
+      if (custSelect) custSelect.value = 'STL';
+      break;
+    case 'AUTO':
+      if (custSelect) custSelect.value = 'SumiRiko';
+      break;
+    case 'CRITICAL':
+      if (critSelect) critSelect.value = 'CRITICAL';
+      break;
+    case 'YEAR_2024':
+      if (yearSelect) yearSelect.value = '2024';
+      break;
+    case 'YEAR_2025':
+      if (yearSelect) yearSelect.value = '2025';
+      break;
+    case 'YEAR_2026':
+      if (yearSelect) yearSelect.value = '2026';
+      break;
+    default:
+      appState.sortColumn = null;
+      appState.sortDirection = 'asc';
+      break;
+  }
+  filterTools();
+}
+
+function resetAllFilters() {
+  const searchInput = document.getElementById('registry-search');
+  const presetSelect = document.getElementById('filter-view-preset');
+  const yearSelect = document.getElementById('filter-year');
+  const pressSelect = document.getElementById('filter-press');
+  const colAdSelect = document.getElementById('filter-col-ad');
+  const custSelect = document.getElementById('filter-customer');
+  const statusSelect = document.getElementById('filter-status');
+  const critSelect = document.getElementById('filter-criticality');
+
+  if (searchInput) searchInput.value = '';
+  if (presetSelect) presetSelect.value = 'ALL';
+  if (yearSelect) yearSelect.value = 'ALL';
+  if (pressSelect) pressSelect.value = 'ALL';
+  if (colAdSelect) colAdSelect.value = 'ALL';
+  if (custSelect) custSelect.value = 'ALL';
+  if (statusSelect) statusSelect.value = 'ALL';
+  if (critSelect) critSelect.value = 'ALL';
+
+  appState.sortColumn = null;
+  appState.sortDirection = 'asc';
+  appState.columnFilters = {};
+
+  filterTools();
+}
+
+function openColFilter(event, colKey) {
+  event.stopPropagation();
+  const popover = document.getElementById('col-filter-popover');
+  if (!popover) return;
+
+  if (popover.dataset.col === colKey && popover.style.display === 'block') {
+    closeColFilter();
+    return;
+  }
+
+  popover.dataset.col = colKey;
+  renderColFilterPopoverContent(colKey);
+
+  const btn = event.currentTarget;
+  const rect = btn.getBoundingClientRect();
+  const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+  popover.style.display = 'block';
+
+  let left = rect.left + scrollLeft - 180;
+  if (left < 10) left = 10;
+  if (left + 260 > window.innerWidth) left = window.innerWidth - 270;
+  let top = rect.bottom + scrollTop + 6;
+
+  popover.style.left = `${left}px`;
+  popover.style.top = `${top}px`;
+}
+
+function closeColFilter() {
+  const popover = document.getElementById('col-filter-popover');
+  if (popover) {
+    popover.style.display = 'none';
+    popover.dataset.col = '';
+  }
+}
+
+function renderColFilterPopoverContent(colKey) {
+  const popover = document.getElementById('col-filter-popover');
+  if (!popover) return;
+
+  const colLabels = {
+    year: 'YEAR',
+    partNumber: 'PART NUMBER',
+    partName: 'PART NAME',
+    customer: 'CUSTOMER',
+    matchedToolShotId: 'LINKED DIE ID',
+    pressTonnage: 'PRESS / MECH',
+    colAD_ToolShot: 'COL AD SHOTS',
+    strokesCurrent: 'TOTAL STROKES',
+    strokeWearPercent: 'LIFE %',
+    healthStatus: 'HEALTH STATUS'
+  };
+
+  const title = colLabels[colKey] || colKey;
+  const isNum = ['colAD_ToolShot', 'strokesCurrent', 'strokeWearPercent', 'year'].includes(colKey);
+
+  const sortAscText = isNum ? '▲ Sort Smallest to Largest' : '▲ Sort A → Z';
+  const sortDescText = isNum ? '▼ Sort Largest to Smallest' : '▼ Sort Z → A';
+
+  let optionsHtml = '';
+
+  if (colKey === 'year') {
+    const curYear = document.getElementById('filter-year')?.value || 'ALL';
+    optionsHtml = `
+      <div class="col-filter-section-title">Filter by Year</div>
+      <div class="col-filter-options">
+        <div class="col-filter-option ${curYear === 'ALL' ? 'active' : ''}" onclick="setDropdownFilter('filter-year', 'ALL')"><span>All Years (253)</span></div>
+        <div class="col-filter-option ${curYear === '2024' ? 'active' : ''}" onclick="setDropdownFilter('filter-year', '2024')"><span>2024 (105 Tools)</span></div>
+        <div class="col-filter-option ${curYear === '2025' ? 'active' : ''}" onclick="setDropdownFilter('filter-year', '2025')"><span>2025 (126 Tools)</span></div>
+        <div class="col-filter-option ${curYear === '2026' ? 'active' : ''}" onclick="setDropdownFilter('filter-year', '2026')"><span>2026 (22 Tools)</span></div>
+      </div>
+    `;
+  } else if (colKey === 'pressTonnage') {
+    const curPress = document.getElementById('filter-press')?.value || 'ALL';
+    optionsHtml = `
+      <div class="col-filter-section-title">Filter by Machine</div>
+      <div class="col-filter-options">
+        <div class="col-filter-option ${curPress === 'ALL' ? 'active' : ''}" onclick="setDropdownFilter('filter-press', 'ALL')"><span>All Presses</span></div>
+        <div class="col-filter-option ${curPress === '150T' ? 'active' : ''}" onclick="setDropdownFilter('filter-press', '150T')"><span>150T (6# STD-150T)</span></div>
+        <div class="col-filter-option ${curPress === '110T' ? 'active' : ''}" onclick="setDropdownFilter('filter-press', '110T')"><span>110T (3#, 4#, 5#, 9#, 13#)</span></div>
+        <div class="col-filter-option ${curPress === '80T' ? 'active' : ''}" onclick="setDropdownFilter('filter-press', '80T')"><span>80T (1# OCP & 2# MHS)</span></div>
+        <div class="col-filter-option ${curPress === '200T' ? 'active' : ''}" onclick="setDropdownFilter('filter-press', '200T')"><span>200T (11# & 12#)</span></div>
+        <div class="col-filter-option ${curPress === '260T+' ? 'active' : ''}" onclick="setDropdownFilter('filter-press', '260T+')"><span>260T - 500T Heavy Presses</span></div>
+      </div>
+    `;
+  } else if (colKey === 'colAD_ToolShot') {
+    const curColAd = document.getElementById('filter-col-ad')?.value || 'ALL';
+    optionsHtml = `
+      <div class="col-filter-section-title">Filter by Col AD Good Qty</div>
+      <div class="col-filter-options">
+        <div class="col-filter-option ${curColAd === 'ALL' ? 'active' : ''}" onclick="setDropdownFilter('filter-col-ad', 'ALL')"><span>All Records</span></div>
+        <div class="col-filter-option ${curColAd === 'HAS_COL_AD' ? 'active' : ''}" onclick="setDropdownFilter('filter-col-ad', 'HAS_COL_AD')"><span>Has Col AD Shots (>0)</span></div>
+        <div class="col-filter-option ${curColAd === 'NO_COL_AD' ? 'active' : ''}" onclick="setDropdownFilter('filter-col-ad', 'NO_COL_AD')"><span>No Col AD Record</span></div>
+      </div>
+    `;
+  } else if (colKey === 'customer') {
+    const curCust = document.getElementById('filter-customer')?.value || 'ALL';
+    optionsHtml = `
+      <div class="col-filter-section-title">Filter by Customer</div>
+      <div class="col-filter-options">
+        <div class="col-filter-option ${curCust === 'ALL' ? 'active' : ''}" onclick="setDropdownFilter('filter-customer', 'ALL')"><span>All Customers</span></div>
+        <div class="col-filter-option ${curCust === 'STL' ? 'active' : ''}" onclick="setDropdownFilter('filter-customer', 'STL')"><span>STL (Schneider Electric)</span></div>
+        <div class="col-filter-option ${curCust === 'SumiRiko' ? 'active' : ''}" onclick="setDropdownFilter('filter-customer', 'SumiRiko')"><span>SumiRiko (Automotive)</span></div>
+        <div class="col-filter-option ${curCust === 'SEMB' ? 'active' : ''}" onclick="setDropdownFilter('filter-customer', 'SEMB')"><span>SEMB (Batam Coils)</span></div>
+        <div class="col-filter-option ${curCust === 'JOYSON' ? 'active' : ''}" onclick="setDropdownFilter('filter-customer', 'JOYSON')"><span>JOYSON Safety</span></div>
+        <div class="col-filter-option ${curCust === 'TESLA' ? 'active' : ''}" onclick="setDropdownFilter('filter-customer', 'TESLA')"><span>TESLA Motors</span></div>
+        <div class="col-filter-option ${curCust === 'TSKT' ? 'active' : ''}" onclick="setDropdownFilter('filter-customer', 'TSKT')"><span>TSKT</span></div>
+      </div>
+    `;
+  } else if (colKey === 'healthStatus') {
+    const curStatus = document.getElementById('filter-status')?.value || 'ALL';
+    optionsHtml = `
+      <div class="col-filter-section-title">Filter by Status</div>
+      <div class="col-filter-options">
+        <div class="col-filter-option ${curStatus === 'ALL' ? 'active' : ''}" onclick="setDropdownFilter('filter-status', 'ALL')"><span>All Statuses</span></div>
+        <div class="col-filter-option ${curStatus === 'Operational' ? 'active' : ''}" onclick="setDropdownFilter('filter-status', 'Operational')"><span>Operational</span></div>
+        <div class="col-filter-option ${curStatus === 'Maintenance Due' ? 'active' : ''}" onclick="setDropdownFilter('filter-status', 'Maintenance Due')"><span>Maintenance Due</span></div>
+        <div class="col-filter-option ${curStatus === 'Critical Attention' ? 'active' : ''}" onclick="setDropdownFilter('filter-status', 'Critical Attention')"><span>Critical Attention</span></div>
+      </div>
+    `;
+  } else if (colKey === 'strokeWearPercent') {
+    const curWear = appState.columnFilters?.strokeWearPercent || 'ALL';
+    optionsHtml = `
+      <div class="col-filter-section-title">Filter by Life %</div>
+      <div class="col-filter-options">
+        <div class="col-filter-option ${curWear === 'ALL' ? 'active' : ''}" onclick="setColumnFilter('strokeWearPercent', 'ALL')"><span>All Life Levels</span></div>
+        <div class="col-filter-option ${curWear === 'OVER_LIMIT' ? 'active' : ''}" onclick="setColumnFilter('strokeWearPercent', 'OVER_LIMIT')"><span>Over Life Limit (>= 100%)</span></div>
+        <div class="col-filter-option ${curWear === 'HIGH_WEAR' ? 'active' : ''}" onclick="setColumnFilter('strokeWearPercent', 'HIGH_WEAR')"><span>High Wear (> 80%)</span></div>
+        <div class="col-filter-option ${curWear === 'NORMAL' ? 'active' : ''}" onclick="setColumnFilter('strokeWearPercent', 'NORMAL')"><span>Normal (< 80%)</span></div>
+      </div>
+    `;
+  } else if (colKey === 'strokesCurrent') {
+    const curRange = appState.columnFilters?.strokesRange || 'ALL';
+    optionsHtml = `
+      <div class="col-filter-section-title">Filter by Strokes</div>
+      <div class="col-filter-options">
+        <div class="col-filter-option ${curRange === 'ALL' ? 'active' : ''}" onclick="setColumnFilter('strokesRange', 'ALL')"><span>All Stroke Counts</span></div>
+        <div class="col-filter-option ${curRange === 'OVER_10M' ? 'active' : ''}" onclick="setColumnFilter('strokesRange', 'OVER_10M')"><span>> 10,000,000 Strokes</span></div>
+        <div class="col-filter-option ${curRange === 'OVER_1M' ? 'active' : ''}" onclick="setColumnFilter('strokesRange', 'OVER_1M')"><span>> 1,000,000 Strokes</span></div>
+        <div class="col-filter-option ${curRange === 'UNDER_1M' ? 'active' : ''}" onclick="setColumnFilter('strokesRange', 'UNDER_1M')"><span>< 1,000,000 Strokes</span></div>
+      </div>
+    `;
+  } else {
+    const curVal = appState.columnFilters?.[colKey] || '';
+    optionsHtml = `
+      <div class="col-filter-section-title">Search in ${title}</div>
+      <div style="padding: 4px 0 8px;">
+        <input type="text" id="col-filter-search-input" value="${curVal}" placeholder="Type to filter..." style="width: 100%; padding: 6px 8px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 12px;" oninput="setColumnFilter('${colKey}', this.value)">
+      </div>
+    `;
+  }
+
+  popover.innerHTML = `
+    <div class="col-filter-header">
+      <span>Filter: ${title}</span>
+      <span style="cursor: pointer; font-size: 14px; font-weight: 700;" onclick="closeColFilter()">✕</span>
+    </div>
+
+    <button class="col-filter-sort-btn" onclick="executeColSort('${colKey}', 'asc')">
+      ${sortAscText}
+    </button>
+    <button class="col-filter-sort-btn" onclick="executeColSort('${colKey}', 'desc')">
+      ${sortDescText}
+    </button>
+
+    <div class="col-filter-divider"></div>
+
+    ${optionsHtml}
+
+    <div class="col-filter-actions">
+      <button class="btn btn-secondary btn-sm" style="font-size: 11px; padding: 3px 8px;" onclick="clearColumnFilter('${colKey}')">Clear</button>
+      <button class="btn btn-primary btn-sm" style="font-size: 11px; padding: 3px 8px;" onclick="closeColFilter()">Done</button>
+    </div>
+  `;
+}
+
+function executeColSort(colKey, direction) {
+  appState.sortColumn = colKey;
+  appState.sortDirection = direction;
+  closeColFilter();
+  filterTools();
+}
+
+function setDropdownFilter(elementId, value) {
+  const el = document.getElementById(elementId);
+  if (el) el.value = value;
+  closeColFilter();
+  filterTools();
+}
+
+function setColumnFilter(colKey, value) {
+  if (!appState.columnFilters) appState.columnFilters = {};
+  if (!value || value === 'ALL') {
+    delete appState.columnFilters[colKey];
+  } else {
+    appState.columnFilters[colKey] = value;
+  }
+  filterTools();
+}
+
+function clearColumnFilter(colKey) {
+  if (appState.columnFilters) {
+    delete appState.columnFilters[colKey];
+  }
+  if (colKey === 'year') {
+    const el = document.getElementById('filter-year');
+    if (el) el.value = 'ALL';
+  } else if (colKey === 'pressTonnage') {
+    const el = document.getElementById('filter-press');
+    if (el) el.value = 'ALL';
+  } else if (colKey === 'colAD_ToolShot') {
+    const el = document.getElementById('filter-col-ad');
+    if (el) el.value = 'ALL';
+  } else if (colKey === 'customer') {
+    const el = document.getElementById('filter-customer');
+    if (el) el.value = 'ALL';
+  } else if (colKey === 'healthStatus') {
+    const el = document.getElementById('filter-status');
+    if (el) el.value = 'ALL';
+  }
+  closeColFilter();
+  filterTools();
+}
+
+function toggleColumnMenu(event) {
+  event.stopPropagation();
+  const menu = document.getElementById('columns-dropdown-menu');
+  if (!menu) return;
+  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+}
+
+function toggleColumnVisibility(colKey, isVisible) {
+  appState.visibleColumns[colKey] = isVisible;
+  localStorage.setItem('tool_maint_visible_columns', JSON.stringify(appState.visibleColumns));
+  applyColumnVisibility();
+}
+
+function applyColumnVisibility() {
+  const table = document.getElementById('registry-table');
+  if (!table) return;
+
+  Object.keys(appState.visibleColumns).forEach(colKey => {
+    const isVisible = appState.visibleColumns[colKey];
+    const elements = table.querySelectorAll(`[data-col="${colKey}"]`);
+    elements.forEach(el => {
+      el.style.display = isVisible ? '' : 'none';
+    });
+  });
+}
+
+function setupGlobalClickHandlers() {
+  document.addEventListener('click', (e) => {
+    const popover = document.getElementById('col-filter-popover');
+    if (popover && popover.style.display === 'block') {
+      if (!popover.contains(e.target) && !e.target.closest('.th-filter-btn')) {
+        closeColFilter();
+      }
+    }
+    const colMenu = document.getElementById('columns-dropdown-menu');
+    if (colMenu && colMenu.style.display === 'block') {
+      if (!colMenu.contains(e.target) && !e.target.closest('#col-toggle-btn')) {
+        colMenu.style.display = 'none';
+      }
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeColFilter();
+      const colMenu = document.getElementById('columns-dropdown-menu');
+      if (colMenu) colMenu.style.display = 'none';
+    }
+  });
 }
 
 function renderToolsGrid(tools) {
@@ -482,18 +1198,18 @@ function renderToolsTable(tools) {
     const strokePct = Math.min(100, Math.round((tool.strokesCurrent / tool.strokesMax) * 100));
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td><span class="badge" style="background:#d1fae5;color:#047857;font-weight:700;font-size:11px;padding:3px 8px;border-radius:4px;">${tool.year || '2024'}</span></td>
-      <td>
+      <td data-col="year"><span class="badge" style="background:#d1fae5;color:#047857;font-weight:700;font-size:11px;padding:3px 8px;border-radius:4px;">${tool.year || '2024'}</span></td>
+      <td data-col="image">
         <img src="${tool.image || 'images/image1.png'}" class="table-thumb" alt="${tool.partNumber}" onclick="openLightbox('${tool.image}', '${tool.partNumber}', '${tool.description}')" style="cursor: pointer;">
       </td>
-      <td><strong class="part-code">${tool.partNumber}</strong></td>
-      <td>${tool.description}</td>
-      <td><span style="font-size: 11px; font-weight: 700; color: #1e40af; background: #dbeafe; padding: 2px 6px; border-radius: 4px;">${tool.customer || 'JRTL'}</span></td>
-      <td><code>${tool.matchedToolShotId || tool.toolId}</code></td>
-      <td>${tool.pressTonnage || 'N/A'} ${tool.mechNo ? '(' + tool.mechNo + ')' : ''}</td>
-      <td><strong style="color: #2563eb;">${tool.colAD_ToolShot ? Number(tool.colAD_ToolShot).toLocaleString() : '—'}</strong></td>
-      <td>${tool.strokesCurrent.toLocaleString()} / ${tool.strokesMax.toLocaleString()}</td>
-      <td>
+      <td data-col="partNumber"><strong class="part-code">${tool.partNumber}</strong></td>
+      <td data-col="partName">${tool.description || tool.partName || ''}</td>
+      <td data-col="customer"><span style="font-size: 11px; font-weight: 700; color: #1e40af; background: #dbeafe; padding: 2px 6px; border-radius: 4px;">${tool.customer || 'JRTL'}</span></td>
+      <td data-col="matchedToolShotId"><code>${tool.matchedToolShotId || tool.toolId}</code></td>
+      <td data-col="pressTonnage">${tool.pressTonnage || 'N/A'} ${tool.mechNo ? '(' + tool.mechNo + ')' : ''}</td>
+      <td data-col="colAD_ToolShot"><strong style="color: #2563eb;">${tool.colAD_ToolShot ? Number(tool.colAD_ToolShot).toLocaleString() : '—'}</strong></td>
+      <td data-col="strokesCurrent">${tool.strokesCurrent.toLocaleString()} / ${tool.strokesMax.toLocaleString()}</td>
+      <td data-col="strokeWearPercent">
         <div class="stroke-meter" style="width: 100px;">
           <div class="stroke-meta">
             <span>${strokePct}%</span>
@@ -503,8 +1219,8 @@ function renderToolsTable(tools) {
           </div>
         </div>
       </td>
-      <td>${getHealthStatusPill(tool.healthStatus)}</td>
-      <td>
+      <td data-col="healthStatus">${getHealthStatusPill(tool.healthStatus)}</td>
+      <td data-col="actions">
         <div style="display: flex; gap: 6px;">
           <button class="btn btn-secondary btn-sm" onclick="openToolDetailModal('${tool.id}')">View</button>
           <button class="btn btn-primary btn-sm" onclick="openNewWorkOrderForTool('${tool.id}')">WO</button>
@@ -517,11 +1233,17 @@ function renderToolsTable(tools) {
 
 function setViewMode(mode) {
   appState.viewMode = mode;
-  document.getElementById('view-mode-grid').classList.toggle('active', mode === 'grid');
-  document.getElementById('view-mode-table').classList.toggle('active', mode === 'table');
+  localStorage.setItem('tool_maint_view_mode', mode);
+  const gridBtn = document.getElementById('view-mode-grid');
+  const tableBtn = document.getElementById('view-mode-table');
+  const gridContainer = document.getElementById('registry-grid-container');
+  const tableContainer = document.getElementById('registry-table-container');
 
-  document.getElementById('registry-grid-container').style.display = mode === 'grid' ? 'grid' : 'none';
-  document.getElementById('registry-table-container').style.display = mode === 'table' ? 'block' : 'none';
+  if (gridBtn) gridBtn.classList.toggle('active', mode === 'grid');
+  if (tableBtn) tableBtn.classList.toggle('active', mode === 'table');
+
+  if (gridContainer) gridContainer.style.display = mode === 'grid' ? 'grid' : 'none';
+  if (tableContainer) tableContainer.style.display = mode === 'table' ? 'block' : 'none';
 }
 
 // ==========================================================================

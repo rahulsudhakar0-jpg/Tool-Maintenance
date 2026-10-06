@@ -905,13 +905,87 @@ body {
   text-transform: uppercase;
   font-size: 11px;
   letter-spacing: 0.05em;
-  padding: 14px 18px;
-  border-bottom: 1px solid var(--border);
+  padding: 10px 14px;
+  border-bottom: 2px solid var(--border);
   white-space: nowrap;
+  user-select: none;
+  position: relative;
+}
+
+.data-table th.th-sorted {
+  background-color: #eff6ff;
+  color: var(--primary);
+  border-bottom: 2px solid var(--primary);
+}
+
+.data-table th.th-filtered {
+  background-color: #ecfdf5;
+  color: #047857;
+  border-bottom: 2px solid #059669;
+}
+
+.th-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.th-title {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.15s ease;
+  font-weight: 700;
+}
+
+.th-title:hover {
+  color: var(--primary);
+}
+
+.sort-icon {
+  font-size: 11px;
+  color: #94a3b8;
+  display: inline-block;
+  margin-left: 2px;
+}
+
+.th-sorted .sort-icon {
+  color: var(--primary);
+  font-weight: 900;
+}
+
+.th-filter-btn {
+  background: rgba(241, 245, 249, 0.8);
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 10px;
+  cursor: pointer;
+  color: #64748b;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.th-filter-btn:hover {
+  background-color: #e2e8f0;
+  color: var(--primary);
+  border-color: #94a3b8;
+}
+
+.th-filter-btn.active {
+  background-color: #dbeafe;
+  color: var(--primary);
+  border-color: #3b82f6;
+  font-weight: 700;
 }
 
 .data-table td {
-  padding: 14px 18px;
+  padding: 12px 14px;
   border-bottom: 1px solid var(--border);
   color: var(--text-main);
   vertical-align: middle;
@@ -933,6 +1007,212 @@ body {
   border-radius: var(--radius-sm);
   padding: 2px;
   border: 1px solid var(--border);
+  transition: transform 0.15s ease;
+}
+
+.table-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Floating Column Filter Popover (Excel / Google Sheets Style) */
+.col-filter-popover {
+  position: absolute;
+  z-index: 1000;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.18), 0 6px 12px -4px rgba(0, 0, 0, 0.08);
+  min-width: 230px;
+  max-width: 280px;
+  padding: 12px;
+  font-size: 12px;
+  color: var(--text-main);
+  animation: popoverFadeIn 0.12s ease-out;
+}
+
+@keyframes popoverFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.col-filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #475569;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.col-filter-sort-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: none;
+  background: transparent;
+  color: var(--text-main);
+  font-size: 12px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.col-filter-sort-btn:hover {
+  background: #eff6ff;
+  color: var(--primary);
+}
+
+.col-filter-divider {
+  height: 1px;
+  background: #e2e8f0;
+  margin: 6px 0;
+}
+
+.col-filter-section-title {
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #94a3b8;
+  margin: 6px 4px 4px;
+}
+
+.col-filter-options {
+  max-height: 190px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 4px 0;
+}
+
+.col-filter-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--text-main);
+  transition: background 0.15s;
+}
+
+.col-filter-option:hover {
+  background: #f1f5f9;
+}
+
+.col-filter-option.active {
+  background: #dbeafe;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.col-filter-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px solid #f1f5f9;
+}
+
+/* Filter Status & Active Chips Bar */
+.filter-status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: -14px;
+  margin-bottom: 16px;
+  padding: 8px 14px;
+  background: #f8fafc;
+  border-radius: var(--radius-md);
+  border: 1px solid #e2e8f0;
+  font-size: 12px;
+}
+
+.filter-count {
+  font-weight: 600;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.active-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #e0e7ff;
+  color: #3730a3;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.filter-chip-remove {
+  cursor: pointer;
+  font-size: 12px;
+  color: #6366f1;
+  font-weight: 700;
+  margin-left: 2px;
+}
+
+.filter-chip-remove:hover {
+  color: #1e1b4b;
+}
+
+/* Columns Selector Menu */
+.columns-menu-container {
+  position: relative;
+  display: inline-block;
+}
+
+.columns-dropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 4px);
+  z-index: 1000;
+  background: white;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+  min-width: 190px;
+  padding: 10px;
+  font-size: 12px;
+}
+
+.columns-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 6px;
+  cursor: pointer;
+  border-radius: 4px;
+  user-select: none;
+  font-size: 12px;
+  color: var(--text-main);
+}
+
+.columns-dropdown-item:hover {
+  background: #f1f5f9;
 }
 
 /* ==========================================================================

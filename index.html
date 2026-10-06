@@ -284,6 +284,28 @@
             </div>
 
             <div class="filter-group">
+              <!-- Filter View Preset Selector -->
+              <div class="filter-preset-wrap" style="display: flex; align-items: center; gap: 6px;">
+                <label for="filter-view-preset" style="font-size: 12px; font-weight: 700; color: var(--primary); white-space: nowrap;">👁️ Filter View:</label>
+                <select id="filter-view-preset" class="filter-select preset-select" onchange="applyViewPreset(this.value)" style="border-color: #3b82f6; font-weight: 600; background-color: #f0f7ff;">
+                  <option value="ALL">All Tools (253 Tools)</option>
+                  <option value="150T">🏭 6# STD-150T Line (888k+ Good Qty)</option>
+                  <option value="110T">🏭 110T Press Lines (3#, 4#, 5#, 9#, 13#)</option>
+                  <option value="80T">🏭 80T Press Lines (1# & 2#)</option>
+                  <option value="HEAVY">🏭 200T-500T Heavy Presses</option>
+                  <option value="HAS_COL_AD">⚡ Col AD Good Qty (> 0)</option>
+                  <option value="HIGH_WEAR">⚠️ High Stroke Wear (> 80% Life)</option>
+                  <option value="OVER_LIMIT">🚨 Over Life Limit (>= 100%)</option>
+                  <option value="STL">🏢 STL (Schneider Electric)</option>
+                  <option value="AUTO">🚗 Automotive (SumiRiko/Joyson/Tesla)</option>
+                  <option value="CRITICAL">🔴 Critical Tools Only</option>
+                  <option value="YEAR_2024">📅 2024 Tools (105)</option>
+                  <option value="YEAR_2025">📅 2025 Tools (126)</option>
+                  <option value="YEAR_2026">📅 2026 Tools (22)</option>
+                </select>
+              </div>
+
+              <!-- Year Filter -->
               <select id="filter-year" class="filter-select" onchange="filterTools()">
                 <option value="ALL">All Years (253 Tools)</option>
                 <option value="2024">2024 (105 Tools)</option>
@@ -291,6 +313,24 @@
                 <option value="2026">2026 (22 Tools)</option>
               </select>
 
+              <!-- Press / Mech Filter -->
+              <select id="filter-press" class="filter-select" onchange="filterTools()">
+                <option value="ALL">All Presses & Mechs</option>
+                <option value="80T">80T (1# OCP & 2# MHS)</option>
+                <option value="110T">110T (3#, 4#, 5#, 9#, 13#)</option>
+                <option value="150T">150T (6# STD-150T)</option>
+                <option value="200T">200T (11# & 12#)</option>
+                <option value="260T+">260T - 500T Heavy Presses</option>
+              </select>
+
+              <!-- Col AD Shots Filter -->
+              <select id="filter-col-ad" class="filter-select" onchange="filterTools()">
+                <option value="ALL">All Col AD Records</option>
+                <option value="HAS_COL_AD">Has Col AD Good Qty (> 0)</option>
+                <option value="NO_COL_AD">No Col AD Record</option>
+              </select>
+
+              <!-- Customer Filter -->
               <select id="filter-customer" class="filter-select" onchange="filterTools()">
                 <option value="ALL">All Customers (253 Tools)</option>
                 <option value="STL">STL (Schneider Electric)</option>
@@ -301,13 +341,7 @@
                 <option value="TSKT">TSKT</option>
               </select>
 
-              <select id="filter-criticality" class="filter-select" onchange="filterTools()">
-                <option value="ALL">All Criticalities</option>
-                <option value="CRITICAL">Critical</option>
-                <option value="MAJOR">Major</option>
-                <option value="MINOR">Standard / Minor</option>
-              </select>
-
+              <!-- Health Status Filter -->
               <select id="filter-status" class="filter-select" onchange="filterTools()">
                 <option value="ALL">All Health Statuses</option>
                 <option value="Operational">Operational</option>
@@ -315,39 +349,136 @@
                 <option value="Critical Attention">Critical Attention</option>
               </select>
 
+              <!-- Criticality Filter -->
+              <select id="filter-criticality" class="filter-select" onchange="filterTools()">
+                <option value="ALL">All Criticalities</option>
+                <option value="CRITICAL">Critical</option>
+                <option value="MAJOR">Major</option>
+                <option value="MINOR">Standard / Minor</option>
+              </select>
+
+              <!-- Column Visibility Button -->
+              <div class="columns-menu-container">
+                <button type="button" class="btn btn-secondary btn-sm" id="col-toggle-btn" onclick="toggleColumnMenu(event)" title="Show/Hide Table Columns">
+                  Columns ⚙️
+                </button>
+                <div class="columns-dropdown" id="columns-dropdown-menu" style="display: none;">
+                  <div style="font-weight: 700; font-size: 11px; margin-bottom: 8px; text-transform: uppercase; color: var(--text-muted); border-bottom: 1px solid #f1f5f9; padding-bottom: 4px;">Toggle Columns</div>
+                  <label class="columns-dropdown-item"><input type="checkbox" data-col="year" checked onchange="toggleColumnVisibility('year', this.checked)"> Year</label>
+                  <label class="columns-dropdown-item"><input type="checkbox" data-col="image" checked onchange="toggleColumnVisibility('image', this.checked)"> Image</label>
+                  <label class="columns-dropdown-item"><input type="checkbox" data-col="partNumber" checked onchange="toggleColumnVisibility('partNumber', this.checked)"> Part Number</label>
+                  <label class="columns-dropdown-item"><input type="checkbox" data-col="partName" checked onchange="toggleColumnVisibility('partName', this.checked)"> Part Name</label>
+                  <label class="columns-dropdown-item"><input type="checkbox" data-col="customer" checked onchange="toggleColumnVisibility('customer', this.checked)"> Customer</label>
+                  <label class="columns-dropdown-item"><input type="checkbox" data-col="matchedToolShotId" checked onchange="toggleColumnVisibility('matchedToolShotId', this.checked)"> Linked Die ID</label>
+                  <label class="columns-dropdown-item"><input type="checkbox" data-col="pressTonnage" checked onchange="toggleColumnVisibility('pressTonnage', this.checked)"> Press / Mech</label>
+                  <label class="columns-dropdown-item"><input type="checkbox" data-col="colAD_ToolShot" checked onchange="toggleColumnVisibility('colAD_ToolShot', this.checked)"> Col AD Shots</label>
+                  <label class="columns-dropdown-item"><input type="checkbox" data-col="strokesCurrent" checked onchange="toggleColumnVisibility('strokesCurrent', this.checked)"> Total Strokes</label>
+                  <label class="columns-dropdown-item"><input type="checkbox" data-col="strokeWearPercent" checked onchange="toggleColumnVisibility('strokeWearPercent', this.checked)"> Life %</label>
+                  <label class="columns-dropdown-item"><input type="checkbox" data-col="healthStatus" checked onchange="toggleColumnVisibility('healthStatus', this.checked)"> Health Status</label>
+                </div>
+              </div>
+
+              <!-- Reset Filters Button -->
+              <button type="button" class="btn btn-secondary btn-sm" onclick="resetAllFilters()" title="Reset All Filters">
+                ↺ Reset
+              </button>
+
+              <!-- View Toggle (Grid / Table) -->
               <div class="view-toggle">
-                <button class="toggle-btn active" id="view-mode-grid" onclick="setViewMode('grid')" title="Cards View">
+                <button class="toggle-btn" id="view-mode-grid" onclick="setViewMode('grid')" title="Cards View">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
                 </button>
-                <button class="toggle-btn" id="view-mode-table" onclick="setViewMode('table')" title="Table View">
+                <button class="toggle-btn active" id="view-mode-table" onclick="setViewMode('table')" title="Table View">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
                 </button>
               </div>
             </div>
           </div>
 
+          <!-- Active Filter Status & Chips Bar -->
+          <div class="filter-status-bar" id="filter-status-bar">
+            <div class="filter-count" id="filter-count-badge">
+              <span id="filter-count-text">Showing 253 of 253 Tools</span>
+            </div>
+            <div class="active-chips" id="active-filter-chips"></div>
+          </div>
+
           <!-- Grid Container -->
-          <div id="registry-grid-container" class="tools-grid">
+          <div id="registry-grid-container" class="tools-grid" style="display: none;">
             <!-- Populated by JS -->
           </div>
 
           <!-- Table Container -->
-          <div id="registry-table-container" class="table-responsive" style="display: none;">
-            <table class="data-table">
+          <div id="registry-table-container" class="table-responsive" style="display: block;">
+            <table class="data-table" id="registry-table">
               <thead>
                 <tr>
-                  <th>Year</th>
-                  <th>Image</th>
-                  <th>Part Number</th>
-                  <th>Part Name</th>
-                  <th>Customer</th>
-                  <th>Linked Die ID</th>
-                  <th>Press / Mech</th>
-                  <th>Col AD Shots</th>
-                  <th>Total Strokes</th>
-                  <th>Life %</th>
-                  <th>Health Status</th>
-                  <th>Actions</th>
+                  <th class="th-sortable" data-col="year">
+                    <div class="th-content">
+                      <span class="th-title" onclick="sortTable('year')">YEAR <span class="sort-icon" id="sort-icon-year">↕</span></span>
+                      <button class="th-filter-btn" id="btn-col-filter-year" onclick="openColFilter(event, 'year')" title="Filter Year">▾</button>
+                    </div>
+                  </th>
+                  <th data-col="image">
+                    <div class="th-content">
+                      <span class="th-title">IMAGE</span>
+                    </div>
+                  </th>
+                  <th class="th-sortable" data-col="partNumber">
+                    <div class="th-content">
+                      <span class="th-title" onclick="sortTable('partNumber')">PART NUMBER <span class="sort-icon" id="sort-icon-partNumber">↕</span></span>
+                      <button class="th-filter-btn" id="btn-col-filter-partNumber" onclick="openColFilter(event, 'partNumber')" title="Filter Part Number">▾</button>
+                    </div>
+                  </th>
+                  <th class="th-sortable" data-col="partName">
+                    <div class="th-content">
+                      <span class="th-title" onclick="sortTable('partName')">PART NAME <span class="sort-icon" id="sort-icon-partName">↕</span></span>
+                      <button class="th-filter-btn" id="btn-col-filter-partName" onclick="openColFilter(event, 'partName')" title="Filter Part Name">▾</button>
+                    </div>
+                  </th>
+                  <th class="th-sortable" data-col="customer">
+                    <div class="th-content">
+                      <span class="th-title" onclick="sortTable('customer')">CUSTOMER <span class="sort-icon" id="sort-icon-customer">↕</span></span>
+                      <button class="th-filter-btn" id="btn-col-filter-customer" onclick="openColFilter(event, 'customer')" title="Filter Customer">▾</button>
+                    </div>
+                  </th>
+                  <th class="th-sortable" data-col="matchedToolShotId">
+                    <div class="th-content">
+                      <span class="th-title" onclick="sortTable('matchedToolShotId')">LINKED DIE ID <span class="sort-icon" id="sort-icon-matchedToolShotId">↕</span></span>
+                      <button class="th-filter-btn" id="btn-col-filter-matchedToolShotId" onclick="openColFilter(event, 'matchedToolShotId')" title="Filter Linked Die ID">▾</button>
+                    </div>
+                  </th>
+                  <th class="th-sortable" data-col="pressTonnage">
+                    <div class="th-content">
+                      <span class="th-title" onclick="sortTable('pressTonnage')">PRESS / MECH <span class="sort-icon" id="sort-icon-pressTonnage">↕</span></span>
+                      <button class="th-filter-btn" id="btn-col-filter-pressTonnage" onclick="openColFilter(event, 'pressTonnage')" title="Filter Press / Mech">▾</button>
+                    </div>
+                  </th>
+                  <th class="th-sortable" data-col="colAD_ToolShot">
+                    <div class="th-content">
+                      <span class="th-title" onclick="sortTable('colAD_ToolShot')">COL AD SHOTS <span class="sort-icon" id="sort-icon-colAD_ToolShot">↕</span></span>
+                      <button class="th-filter-btn" id="btn-col-filter-colAD_ToolShot" onclick="openColFilter(event, 'colAD_ToolShot')" title="Filter Col AD Shots">▾</button>
+                    </div>
+                  </th>
+                  <th class="th-sortable" data-col="strokesCurrent">
+                    <div class="th-content">
+                      <span class="th-title" onclick="sortTable('strokesCurrent')">TOTAL STROKES <span class="sort-icon" id="sort-icon-strokesCurrent">↕</span></span>
+                      <button class="th-filter-btn" id="btn-col-filter-strokesCurrent" onclick="openColFilter(event, 'strokesCurrent')" title="Filter Total Strokes">▾</button>
+                    </div>
+                  </th>
+                  <th class="th-sortable" data-col="strokeWearPercent">
+                    <div class="th-content">
+                      <span class="th-title" onclick="sortTable('strokeWearPercent')">LIFE % <span class="sort-icon" id="sort-icon-strokeWearPercent">↕</span></span>
+                      <button class="th-filter-btn" id="btn-col-filter-strokeWearPercent" onclick="openColFilter(event, 'strokeWearPercent')" title="Filter Life %">▾</button>
+                    </div>
+                  </th>
+                  <th class="th-sortable" data-col="healthStatus">
+                    <div class="th-content">
+                      <span class="th-title" onclick="sortTable('healthStatus')">HEALTH STATUS <span class="sort-icon" id="sort-icon-healthStatus">↕</span></span>
+                      <button class="th-filter-btn" id="btn-col-filter-healthStatus" onclick="openColFilter(event, 'healthStatus')" title="Filter Health Status">▾</button>
+                    </div>
+                  </th>
+                  <th data-col="actions">ACTIONS</th>
                 </tr>
               </thead>
               <tbody id="registry-table-tbody">
@@ -355,6 +486,9 @@
               </tbody>
             </table>
           </div>
+
+          <!-- Floating Google Sheets / Excel Style Column Filter Popover -->
+          <div id="col-filter-popover" class="col-filter-popover" style="display: none;"></div>
         </section>
 
         <!-- ================= TAB 3: WORK ORDERS (PM/CM) ================= -->
