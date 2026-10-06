@@ -284,11 +284,20 @@
             </div>
 
             <div class="filter-group">
+              <select id="filter-customer" class="filter-select" onchange="filterTools()">
+                <option value="ALL">All Customers (105 Tools)</option>
+                <option value="STL">STL (Schneider Electric)</option>
+                <option value="SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant)">SumiRiko (Automotive)</option>
+                <option value="SEMB">SEMB (Batam Coils)</option>
+                <option value="JOYSON">JOYSON Safety</option>
+                <option value="TESLA">TESLA Motors</option>
+              </select>
+
               <select id="filter-criticality" class="filter-select" onchange="filterTools()">
                 <option value="ALL">All Criticalities</option>
                 <option value="CRITICAL">Critical</option>
                 <option value="MAJOR">Major</option>
-                <option value="MINOR">Minor</option>
+                <option value="MINOR">Standard / Minor</option>
               </select>
 
               <select id="filter-status" class="filter-select" onchange="filterTools()">
@@ -296,15 +305,13 @@
                 <option value="Operational">Operational</option>
                 <option value="Maintenance Due">Maintenance Due</option>
                 <option value="Critical Attention">Critical Attention</option>
-                <option value="Trial In Progress">Trial In Progress</option>
-                <option value="Pipeline Pending">Pipeline Pending</option>
               </select>
 
               <div class="view-toggle">
-                <button class="toggle-btn active" id="view-mode-grid" onclick="setViewMode('grid')">
+                <button class="toggle-btn active" id="view-mode-grid" onclick="setViewMode('grid')" title="Cards View">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
                 </button>
-                <button class="toggle-btn" id="view-mode-table" onclick="setViewMode('table')">
+                <button class="toggle-btn" id="view-mode-table" onclick="setViewMode('table')" title="Table View">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
                 </button>
               </div>
@@ -323,13 +330,14 @@
                 <tr>
                   <th>Image</th>
                   <th>Part Number</th>
-                  <th>Description</th>
-                  <th>Tool ID</th>
-                  <th>Criticality</th>
-                  <th>Strokes Meter</th>
+                  <th>Part Name</th>
+                  <th>Customer</th>
+                  <th>Linked Die ID</th>
+                  <th>Press / Mech</th>
+                  <th>Col AD Shots</th>
+                  <th>Total Strokes</th>
+                  <th>Life %</th>
                   <th>Health Status</th>
-                  <th>Next PM Due</th>
-                  <th>Location</th>
                   <th>Actions</th>
                 </tr>
               </thead>

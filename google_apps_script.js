@@ -94,11 +94,11 @@ function doPost(e) {
 // Initialize template headers if sheets are empty
 function initSheetsIfNeeded(ss) {
   const toolHeaders = [
-    "id", "partNumber", "description", "criticality", "category",
-    "toolId", "toolType", "pressTonnage", "material", "cavities",
-    "samplesQty", "pipelineStatus", "statusDate", "remarks", "image",
-    "strokesCurrent", "strokesMax", "pmIntervalStrokes", "lastPmDate",
-    "nextPmDate", "healthStatus", "location", "assignedTech", "notes"
+    "id", "slNo", "partNumber", "description", "customer", "criticality", "category",
+    "toolId", "toolType", "pressTonnage", "mechNo", "speed", "material", "thickness", "cavities",
+    "toolingSize", "blankingGap", "designer", "platingSupplier", "productPosition",
+    "strokesCurrent", "strokesMax", "colAD_ToolShot", "actualToolShot", "warrantyToolShots", "currentTotalShot",
+    "matchedToolShotId", "healthStatus", "location", "assignedTech", "pipelineStatus", "notes"
   ];
 
   const woHeaders = [

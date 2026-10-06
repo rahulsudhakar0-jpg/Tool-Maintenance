@@ -37,11 +37,13 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initData() {
+  const DATA_VERSION = 'v2_105_tools_linked_col_ad';
+  const savedVersion = localStorage.getItem('tool_maint_data_version');
   const savedTools = localStorage.getItem('tool_maint_tools');
   const savedWO = localStorage.getItem('tool_maint_workorders');
   const savedHist = localStorage.getItem('tool_maint_history');
 
-  if (savedTools && savedWO && savedHist) {
+  if (savedVersion === DATA_VERSION && savedTools && savedWO && savedHist) {
     try {
       appState.tools = JSON.parse(savedTools);
       appState.workOrders = JSON.parse(savedWO);
@@ -49,9 +51,11 @@ function initData() {
     } catch (e) {
       console.warn('Failed to parse localStorage, resetting to initial data', e);
       loadInitialData();
+      localStorage.setItem('tool_maint_data_version', DATA_VERSION);
     }
   } else {
     loadInitialData();
+    localStorage.setItem('tool_maint_data_version', DATA_VERSION);
   }
 }
 
@@ -335,18 +339,22 @@ function filterTools() {
   const searchTerm = (document.getElementById('registry-search')?.value || '').toLowerCase();
   const critFilter = document.getElementById('filter-criticality')?.value || 'ALL';
   const statusFilter = document.getElementById('filter-status')?.value || 'ALL';
+  const custFilter = document.getElementById('filter-customer')?.value || 'ALL';
 
   const filtered = appState.tools.filter(t => {
     const matchesSearch = 
       t.partNumber.toLowerCase().includes(searchTerm) ||
       t.description.toLowerCase().includes(searchTerm) ||
       t.toolId.toLowerCase().includes(searchTerm) ||
+      (t.customer && t.customer.toLowerCase().includes(searchTerm)) ||
+      (t.matchedToolShotId && t.matchedToolShotId.toLowerCase().includes(searchTerm)) ||
       (t.material && t.material.toLowerCase().includes(searchTerm));
 
     const matchesCrit = critFilter === 'ALL' || t.criticality === critFilter;
     const matchesStatus = statusFilter === 'ALL' || t.healthStatus === statusFilter;
+    const matchesCust = custFilter === 'ALL' || t.customer === custFilter || (custFilter === 'STL' && t.customer && t.customer.includes('STL'));
 
-    return matchesSearch && matchesCrit && matchesStatus;
+    return matchesSearch && matchesCrit && matchesStatus && matchesCust;
   });
 
   renderToolsGrid(filtered);
@@ -383,7 +391,10 @@ function renderToolsGrid(tools) {
       <div class="tool-card-content">
         <div class="tool-card-header">
           <div>
-            <div class="part-code">${tool.partNumber}</div>
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+              <span class="part-code">${tool.partNumber}</span>
+              <span style="font-size: 11px; font-weight: 700; color: #1e40af; background: #dbeafe; padding: 2px 6px; border-radius: 4px;">${tool.customer || 'JRTL'}</span>
+            </div>
             <div class="part-title">${tool.description}</div>
           </div>
         </div>
@@ -400,20 +411,20 @@ function renderToolsGrid(tools) {
 
         <div class="tool-card-meta">
           <div class="meta-item">
-            <span class="meta-label">Tool ID</span>
-            <span class="meta-value">${tool.toolId}</span>
+            <span class="meta-label">Col AD Shots</span>
+            <span class="meta-value" style="color: #2563eb; font-weight: 700;">${tool.colAD_ToolShot ? Number(tool.colAD_ToolShot).toLocaleString() : '—'}</span>
           </div>
           <div class="meta-item">
-            <span class="meta-label">Press Machine</span>
-            <span class="meta-value">${tool.pressTonnage || 'N/A'}</span>
+            <span class="meta-label">Linked Die ID</span>
+            <span class="meta-value"><code>${tool.matchedToolShotId || tool.toolId}</code></span>
           </div>
           <div class="meta-item">
-            <span class="meta-label">Next PM Due</span>
-            <span class="meta-value">${tool.nextPmDate || 'Scheduled'}</span>
+            <span class="meta-label">Press & Mech</span>
+            <span class="meta-value">${tool.pressTonnage || 'N/A'} ${tool.mechNo ? '(' + tool.mechNo + ')' : ''}</span>
           </div>
           <div class="meta-item">
-            <span class="meta-label">Location</span>
-            <span class="meta-value">${tool.location || 'Toolroom'}</span>
+            <span class="meta-label">Material / Thick</span>
+            <span class="meta-value">${tool.material || 'Alloy'} ${tool.thickness ? '(' + tool.thickness + ')' : ''}</span>
           </div>
         </div>
 
@@ -441,10 +452,13 @@ function renderToolsTable(tools) {
       </td>
       <td><strong class="part-code">${tool.partNumber}</strong></td>
       <td>${tool.description}</td>
-      <td><code>${tool.toolId}</code></td>
-      <td>${getCriticalityBadge(tool.criticality)}</td>
+      <td><span style="font-size: 11px; font-weight: 700; color: #1e40af; background: #dbeafe; padding: 2px 6px; border-radius: 4px;">${tool.customer || 'JRTL'}</span></td>
+      <td><code>${tool.matchedToolShotId || tool.toolId}</code></td>
+      <td>${tool.pressTonnage || 'N/A'} ${tool.mechNo ? '(' + tool.mechNo + ')' : ''}</td>
+      <td><strong style="color: #2563eb;">${tool.colAD_ToolShot ? Number(tool.colAD_ToolShot).toLocaleString() : '—'}</strong></td>
+      <td>${tool.strokesCurrent.toLocaleString()} / ${tool.strokesMax.toLocaleString()}</td>
       <td>
-        <div class="stroke-meter" style="width: 130px;">
+        <div class="stroke-meter" style="width: 100px;">
           <div class="stroke-meta">
             <span>${strokePct}%</span>
           </div>
@@ -454,11 +468,9 @@ function renderToolsTable(tools) {
         </div>
       </td>
       <td>${getHealthStatusPill(tool.healthStatus)}</td>
-      <td>${tool.nextPmDate || 'Scheduled'}</td>
-      <td>${tool.location || 'Line Bay'}</td>
       <td>
         <div style="display: flex; gap: 6px;">
-          <button class="btn btn-secondary btn-sm" onclick="openToolDetailModal('${tool.id}')">Inspect</button>
+          <button class="btn btn-secondary btn-sm" onclick="openToolDetailModal('${tool.id}')">View</button>
           <button class="btn btn-primary btn-sm" onclick="openNewWorkOrderForTool('${tool.id}')">WO</button>
         </div>
       </td>
@@ -770,6 +782,9 @@ function openToolDetailModal(toolId) {
           ${getCriticalityBadge(tool.criticality)}
           ${getHealthStatusPill(tool.healthStatus)}
         </div>
+        <div style="margin-top: 8px; font-size: 11px; font-weight: 700; color: #1e40af; background: #dbeafe; padding: 3px 8px; border-radius: 4px;">
+          Customer: ${tool.customer || 'JRTL'}
+        </div>
       </div>
 
       <div>
@@ -783,28 +798,60 @@ function openToolDetailModal(toolId) {
           </div>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; font-size: 13px;">
-          <div><span style="color: var(--text-muted);">Tool Type:</span> <strong>${tool.toolType}</strong></div>
-          <div><span style="color: var(--text-muted);">Tonnage:</span> <strong>${tool.pressTonnage || 'N/A'}</strong></div>
-          <div><span style="color: var(--text-muted);">Cavities:</span> <strong>${tool.cavities || 1}</strong></div>
-          <div><span style="color: var(--text-muted);">Material:</span> <strong>${tool.material || 'Standard Alloy'}</strong></div>
-          <div><span style="color: var(--text-muted);">Location:</span> <strong>${tool.location || 'Toolroom'}</strong></div>
-          <div><span style="color: var(--text-muted);">Technician:</span> <strong>${tool.assignedTech || 'Unassigned'}</strong></div>
-          <div><span style="color: var(--text-muted);">Next PM Due:</span> <strong>${tool.nextPmDate || 'Scheduled'}</strong></div>
-          <div><span style="color: var(--text-muted);">PM Interval:</span> <strong>${(tool.pmIntervalStrokes || 50000).toLocaleString()} strokes</strong></div>
+        <!-- Linked Tool Shot Template Box -->
+        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: var(--radius-md); padding: 12px 16px; margin-bottom: 14px;">
+          <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #1d4ed8; margin-bottom: 6px; display: flex; justify-content: space-between;">
+            <span>Tool Shot Template Linkage (Jinrong CH-TH)</span>
+            <span>${tool.matchedToolShotId ? '✓ Linked' : 'Standard Baseline'}</span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; font-size: 12px;">
+            <div>
+              <span style="color: var(--text-muted); display: block;">Col AD Shots:</span>
+              <strong style="color: #2563eb; font-size: 14px;">${tool.colAD_ToolShot ? Number(tool.colAD_ToolShot).toLocaleString() : '—'}</strong>
+            </div>
+            <div>
+              <span style="color: var(--text-muted); display: block;">Current Total Shots:</span>
+              <strong style="color: #0f172a; font-size: 14px;">${tool.strokesCurrent.toLocaleString()}</strong>
+            </div>
+            <div>
+              <span style="color: var(--text-muted); display: block;">Warranty Limit (Col AH):</span>
+              <strong style="color: #0f172a; font-size: 14px;">${(tool.warrantyToolShots || tool.strokesMax).toLocaleString()}</strong>
+            </div>
+          </div>
+          ${tool.matchedToolShotId ? `
+            <div style="font-size: 11px; color: #1e40af; margin-top: 6px; padding-top: 4px; border-top: 1px dashed #bfdbfe;">
+              Matched Die: <strong>${tool.matchedToolShotId}</strong> • ${tool.matchedToolShotName || ''} (${tool.matchReason || ''})
+            </div>
+          ` : ''}
+        </div>
+
+        <!-- Technical Specification Grid -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; font-size: 12px;">
+          <div><span style="color: var(--text-muted);">Manufacture No:</span> <strong>${tool.toolId}</strong></div>
+          <div><span style="color: var(--text-muted);">Press Machine:</span> <strong>${tool.pressTonnage || 'N/A'} (Mech ${tool.mechNo || '-'})</strong></div>
+          <div><span style="color: var(--text-muted);">Model / Tool Type:</span> <strong>${tool.toolType}</strong></div>
+          <div><span style="color: var(--text-muted);">Speed / Stroke Rate:</span> <strong>${tool.speed || '80 SPM'}</strong></div>
+          <div><span style="color: var(--text-muted);">Material & Thick:</span> <strong>${tool.material || '-'} (${tool.thickness || '-'})</strong></div>
+          <div><span style="color: var(--text-muted);">Cavity Count:</span> <strong>${tool.cavities || '1'}</strong></div>
+          <div><span style="color: var(--text-muted);">Tool Size (L*W*H):</span> <strong>${tool.toolingSize || 'N/A'}</strong></div>
+          <div><span style="color: var(--text-muted);">Blanking Gap:</span> <strong>${tool.blankingGap || 'N/A'}</strong></div>
+          <div><span style="color: var(--text-muted);">PPEP NO:</span> <strong>${tool.ppepNo || 'N/A'}</strong></div>
+          <div><span style="color: var(--text-muted);">Designer:</span> <strong>${tool.designer || 'Yang'}</strong></div>
+          <div><span style="color: var(--text-muted);">Plating Supplier:</span> <strong>${tool.platingSupplier || 'N/A'}</strong></div>
+          <div><span style="color: var(--text-muted);">Product Position:</span> <strong>${tool.productPosition || 'THAI'}</strong></div>
         </div>
       </div>
     </div>
 
-    <div style="background: #f1f5f9; padding: 14px 18px; border-radius: var(--radius-md); margin-bottom: 20px;">
-      <strong style="font-size: 12px; text-transform: uppercase; color: var(--text-muted);">LAIR Pipeline Status & Remarks:</strong>
-      <div style="font-size: 14px; color: var(--text-main); margin-top: 4px;">
-        <strong>${tool.pipelineStatus}</strong> — ${tool.remarks || 'Samples approved'}
+    <div style="background: #f1f5f9; padding: 12px 16px; border-radius: var(--radius-md); margin-bottom: 16px;">
+      <strong style="font-size: 11px; text-transform: uppercase; color: var(--text-muted);">Pipeline Status & Production Details:</strong>
+      <div style="font-size: 13px; color: var(--text-main); margin-top: 4px;">
+        <strong>${tool.pipelineStatus}</strong> — ${tool.remarks || 'Tooling active in production line. Quality validated.'}
       </div>
     </div>
 
     ${tool.notes ? `
-      <div style="background: #fffbeb; border: 1px solid #fef3c7; padding: 12px 16px; border-radius: var(--radius-md); font-size: 13px; color: #92400e; margin-bottom: 20px;">
+      <div style="background: #fffbeb; border: 1px solid #fef3c7; padding: 10px 14px; border-radius: var(--radius-md); font-size: 12px; color: #92400e; margin-bottom: 16px;">
         <strong>Engineering Quality Note:</strong> ${tool.notes}
       </div>
     ` : ''}

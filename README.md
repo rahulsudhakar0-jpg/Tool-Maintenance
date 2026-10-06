@@ -45,7 +45,13 @@ Extracted and calibrated directly from the plant engineering specifications and 
 * **Data Export**: One-click download of the entire database in **CSV** or **JSON** format.
 * **Printable Maintenance Job Sheets**: Formatted for standard A4 printing (`Ctrl+P` or via the top navigation bar) for toolroom technicians and quality audits.
 
-### 8. 📊 Google Sheets as Live Cloud Database
+### 8. 🔗 Multi-Source Data Linking (105 Tools & Real Tool Shots)
+* **Primary Parts Registry**: Linked from Google Sheet `1GJT6p_Yfn7Lda-kYgH7-lFofOO0GOn1ZfwWjTlGXm2c` (JRTL Tooling List) containing all 105 production tools across STL (Schneider Electric), SumiRiko (Automotive), SEMB (Coils), JOYSON (Safety Systems), and TESLA.
+* **Real Tool Shots in Column AD**: Linked from `Tool Shot Tempalte-Jinrong CH-TH(9).xlsx` (and online Google Sheets), tracking actual die stroke counters from **Column AD** (`46266`), **Column AI** (`Current total Tool Shot`), **Column AH** (`Warranty Tool Shots`), and **Column F** (`ActualToolShot`).
+* **Technical Specifications**: Press Tonnage (80T - 500T), Mech No (#1 - #8), Speed (SPM), Cavities, Tooling Size (L*W*H), Material Model (SPCC, SPFC, SPHC, C1100, T2Y2), Thickness, Blanking Clearance, PPEP No, Designer, and Plating Supplier.
+* **Over-Warranty & Wear Alarms**: Automatically calculates usage ratio and flags tooling reaching $\ge 90\%$ (Critical Attention) or $\ge 70\%$ (Maintenance Due) with 22 automated corrective work orders.
+
+### 9. 📊 Google Sheets as Live Cloud Database
 * **Cloud Persistence**: Use any Google Sheet as a live, collaborative, multi-user database for tools, work orders, and maintenance logs.
 * **Bi-Directional Synchronization**: Push local data to Google Sheets or pull live changes directly into the web application.
 * **Automated Web App API**: Powered by a lightweight Google Apps Script (`google_apps_script.js`) with zero third-party dependencies.
@@ -55,22 +61,19 @@ Extracted and calibrated directly from the plant engineering specifications and 
 ## 📂 Project Structure
 
 ```text
-├── index.html          # Main Single-Page Application interface
-├── styles.css          # Industrial design system and responsive styles
-├── app.js              # Application controller, state management & reactive logic
-├── data.js             # Initial dataset extracted from GP-CoS -LAIR preparation.xlsx
-├── server.ps1          # Lightweight zero-dependency PowerShell HTTP server & API
-├── start_app.bat       # Windows 1-click launcher batch script
-├── excel_data.json     # Extracted Excel JSON manifest & image anchor coordinates
-├── images/             # Extracted high-resolution component CAD & tooling photos
-│   ├── image1.png      # Lock, Shaft (48187082AA)
-│   ├── image2.png      # Lever, Door Lock (48187077AA)
-│   ├── image3.png      # Striker-Plate (48187083AA)
-│   ├── image4.png      # Plate, Cam (48187099AA)
-│   ├── image5.png      # Clamp, Shaft (48187081AA)
-│   ├── ...             # Remaining tooling images 6-14
+├── index.html              # Main Single-Page Application interface
+├── styles.css              # Industrial design system and responsive styles
+├── app.js                  # Application controller, state management & reactive logic
+├── data.js                 # Complete linked dataset (105 tools, 22 work orders, specs)
+├── excel_data.json         # Linked JSON manifest with metadata and tooling records
+├── google_apps_script.js   # Two-way sync backend for Google Sheets
+├── build_full_dataset.ps1  # Automated data linker between Google Sheet and Tool Shot template
+├── server.ps1              # Lightweight zero-dependency PowerShell HTTP server & API
+├── start_app.bat           # Windows 1-click launcher batch script
+├── images/                 # Component CAD & tooling photos
 ├── GP-CoS -LAIR preparation.xlsx # Original plant tooling spreadsheet
-└── README.md           # Documentation
+├── new_sheet.csv           # JRTL 105 Tooling List source data
+└── README.md               # Documentation
 ```
 
 ---
@@ -95,28 +98,22 @@ Double-click `index.html` or open it directly in Google Chrome / Edge / Firefox.
 
 ---
 
-## 🛠️ Tooling & Part Specifications Included
+## 🛠️ Sample Linked Tooling Assets (from 105 JRTL Tools)
 
-| Part Number | Description | Criticality | Tool ID | Press / Machine | Pipeline Status |
-| :--- | :--- | :---: | :--- | :--- | :--- |
-| **S1A28862** | Terminal plug-in low rating | **MAJOR** | `DIE-TRM-8862-A` | 110T Komatsu | Sent to JR-TH |
-| **S1A28863** | Terminal plug-in high rating | **MAJOR** | `DIE-TRM-8863-B` | 160T Aida | Sent to JR-TH |
-| **GHJ16013AA** | Spreader1 4P | **MINOR** | `MLD-SPR-6013-1` | 80T Chin Fong | Sent to JR-TH |
-| **GHJ16016AA** | Spreader4 4P | **MINOR** | `MLD-SPR-6016-4` | 80T Chin Fong | Sent to JR-TH |
-| **GHJ16014AA** | Spreader2 4P | **MINOR** | `MLD-SPR-6014-2` | 80T Chin Fong | Sent to JR-TH |
-| **GHJ16015AA** | Spreader3 4P | **MINOR** | `MLD-SPR-6015-3` | 80T Chin Fong | Sent to JR-TH |
-| **48187114AA** | PLATE, SLIDE | **MINOR** | `DIE-PLT-7114` | 160T Aida | Finished Trial |
-| **48187099AA** | PLATE, CAM | **MINOR** | `DIE-CAM-7099` | 160T Aida | Sent to JR-TH |
-| **48187081AA** | CLAMP, SHAFT | **CRITICAL** | `DIE-CLP-7081-CRIT` | 200T Komatsu | Sent to JR-TH |
-| **48187077AA** | LEVER, DOOR LOCK | **CRITICAL** | `DIE-LVR-7077-CRIT` | 110T Komatsu | Sent to JR-TH |
-| **48187083AA** | STRIKER-PLATE | **MINOR** | `DIE-STK-7083` | 160T Aida | Sent to JR-TH |
-| **48187082AA** | LOCK, SHAFT | **CRITICAL** | `DIE-LCK-7082-CRIT` | 200T Komatsu | Sent to JR-TH |
-| **48187087AA** | LEVER, SHAFT RELEASE | **CRITICAL** | `DIE-REL-7087-CRIT` | 160T Aida | Finished Trial |
-| **48187076AA** | LATCH, UVR | **CRITICAL** | `DIE-UVR-7076-CRIT` | 110T Komatsu | Prep in progress |
-| **S1B22575** | TERMINAL (with Silver Tip) | **MAJOR** | `DIE-TRM-2575-ST` | 110T Komatsu | Prep in progress |
-| **S1B22372** | TERMINAL (W/O Silver Tip) | **MAJOR** | `DIE-TRM-2372-WO` | 110T Komatsu | Prep in progress |
-| **S1A23987** | ARC STACK LOW | **CRITICAL** | `DIE-ARC-3987-CRIT` | 160T Aida | Prep in progress |
-| **48187145AA** | STAPLE | **CRITICAL** | `DIE-STP-7145-CRIT` | 60T Bihler | Prep in progress |
+| SL | Part Number | Part Name | Customer | Linked Die ID | Press Tonnage | Col AD Shots | Total Strokes | Warranty Life | Health Status |
+| :---: | :--- | :--- | :--- | :--- | :--- | :---: | :---: | :---: | :---: |
+| **1** | `51207084` | Fixed Contact | **STL** | `S1B38101#2` | 80T (1#) | — | 28,995,167 | 15,000,000 | 🔴 Critical Attention |
+| **2** | `51207070AB` | Bimetal Support Greco | **STL** | `51207070#5` | 110T (4#) | — | 12,336,580 | 15,000,000 | 🟡 Maintenance Due |
+| **3** | `48187088&7089` | MECH SIDE L/R | **STL** | `48187088&89#4` | 150T (6#) | — | 9,409,415 | 15,000,000 | 🟢 Operational |
+| **4** | `48187061AA` | PRIMARY LATCH | **STL** | `48187061#4` | 110T (3#) | — | 4,378,954 | 15,000,000 | 🟢 Operational |
+| **5** | `48187096AA` | MIDDLE TERMINAL | **STL** | `48187096#3` | 80T (1#) | — | 17,957,990 | 5,000,000 | 🔴 Critical Attention |
+| **6** | `48187055AA` | LOAD TERM-HI-LOW | **STL** | `48187055/255#3` | 80T (1#) | — | 17,320,885 | 5,000,000 | 🔴 Critical Attention |
+| **7** | `48187070AA` | Magnet. Loop | **STL** | `48187070#3` | 80T (1#) | — | 10,219,720 | 10,000,000 | 🔴 Critical Attention |
+| **11** | `TM-755A-1` | UPPER PLATE | **SumiRiko** | `DIE-JRTL-011` | 300T (7#) | — | 1,750,000 | 5,000,000 | 🟢 Operational |
+| **20** | `51207117AD1` | ARC PLATE | **STL** | `51207117#5` | 110T | — | 16,394,097 | 70,000,000 | 🟢 Operational |
+| **31** | `48187063AA` | Armature High Amp | **STL** | `48187063#4` | 110T (3#) | — | 3,884,008 | 5,000,000 | 🟡 Maintenance Due |
+| **33** | `48187058` | CRADLE | **STL** | `48187058#4` | 110T (3#) | — | 9,920,668 | 5,000,000 | 🔴 Critical Attention |
+| **105** | `0135-0800005` | 3DU RESOLVER COVER | **TESLA** | `DIE-JRTL-105` | 160T | — | 3,500,000 | 10,000,000 | 🟢 Operational |
 
 ---
 

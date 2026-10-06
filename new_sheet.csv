@@ -1,0 +1,324 @@
+﻿,Tooling 2024,105,Total Tooling JRTL,105,,,,,,,,,,,,,,,,,,,,,
+ JRTL TooLing List,,,,,,,,,,,,,,,,,,,,,,,,,
+SL.NO,Part Picture,Customer,Part Name,Part No.,Rev.,Manufacture No.,Press Tonnage,Mech. No.,Tooling Life,Speed,Model ,Cavity No.,"Tooling Size
+ (L * W * H)",Material Model,Thickness,Material Width * Step,PPEP NO.,Blanking Gap,Designer,"Plating 
+Supplier",Production Flow Chart,Complete First Submission Date,Design Change Date,Product Position,
+1,,STL,Fixed Contact,"51207084
+S1B38101B-BOI",18/00,L10.TD.61,80T,1#,15M,100,"Progressive Tooling
+（2 Cav.）",T1*T2,600mm*430mm*293mm,SPCC-SD,1,54*13,"/
+SELV","Unilateral
+0.05mm",Yang,CHINA,Stamping---Plating---Packaging---Finished Product,2010.6.28,,THAI,
+2,,STL,Bimetal Support Greco,51207070AB,13,L18.TL.147,110T,4#,15M,110,"Progressive Tooling
+（2 Cav.）",J1*J2,880mm*420mm*294mm,SPCC-SD,0.8,39*64,REG4-AAAGOJ,"Unilateral
+0.05mm",Yang,Greentech,Stamping---Plating---Packaging---Finished Product,2018.10.8,"2021.11.18
+change raw material width 39mm to 38mm",THAI,
+3,,STL,MECH SIDE L/R,48187088&7089,04/05,L17.TL.222,150T,6#,15M,60,"Progressive Tooling
+（2 Cav.）",L/R,1050mm*530mm*347mm,SPCC-4D,1.2,92*46,"REG4-AAAFCI
+REG4-AAAFCJ","Unilateral
+0.06mm",Yang,"TJJ
+zn 8-15 μ",Stamping---Tapping（M3.5)---Plating---Packaging---Finished Product,2107.12.21,,THAI,
+4,,STL,PRIMARY LATCH,"48187061AA
+/S1B14877",04/00,L18.TL.145,110T,3#,15M,60,"Progressive Tooling
+（2 Cav.）",,815mm*450mm*289mm,SPFC-590,1,37*20,"REG4-AAAKRO
+REG4-AAAKRP","Unilateral
+0.05mm",Yang,Greentech,Stamping（in-tool tapping)---Plating---Packaging---Finished Product,"2019.12,05",,THAI,
+5,,STL,MIDDLE TERMINAL,48187096AA,01,"COS Trophy
+GST",80T,1#,10M ,100,"Progressive Tooling
+（2 Cav.）",,455mm*370mm*271mm,SPCC-4D,1.5,48*10,REG4-AAAJGH,"Unilateral
+0.07mm",GST,CP,Stamping---TAP----Plating---Packaging---Finished Product,2019.10.4,,THAI,
+6,,STL,LOAD TERM-HI-LOW,48187055AA& 48187255AA,04/04,"COS Trophy
+GST",80T,1#,10M ,80,"Progressive Tooling
+（2 Cav.）",,560mm*375mm*263mm,C1100,2,60*19,"REG4-AAAHCM
+REG4-AAAHCN","Unilateral
+0.08mm",GST,HTS,Stamping---TAP----Plating---Packaging---Finished Product,2019.09。25,,THAI,
+7,,STL,Magnet. Loop,48187070AA,02,"COS Trophy
+GST",80T,1#,10M ,100,"Progressive Tooling
+（2 Cav.）",NO,540mm*360mm*252mm,SPCC-4D,1.5,72*11,REG4-AAAJGJ,"Unilateral
+0.07mm",GST,Greentech,Stamping---Plating---Packaging---Finished Product,2019.10.4,,THAI,
+8,,STL,PADLOCKING,48187864AA,02,"COS Trophy
+GST",80T,1#,10M ,65,"Progressive Tooling
+（1 Cav.）",NO,420mm*305mm*250mm,SUS304-2B,2,34*29,REG4-AAAJGK,"Unilateral
+0.07mm",GST,TJJ,Stamping---Plating---Packaging---Finished Product,2019.10.4,,THAI,
+9,,STL,YOKE,48187064AA,03,"COS Trophy
+GST",110T,3#,10M ,60,"Progressive Tooling
+（4 Cav.）",NO,760mm*420mm*305mm,SPCC-4D,2,86*28.5,REG4-AAAHCL,"Unilateral
+0.1mm",GST,Greentech,Stamping---Plating---Packaging---Finished Product,2019.09.25,,THAI,
+10,,STL,UPPER LINK,48187060AA,03,L19TL251,110T,5#,10M,60,"Progressive Tooling
+（2 Cav.）",J1*J2,855mm*420mm*320mm,SPFC-590,1,92*31,REG4-AAAKWV,"Unilateral
+0.05mm",LI JIAN,CHINA,Stamping---Plating---Packaging---Finished Product,2020.07,,THAI,
+11,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),UPPER PLATE,TM-755A-1,C,L20.TS.48-1,300T,7#,5M,40,"Progressive Tooling
+（1 Cav.）",NO,1330mm*490mm*440mm,SPHC-P/O,2.9,64*110,/,"Unilateral
+0.29mm",LIU ,/,Stamping+Riveting---Welding---Packaging---Finished Product,2020.02,,THAI,
+12,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),UPPER PLATE,TM-755A-1,C,L20.TS.48-2,110T,7#,5M,60,Single Tooling,NO,544mm*440mm*295mm,SPHC-P/O,2.9,/,/,NO,LIU ,/,Stamping---Riveting---Welding---Packaging---Finished Product,2020.02,,THAI,每小时焊接550 件
+13,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),UPPER PLATE,TM-755A-1,C,jig fixture-TM755A-1,100KW,2#/3#,,/,"Welding Jig
+（1 Cav.）",NO,/,/,2.9,/,/,,,,,,,THAI,
+14,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),OUTER,SN-185B-1,B,L19TER001,500T,8#,5M,25,"Progressive Tooling
+（1 Cav.）",NO,2045mm*630mm*540mm,SPCD,1.6,129*129,/,"Unilateral
+0.1mm",LIU ,/,Stamping---Packaging---Finished Product,2019.04.09,,THAI,
+15,,STL,LOOP LINE-TERM HEIGHT/LOW,48187251AA/48187051AA,05/07,L18.TL.146,160T,/,,70,"Progressive Tooling
+（1 Cav.）",J,1109mm*694mm*338mm   ,T2Y2,2,105*20.5,REG4-AAACCX,"Unilateral
+0.08mm",Hu Yongjian,CHINA,Stamping---TAP----Plating---Packaging---Finished Product,2018.10.31,,CHINA,
+16,,STL,MAG TRIP FRAME 03/04,48187065AA,03/04,L18.TL.186,110T,/,,45,"Progressive Tooling
+（2 Cav.）",U1/U2,725mm*450mm*290mm,H68Y,1,88*21.5,Pending,"Unilateral
+0.06mm",Shen Xiaozhi,CHINA,Stamping---Degreasing---Packaging---Finished Product,2019.1.25,"2021-9-4
+Part REV. from ""3""to""4""",CHINA,
+17,,STL,GV2L32 SHUNT CUIVE,138980501A50,05,L19.TL.299,80T,/,10M,80,"Progressive Tooling
+（2 Cav.）",,500mm*400mm*269.8mm,T2Y2,0.8,26.5*6,,"Unilateral
+0.04mm",Li Jian,/,Stamping---Degreasing---Packaging---Finished Product,2019.12.6,,CHINA,
+18,,STL,GV2 Locking lever,138928901A50,04,L19.TL.300,110T,/,5M,70,"Progressive Tooling
+（2 Cav.）",,480mm*400mm*270mm,T2Y2,0.8,64*14.5,,"Unilateral
+0.05mm",Zhang Qinghao,/,Stamping---Degreasing---Packaging---Finished Product,2020.04.23,,CHINA,
+19,,STL,MOVING CONTACT,W213898370211C,06,L19.TL.250,110T,/,10M,70,"Progressive Tooling
+（1 Cav.）",1,475mm*395mm*273mm,T2Y2,1,32*7,REG4-AAAKNY,"Unilateral
+0.04mm",Zhang Qinghao,CHINA,Stamping---Plating---Packaging---Finished Product,2019.11.14,,CHINA,
+20,,STL,ARC PLATE,51207117AD1,04,W19.TL.40,110T,/,70M,96,"Progressive Tooling
+（12 Cav.）",1-12,670mm*410mm*272.8mm,SPCC,0.8,120*29.4,REG4-AAAOQA,"Unilateral
+0.04mm",Zhaoxing,CHINA,Stamping---Plating---Packaging---Finished Product,2019.12.14,,CHINA,
+21,,STL,2D FIXED CONTAC,"SIB38101B
+SIB38101B-BO",,L19.TL.302,110T,/,60M,95,"Progressive Tooling
+（2 Cav.）",T5/T6,620mm*410mm*270mm,SPCC,1,50*13,REG4-AAAKWU,"Unilateral
+0.07mm",Shen Xiaozhi,CHINA,Stamping---Plating---Welding---Packaging---Finished Product,2020.02.03,,CHINA,
+22,,STL,TERMINAL CONNEXION STEELbrass,"W116365250211
+W816365250111",,L19.TL.303,110T,/,,60,"Progressive Tooling
+（2 Cav.）",1/2,960*420mm*282.5mm,DC01C390,1.5,67*19,"REG4-AAAQHG
+REG4-AAAQFC","Unilateral
+0.08mm",Hu Yongjian,"Greentech
+cu 3-5 μ
+CHIAN CLEAN",Stamping---Plating/Cleaning---Packaging---Finished Product,2020.04.29,,CHINA,
+23,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),LOWER PLATE,SB-042C-2-1,,20-TER002,300T,7#,3M,35,"Progressive Tooling
+（1 Cav.）",NO,1500*500mm*540mm,SAPH440,3.6,127*98,/,"Unilateral
+0.43mm",ZhangXN,/,Stamping---Packaging,2021.2.21,,THAI,
+24,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),LOWER BASE,SB-042B-2-2-1,,20-TER003-1,300T,7#,3M,35,"Progressive Tooling
+（1 Cav.）",NO,960*420mm*282.8mm,SAPH440,3.6,102*90.5,/,"Unilateral
+0.43mm",LANCL,/,Stamping---Packaging,2021.2.21,,THAI,
+25,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),Passive Bracket Assembly,SB-042E-2-2,,20-TER003-2,110T,9#,3M,8,"Progressive Tooling
+（1 Cav.）",NO,/,"SB-042B-2-2-1
+Bolt",/,/,/,/,LANCL,/,Riveting---Packaging,2021.2.21,,THAI,铆接一小时350-400件
+26,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),Passive Bracket Assembly ,SB-042E-2,,SB-042B-2,Robot,1#,,50 pcs/H,"Welding Jia
+（2 Cav.）",L&R,/,"SB-042B-2-1
+SB-042B-2-2",/,/,/,/,Wang Chun Fu,/,Welding-riveting-selection-packaging,2021.2.21,,THAI,
+27,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),OUTER,TM-771A-1,,21-TER004,300T,7#,,30,"Progressive Tooling
+（1 Cav.）",NO,2175*800mm*540mm,SPCD,1.2,165*164,/,"Unilateral
+0.08mm",LANK,/,Stamping---Selecting---Packaging---Finished Product,2021.8.10,,THAI,
+28,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),ORIFICE PLATE,TH-496A-2,,21-TER005,110T/150T,5#/6#,,30,"Progressive Tooling
+（1 Cav.）",NO,975*520mm*285mm,SPCC-SD,1.0,87*84,/,"Unilateral
+0.15mm",LANK,/,Stamping---Packaging---Finished Product,2021.8.10,,THAI,
+29,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),OUTER,TM-791A-1,,21-TER006,500T,8#,,20,"Progressive Tooling
+（2 Cav.）",NO,1840*800mm*540mm,SPHC-P/O,1.4,228*114,/,"Unilateral
+1.12mm",LJL,/,Stamping---Packaging---Finished Product,2021.8.30,,THAI,
+30,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),PLATE,TM-795A-1,,21-TER007,300T,7#,,20,"Progressive Tooling
+（2 Cav.）",DOT&NO DOT,1545*778mm*540mm,SPCC-SD,1.0,146*64,/,"Unilateral
+0.08mm",Liu JiaWei,/,Stamping---Packaging---Finished Product,2021.9.15,,THAI,
+31,,STL,Armature High Amp ,48187063AA,03,D21.TL.65,80T,1#,,70,"Progressive Tooling
+（2 Cav.）",1&2,560*400mm*267mm,SPCC-4D,1.0,64*22,REG4-AAAQBO,"Unilateral
+0.04mm",Shen Xiaozhi,TJJ(zn 8-13um),Stamping---Plating---Packaging---Finished Product,2021.9.21,,THAI,
+32,,STL,CLAMP PLATE,48187311AA,01,D21.TL.57,110T,5#,,80,"Progressive Tooling
+（3 Cav.）",One Dot &Two Dot &  Without Dot,620*450mm*267mm,SPCC-4D,2.0,74*22,REG4-AAAPSK,"Unilateral
+0.14mm",Hu Yongjian,TJJ(zn 8-13um),Stamping---Plating---Packaging---Finished Product,2021.9.21,,THAI,
+33,,STL,CRADLE,48187058,05,D21.TL.43,110T,4#,,80,"Progressive Tooling
+（1 Cav.）",DOT,690*480mm*277.2mm,SPFC590,1.2,70*28,REG4-AAAQCY,"Unilateral
+0.20mm",Hu Yongjian,Greentech,Stamping---Plating---Packaging---Finished Product,2021.9.22,,THAI,
+34,,STL,Medium Arc Platel ,48187097AA,00,D21.TL.61,80T,1#,,90,"Progressive Tooling
+（3 Cav.）",1&2&3,500*400mm*269.8mm,SPCC-4D,1.2,59*22.5,REG4-AAAQBP,"Unilateral
+0.07mm",Zhaoxing,HACHI(Ni 5-10um),Stamping---Plating---Packaging---Finished Product,2021.9.29,,THAI,
+35,,STL,Arc Stack Top ,48187104AA,00,D21.TL.62,80T,1#,,90,"Progressive Tooling
+（4 Cav.）",1&2&3&4,470*400mm*265.9mm,SPCC-4D,1.2,78*13,REG4-AAAQBQ,"Unilateral
+0.08mm",Hu Yongjian,HACHI(Ni 5-10um),Stamping---Plating---Packaging---Finished Product,2021.9.29,,THAI,
+36,,STL,Arc plate GV2,W113893530111,08,D21.TL.76,80T,1#,,80,"Progressive Tooling
+（8 Cav.）",1&2&3&4&5&6&7&8,490*400mm*272.9mm,SPCC-4D,0.8,88*25,REG4-AAAQUZ,"Unilateral
+0.04mm",Shen Xiaozhi,GREENTECH(1-2um),Stamping---Plating---Packaging---Finished Product,2021.9.29,,THAI,
+37,,STL,High Arc Plate,48187053AA,00,D21.TL.64,80T,1#,,90,"Progressive Tooling
+（3 Cav.）",1&2&3,495*400mm*273.4mm,SPCC-4D,1.2,84*19,REG4-AAAQBN,"Unilateral
+0.1mm",Zhang QingHao,HACHI(Ni 5-10um),Stamping---Plating---Packaging---Finished Product,2021.9.29,,THAI,
+38,,STL,Arc Stack Plate,48187199AA,02,D21.TL.63,80T,1#,,90,"Progressive Tooling
+（3 Cav.）",1&2&3,512*470mm*278.6mm,SPCC-4D,1.6,63*19.5,REG4-AAAQBR,"Unilateral
+0.08mm",Shen Xiaozhi,HACHI,Stamping---Plating---Packaging---Finished Product,2021.10.22,,THAI,
+39,,STL,Handle Arm,48187057AA,05,D21.TL.56,110T,3#,,70,"Progressive Tooling
+（1 Cav.）",NO,700*450mm*302.2mm,SPFC590,1.2,93*33.5,REG4-AAAPSF,"Unilateral
+0.08mm",Zhang Qinghao,TJJ,Stamping---Plating---Packaging---Finished Product,2021.10.22,,THAI,
+40,,STL,Secondary latch ,48187062AA,06,D21.TL.75,150T,6#,,60,"Progressive Tooling
+（2 Cav.）",I1&I2,920*500mm*350mm,SPFC590,1.0,48*32,REG4-AAAPSE,"Unilateral
+0.05mm",Lin Peng,"THAI PARKERIZING
+600-800Hv",Stamping---Heat Treatment---Packaging---Finished Product,2021.10.22,,THAI,
+41,,STL,Local Reinforcing Plate ,GHM12023,01,D21.TL.78,80T,1#,,80,"Progressive Tooling
+（8 Cav.）",1&2&3&4&5&6&7&8,493mm*400mm*250.6mm,SPCC-SD,0.6,45*9.6,REG4-AAAQIJ,"Unilateral
+0.04mm",Shen Xiaozhi,"Thai Jin Jer
+彩ZN 8-15 μ",Stamping---Plating---Riveting,2021.10.20,,THAI,
+42,,STL,InPut  Connector Greco,51207042AA,10,D21.TL.104,80T,2#,,150,"Progressive Tooling
+（2 Cav.）",DOT/NO DOT,510mm*420mm*270mm,SPCC-SD,1.0,50*11,REG4-AAASGO,"Unilateral
+0.1mm",Shen Xiaozhi,"HA CHI
+预镀cu 3-7μ 镀暗sn 3-7 μ",Stamping---Plating---Packaging---Finished Product,2021.11.27,,THAI,
+43,,STL,Bimetal Support Greco#4,"
+51207070AB",13,D21.TL.38,110T,5#,,110,"Progressive Tooling
+（2 Cav.）",DOT/NO DOT,960mm*420mm*282.27mm,SPCC-SD,0.8,38*64,REG4-AAARNY,"Unilateral
+0.08mm",LIJIAN,Greentech,Stamping---Plating---Packaging---Finished Product,2021.08.20,,THAI,
+44,,STL,ARC PLATE GRECO（21年备模）,51207117,05,D21.TL.103,80T,2#,,180,"Progressive Tooling
+（14 Cav.）",1-14,670mm*440mm*274mm,SPCC-SD,0.8,141*29.4,REG4-AAASGQ,"Unilateral
+0.04mm",Zhaoxing,"HA CHI
+Ni 3-5 μ",Stamping---Plating---Packaging---Finished Product,2021.10.20,,THAI,
+45,,STL,LANCED LINE TERM.-HIGH&LOW,"48187094AA
+48187095AA","05
+07",D21.TL.53,150T/UMX110,,,60,"Progressive Tooling
+（1 Cav.）",NO,934mm*610mm*338mm,T2Y2,2,70.5*15.5,"REG4-AAAPSI
+REG4-AAAPSJ","Unilateral
+0.08mm",Hu Yongjian,"HA CHI
+Sn 5-8 μ",Stamping---Plating---Packaging---Finished Product,-,,CHINA,
+46,,STL,BIMTEAL STRUT,W113896050411,20,D21.TL.77,110T,,,100,"Progressive Tooling
+（2 Cav.）",1&2,630mm*400mm*267.2mm,"DC03C390
+预镀铜",1.2,54*12,REG4-AAAQVA,"Unilateral
+0.06mm",Hu Yongjian,TJ JR Clean,Stamping---clean---packaging---Finished Product,-,,CHINA,
+47,,STL,"JAW
+jaw","NVE84462
+51207154AB","00
+06",D21.TL.58,110T,,,90,"Progressive Tooling
+（2 Cav.）",1&2,620mm*400mm*267.2mm,CuFe2P,1.2,62*21,"REG4-AAAPSY
+REG4-AAAPSX","Unilateral
+0.1mm",Shen Xiaozhi,"TIAN SHENG CHINA
+HA CHI
+暗Sn 10-13 μ",Stamping---Plating---Packaging---Finished Product,-,,CHINA,
+48,,STL,Out put phase copper,S1B13954,1,D21.TL.79,110T,,,70,"Progressive Tooling
+（2 Cav.）",1&2,654mm*450mm*293.2mm,T2Y2,1.2,53*10,REG10-AAAQKT,"Unilateral
+0.10mm",Lin Peng,"HA CHI
+Ni 3-11 μ",Stamping---Plating---Packaging---Finished Product,-,,CHINA,
+49,,STL,"BIMETAL SUPPORT(HIGH RATING)
+BIMETAL SUPPORT",S1B83820&S1B22374,"03
+06",Transfer tooling,110T,,,60,"Progressive Tooling
+（1 Cav.）","H
+NO",670mm*440mm*281mm,D03C390,1.2,22*24,"REG4-AAARSZ
+REG4-AAARSY","Unilateral
+0.11mm",,CHINA CLEAN,Stamping---Clean---Packaging---Finished Product,-,,CHINA,
+50,,STL,BLADE-MEDIUM/HIGH,48187092AA,01,D21.TL.54,110T,,,70,"Progressive Tooling
+（2 Cav.）",1&2,570mm*420mm*317mm,T2Y2,2,30*44.5,REG4-AAAPSG,"Unilateral
+0.1mm",Zhaoxing,TJ JR Clean,Stamping---Clean---Packaging---Finished Product,-,,CHINA,
+51,,STL,"Blade-EMLB
+Blade-LOW"," GHJ16017
+48187093AA ","01
+02",D21.TL.55,160T,,,60,"Progressive Tooling
+（2 Cav.）",1&2,980mm*490mm*364mm,T2Y2,2,31.5*45,"REG4-AAASEE
+REG4-AAAPSH","Unilateral
+0.08mm",Zhaoxing,"Tian Sheng China
+Ag 1-3 μ",Stamping---Plating---Packaging---Finished Product,-,,CHINA,
+52,,STL,OUTPUT PHASE CONNECTOR ASSEMBLY,S1B13956,01,D21.TL.30,Riveting fixture,,,2,"Riveting fixture
+（2 Cav.）",NO,,S1B13954&GHM12023,N/A,N/A,REG4-AAAPTL,,Song ZiWen,N/A,Riveting---Packaging,2021-12-20,,THAI,
+53,,STL,MID - TERM / HEATER-I JR,48187254AA,03,Transfer tooling,110T,3#&5#,,50,"Progressive Tooling
+（1 Cav.）",1JR,760mm*300mm*321mm,1 JR TYPE 1 ELEC ALLOY CF ANL,2,30*28,REG4-AAASWK,,_,TJJ CLEAN,Stamping---TAP----Plating---Packaging---Finished Product,2021-12-21,,THAI,
+54,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),CUP,TM-818-1,,21-TER008,500T,8#,,25,"Progressive Tooling
+（1 Cav.）",NO,1690mm*560mm*540mm,SPH270D-0D,3.2,140*128,/,"Unilateral
+0.38mm",TJD,/,Stamping-Welding-Riveting-Selection-Packaging,2022-2-13,,THAI,
+55,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),CUP,TM-818-1,,,Spot Welding,2#,,/,/,/,/,"TM-818-1
+TM-818-1-1",/,/,/,/,Dong XiLi,/,Welding-riveting-selection-packaging,2022-2-13,,THAI,每小时350-400 pcs
+56,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),Outer,TM-806A-1,,21-TER009,500T,8#,,30,"Progressive Tooling
+（1 Cav.）",NO,2175mm*700mm*540mm,SPC270D,1.6,208*179,/,"Unilateral
+0.14mm",SHAOHS,/,Stamping---Packaging---Finished Product,2022-8-3,,THAI,
+57,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),LWR PLATE,MC-103A-2,,23-TRE016,500T,8#,,30,"Progressive Tooling
+（1 Cav.）",NO,1650mm*670mm*600mm,SAPH440  ,5.0,180*124,,"Unilateral
+0.6mm",SHAOHS,,,,,THAI,
+58,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),UPR CUP,SB-059C-2,,23-TRE017-1,500T,8#,,20,"Progressive Tooling
+（1 Cav.）",NO,2680mm*800mm*600mm,SAPH440,2.6,232*220,/,,ZHangXN,/,Stamping---Packaging,/,,THAI,
+59,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),UPR CUP,SB-059C-2,,23-TRE017-2,260T,10#,,30,           Single Tooling            （1 Cav.）,NO,550mm*450mm*440mm,/,/,/,/,,LANK,/,Stamping---Packaging,/,,THAI,
+60,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),UPR CUP,SB-059C-2,,23-TRE017-3,260T,10#,,30,           Single Tooling            （1 Cav.）,NO,600mm*480mm*440mm,/,/,/,/,,ZHangXN,/,Stamping---Packaging,/,,THAI,
+61,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),UPR CUP,SB-059C-2,,23-TRE017-4,110T,9#,,30,           Single Tooling            （1 Cav.）,NO,550mm*450mm*440mm,/,/,/,/,,RENLQ,,,13-02-2024,,THAI,
+62,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),Diaphragm Outer,SB-064D-1,,23-TER010,500T,8#,,25,"Progressive Tooling
+（1 Cav.）",NO,2680mm*830mm*600mm,SPCD,1.6,176*172,/,"Unilateral
+0.15mm",RENLQ,/,Stamping---sorting 100%---Packaging---Finished Product,13-02-2024,,THAI,
+63,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),Orifice Plate,SB-062C-2,,23-TER019,300T,7#,,30,"Progressive Tooling
+（1 Cav.）",NO,950mm*560mm*540mm,SPCC-SD,1.2,98*95,/,"Unilateral
+0.11mm",SHAOHS,/,Stamping---sorting 100%---Packaging---Finished Product,13-02-2024,,THAI,
+64,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),BRACKET,SB-068C-1-1,,23-TER011-1,500T,8#,,25,"Progressive Tooling
+（1 Cav.）",NO,2000mm*760mm*600mm,SAPH440,5.0,260*104,/,"Unilateral
+0.6mm",YANGRJ,/,Stamping---Packaging,/,,THAI,
+65,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),BRACKET,SB-068C-1-1,,23-TER011-2,260T,10#,,30,           Single Tooling            （1 Cav.）,NO,900mm*416mm*340mm,/,/,/,/,"Unilateral
+0.6mm",ZHANGMY,/,Stamping---Packaging,/,,THAI,
+66,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),UPPER BASE,SB-068C-1-2,,23-TER012,500T,8#,,25,"Progressive Tooling
+（1 Cav.）",NO,1560mm*760mm*600mm,SAPH440,4.0,167*225,/,"Unilateral
+0.48mm",LANK,/,Stamping---Packaging,/,,THAI,
+67,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),UPPER RING,SB-068A-1-3,,23-TER013,300T,7#,,30,"Progressive Tooling
+（1 Cav.）",NO,850mm*680mm*540mm,SAPH440,4.0,233*25,/,"Unilateral
+0.45mm",SHAOHS,/,Stamping---Packaging,/,,THAI,
+68,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),UPR ACTIVE ASSEMBLY,SB-068C-1,,SB-068-1,robot welding,1#,,/,"Welding Jia
+（1 Cav.）",NO,/,          SB-068-1-1                    SB-068B-1-2        SB-068-1-3,/,/,/,,,/,Welding--sorting 100%--packaging--Finished Product,20-02-2024,,THAI,
+69,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),PASSIVE BRACKET,SB-068C-2,,,,1#,,/,              die casting              （1 Cav.）,,,,,,,,,,,15-02-2024,,THAI,
+70,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),Bracket,SB-075B-1-1,,,,1#,,/,              die casting              （2 Cav.）,1&2,,,,,/,,,/,,15-02-2024,,THAI,
+71,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),HEAT SHIELD,SB-070B-1,,23-TER020-1,150T,6#,,60,"Progressive Tooling
+（1 Cav.）",NO,575mm*700mm*360mm,JIS G3314 SA1E,0.8,240*216,/,"Unilateral
+0.07mm",LANK,/,Stamping---Packaging,/,,THAI,
+72,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),HEAT SHIELD,SB-070B-1,,23-TER020-2,110T,9#,,25,           Single Tooling            （1 Cav.）,NO,650mm*400mm*295mm,/,/,5120,/,"Unilateral
+0.06mm",SHAOHS,/,Stamping---Packaging,/,,THAI,
+73,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),HEAT SHIELD,SB-070B-1,,23-TER020-3,110T,9#,,20,           Single Tooling            （1 Cav.）,NO,680mm*390mm*295mm,/,/,/,/,/,YANGRJ,/,Stamping---Packaging,/,,THAI,
+74,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),HEAT SHIELD,SB-070B-1,,23-TER020-4,110T,9#,,20,           Single Tooling            （1 Cav.）,NO,680mm*390mm*295mm,/,/,/,/,/,ZHangXN,/,Stamping---Packaging,/,,THAI,
+75,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),HEAT SHIELD,SB-070B-1,,23-TER020-5,110T,9#,,20,           Single Tooling            （1 Cav.）,NO,660mm*440mm*295mm,/,/,/,/,"Unilateral
+0.08mm",ZHANGMY,/,Stamping---sorting 100%---Packaging---Finished Product,22-03-2024,,THAI,
+76,,STL,Lower Link,48187059,,D23TL148,110T,4#,,80,"Progressive Tooling
+（1 Cav.）",J,620mm*400mm*263mm,SPCC-4D,1,45*21,,"Unilateral
+0.05mm",,,,,,THAI,
+77,,STL,Magnet Lanced HT Valide,48187068AA,,D23TL018,110T,"3#,1#",,60,"Progressive Tooling
+（2 Cav.）",1&2,570mm*400mm*279mm,SPCC-4D,2,68*12,,,,,,,,THAI,
+78,,STL,"Lock,Slide",48187086AA,,D23TL019,110T,3#,,60,"Progressive Tooling
+（2 Cav.）",1&2,610mm*400mm*279mm,SPCC-4D,1.5,44*25,,,,,,,,THAI,
+79,,STL,Output Connector Steel,S1B13952,,D23TL140,110T,3#,,80,"Progressive Tooling
+（2 Cav.）",31&32,560mm*450mm*270.2mm,SPCC-SD,1.2,47*9,,"Unilateral
+0.06mm",,,,,,THAI,
+80,,STL,"Plate,Thread",48187084AA,,D23TL141,110T,5#,,80,"Progressive Tooling
+（1 Cav.）",↑  Mark,950mm*450mm*270mm,SPCC-4D,2,95*95,,"Unilateral
+0.12mm",,,,,,THAI,
+81,,STL,Bimetal Support Greco,51207070,,D23TL137,110T,6#,,100,"Progressive Tooling
+（2 Cav.）","51,52",730mm*490mm*282.8mm,SPCC-SD,.8,100*19.5,,"Unilateral
+0.05mm",,,,,,THAI,
+82,,STL,Bimetal Support Greco,51207070,,D23TL138,110T,6#,,100,"Progressive Tooling
+（2 Cav.）","61,62",730mm*490mm*282.8mm,SPCC-SD,.8,100*19.5,,"Unilateral
+0.05mm",,,,,,THAI,
+83,,STL,BETA Arc extinguishing chamber,72570400-8-3,,D23TL110,110T,2#,,100,"Progressive Tooling
+（12 Cav.）",1-12,490mm*430mm*270mm,SPCC-SD,.8,93*44,,"Unilateral
+0.04mm",,,,,,THAI,
+84,,SEMB,CT3 Tetra A1 Coil Screw Terminal A1,W117239700111,,D23TL107,110T,3#,,50,"Progressive Tooling
+（1 Cav.）",A3,740mm*530mm*287.2mm,DC03C390(SPCC-4),1.2,86*16.5,,"Unilateral
+0.05mm",,,,,,THAI,
+85,,SEMB,CT3 Tetra A1 Coil Screw Terminal A2,W117239710111,,D23TL108,110T,3#,,50,"Progressive Tooling
+（1 Cav.）",A3,670mm*475mm*287.2mm,DC03C390(SPCC-4),1..2,86*16.5,,"Unilateral
+0.05mm",,,,,,THAI,
+86,,SEMB,Coil Output A1,MFR73710,,D23TL132,110T,3#,,50,"Progressive Tooling
+（2 Cav.）",NO,550mm*425mm*270mm,DC03C390(SPCC-4),1,60*10.5,,"Unilateral
+0.06mm",,,,,,THAI,
+87,,SEMB,Coil Output A2,MFR73711,,,,,,,,,,,,,,,,,,,,,
+88,,SEMB,Coil Output B1,MFR73712,,D23TL133,80T,1#,,50,"Progressive Tooling
+（2 Cav.）",B1&B2,640mm*400mm*268mm,DC03C390(SPCC-4),1,45*11,,"Unilateral
+0.05mm",,,,,,THAI,
+89,,SEMB,Coil Output B2,MFR73713,,,,,,,,,,,,,,,,,,,,,
+90,,SEMB,SORTIE BOBINE BORNE A1,W113791660114,,D23TL134,110T,3#,,50,"Progressive Tooling
+（1 Cav.）",A,760mm*450mm*268mm,DC03C390(SPCC-4),1,47*10,,"Unilateral
+0.05mm",,,,,,THAI,
+91,,SEMB,SORTIE BOBINE BORNE A2,W113791670114,,D23TL135,110T,3#,,50,"Progressive Tooling
+（1 Cav.）",A,750mm*450mm*268mm,DC03C390(SPCC-4),1,47*10,,"Unilateral
+0.05mm",,,,,,THAI,
+92,,STL,GV2 DEFLECTEUR  MOBILE,W113890070111,,D23TL145,110T,3#,,55,"Progressive Tooling
+（ 6 Cav.）","31,32,33,34,35,36",510mm*400mm*262.8mm,SPCC-SD,0.8,132*21,,"Unilateral
+0.04mm",,,,,,THAI,
+93,,STL,GV2  P  DEFLECTEUR  MOBILE,W113890870111,,D23TL146,110T,3#,,55,"Progressive Tooling
+（ 6 Cav.）","31,32,33,34,35,36",510mm*400mm*262.8mm,SPCC-SD,0.8,132*21,,"Unilateral
+0.04mm",,,,,,THAI,
+94,,JOYSON,PLATE,1186500-AB,,Q24JS052,110T,3#,,90,"Progressive Tooling
+（1 Cav.）",NO,620mm*425mm*276mm,SPFC590,1,46*29,,,,,,,,THAI,
+95,,JOYSON, CG BASE,1191827,,Q24.JS.028,500T,8#,,25,"Progressive Tooling
+（1 Cav.）",NO,2800mm*900mm*750mm,SPFH590,1.8,212*120,,"Unilateral
+0.18mm",,,,,,THAI,
+96,,JOYSON,CG BRACKET RH,2567476-AA,,Q24.JS.029,300T,7#,,30,"Progressive Tooling
+（1 Cav.）",NO,2000mm*850mm*700mm,SPFH590,2.6,165*70,,,,,,,,THAI,
+97,,JOYSON,CG TIE BAR ,1118183-AA,,L155 T110,110T,,,,"Progressive Tooling
+（2 Cav.）",NO,900mm*500mm*400mm,SAPH440,2,48*72,,"Unilateral
+0.14mm",,,,,,THAI,
+98,,JOYSON,CG TIE BAR 92295,1112163,,L155 T111,110T,,,,"Progressive Tooling
+（1 Cav.）",NO,900mm*600mm*400mm,SAPH440,1.6,71*63,,"Unilateral
+0.1mm",,,,,,THAI,
+99,,JOYSON,CG BASE UNIT RR,2567475-AA,,,,,,,       Spot Welding-1 Nut     Riveting -3 Parts,NO,,,,,,,,,,,,THAI,
+100,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),OUTER,TM-865A-1,,Q24.TS.021,500T,8#,,25,"Progressive Tooling
+（1 Cav.）",NO,2590mm*710mm*600mm,SPH270D-OD,1.6,184*182,,,,,,,,THAI,
+101,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),OUTER,TM-860A-1,,Q24.TS.020,500T,8#,,25,"Progressive Tooling
+（1 Cav.）",NO,2750mm*750mm*600mm,SPC270D,1.8,153*150,,,,,,,,THAI,
+102,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),INNER,TM-865A-2,,,,,,,              die casting              （1 Cav.）,,,,,,,,,,,,,THAI,
+103,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),ACTUATOR CUP,TM-867A-1,,24-TER021,500T,8#,,25,"Progressive Tooling
+（1 Cav.）",NO,2250mm*650mm*575mm,SPC270C,1.2,142*139,,"Unilateral
+0.11mm",,,,,,THAI,
+104,,SumiRiko Eastern Rubber (Thailand) Ltd. (ESIE Plant),RHS ACTIVE BRACKET,SB-069A-1,,,,,,,              die casting              （1 Cav.）,NO,,ADC12,,,/,,,/,,,,THAI,
+105,,TESLA,3DU RESOLVER COVER, 0135-0800005,,,,,,,              die casting              （2 Cav.）,,,,,,,,,,,,,THAI,
+,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,, ,,,,,,,,,,,,,,,
