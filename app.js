@@ -23,7 +23,7 @@ let donutChartInstance = null;
 // Initialization
 // ==========================================================================
 
-document.addEventListener('DOMContentLoaded', () => {
+function initApp() {
   initData();
   setupNavigation();
   renderCurrentTab();
@@ -34,36 +34,49 @@ document.addEventListener('DOMContentLoaded', () => {
   if (appState.googleSheetsUrl) {
     testAndFetchGoogleSheets(true);
   }
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  initApp();
+}
 
 function initData() {
-  const DATA_VERSION = 'v3_253_tools_all_years';
+  const DATA_VERSION = 'v4_253_tools_all_years';
   const savedVersion = localStorage.getItem('tool_maint_data_version');
   const savedTools = localStorage.getItem('tool_maint_tools');
   const savedWO = localStorage.getItem('tool_maint_workorders');
   const savedHist = localStorage.getItem('tool_maint_history');
 
+  let isLoaded = false;
   if (savedVersion === DATA_VERSION && savedTools && savedWO && savedHist) {
     try {
-      appState.tools = JSON.parse(savedTools);
-      appState.workOrders = JSON.parse(savedWO);
-      appState.maintenanceHistory = JSON.parse(savedHist);
+      const parsedTools = JSON.parse(savedTools);
+      // Ensure we have the full 253 multi-year dataset, not an old 18-part cache
+      if (Array.isArray(parsedTools) && parsedTools.length >= 200) {
+        appState.tools = parsedTools;
+        appState.workOrders = JSON.parse(savedWO) || [];
+        appState.maintenanceHistory = JSON.parse(savedHist) || [];
+        isLoaded = true;
+      }
     } catch (e) {
       console.warn('Failed to parse localStorage, resetting to initial data', e);
-      loadInitialData();
-      localStorage.setItem('tool_maint_data_version', DATA_VERSION);
     }
-  } else {
+  }
+
+  if (!isLoaded) {
     loadInitialData();
     localStorage.setItem('tool_maint_data_version', DATA_VERSION);
   }
 }
 
 function loadInitialData() {
-  if (typeof INITIAL_DATA !== 'undefined') {
-    appState.tools = JSON.parse(JSON.stringify(INITIAL_DATA.tools));
-    appState.workOrders = JSON.parse(JSON.stringify(INITIAL_DATA.workOrders));
-    appState.maintenanceHistory = JSON.parse(JSON.stringify(INITIAL_DATA.maintenanceHistory));
+  const initial = typeof INITIAL_DATA !== 'undefined' ? INITIAL_DATA : (typeof window !== 'undefined' ? window.INITIAL_DATA : null);
+  if (initial && initial.tools) {
+    appState.tools = Array.isArray(initial.tools) ? JSON.parse(JSON.stringify(initial.tools)) : [];
+    appState.workOrders = Array.isArray(initial.workOrders) ? JSON.parse(JSON.stringify(initial.workOrders)) : [];
+    appState.maintenanceHistory = Array.isArray(initial.maintenanceHistory) ? JSON.parse(JSON.stringify(initial.maintenanceHistory)) : [];
     saveState();
   }
 }
@@ -188,6 +201,13 @@ function renderDashboard() {
     .reduce((sum, t) => sum + (Number(t.samplesQty) || 0), 0);
 
   document.getElementById('kpi-total-tools').textContent = total;
+  const subtext = document.getElementById('kpi-total-subtext');
+  if (subtext) {
+    const t24 = appState.tools.filter(t => String(t.year) === '2024').length;
+    const t25 = appState.tools.filter(t => String(t.year) === '2025').length;
+    const t26 = appState.tools.filter(t => String(t.year) === '2026').length;
+    subtext.innerHTML = `<span>${t24} (2024) • ${t25} (2025) • ${t26} (2026)</span>`;
+  }
   document.getElementById('kpi-critical-tools').textContent = critical;
   document.getElementById('kpi-active-wo').textContent = activeWOs;
   document.getElementById('kpi-samples-sent').textContent = `${samplesSent} pcs`;
@@ -296,10 +316,18 @@ function initCharts() {
   // Chart 2: Criticality Donut Chart
   const critCount = { CRITICAL: 0, MAJOR: 0, MINOR: 0 };
   appState.tools.forEach(t => {
-    if (critCount[t.criticality] !== undefined) {
-      critCount[t.criticality]++;
-    }
+    const c = (t.criticality || '').toUpperCase();
+    if (c === 'CRITICAL') critCount.CRITICAL++;
+    else if (c === 'MAJOR') critCount.MAJOR++;
+    else critCount.MINOR++;
   });
+
+  const legCrit = document.getElementById('donut-legend-crit');
+  const legMajor = document.getElementById('donut-legend-major');
+  const legMinor = document.getElementById('donut-legend-minor');
+  if (legCrit) legCrit.textContent = `● Critical (${critCount.CRITICAL})`;
+  if (legMajor) legMajor.textContent = `● Major (${critCount.MAJOR})`;
+  if (legMinor) legMinor.textContent = `● Standard / Minor (${critCount.MINOR})`;
 
   const ctxDonut = document.getElementById('criticalityDonut');
   if (ctxDonut) {
@@ -307,7 +335,7 @@ function initCharts() {
     donutChartInstance = new Chart(ctxDonut, {
       type: 'doughnut',
       data: {
-        labels: ['Critical', 'Major', 'Minor'],
+        labels: ['Critical', 'Major', 'Standard / Minor'],
         datasets: [{
           data: [critCount.CRITICAL, critCount.MAJOR, critCount.MINOR],
           backgroundColor: ['#ef4444', '#f59e0b', '#0ea5e9'],
@@ -1291,7 +1319,7 @@ function getStrokeColor(pct) {
 // Google Sheets Cloud Database Integration
 // ==========================================================================
 
-const DEFAULT_GS_URL = "https://docs.google.com/spreadsheets/d/1-3RKcRJC_ENe-xCWMIYYHqYYaKj0cyCG8n-MwMWQMXM/edit?gid=587870018#gid=587870018";
+const DEFAULT_GS_URL = "https://docs.google.com/spreadsheets/d/1GJT6p_Yfn7Lda-kYgH7-lFofOO0GOn1ZfwWjTlGXm2c/edit";
 
 function openGoogleSheetsModal() {
   const urlInput = document.getElementById('gs-web-app-url');
