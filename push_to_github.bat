@@ -1,33 +1,23 @@
 @echo off
-set "PATH=C:\Program Files\Git\cmd;%PATH%"
+set "PATH=C:\Program Files\Git\bin;C:\Program Files\Git\cmd;%PATH%"
 title Push to GitHub - Tool Maintenance
 echo ========================================================
 echo   Pushing to https://github.com/rahulsudhakar0-jpg/Tool-Maintenance
 echo ========================================================
 echo.
-echo Attempting git push...
+echo Syncing with GitHub...
+git add .
+git commit -m "chore: manual sync from tool maintenance batch" 2>nul
 git push -u origin main
 
-if %errorlevel% neq 0 (
+if %errorlevel% equ 0 (
     echo.
     echo ========================================================
-    echo   Authentication required for GitHub!
+    echo   SUCCESS! Pushed to GitHub main branch.
     echo ========================================================
-    echo Please paste your GitHub Personal Access Token (PAT) below.
-    echo (Generate one at: https://github.com/settings/tokens with 'repo' scope)
-    echo.
-    set /p "GITHUB_TOKEN=Enter GitHub PAT: "
-    if defined GITHUB_TOKEN (
-        echo Pushing with provided token...
-        git push https://%GITHUB_TOKEN%@github.com/rahulsudhakar0-jpg/Tool-Maintenance.git main
-        if %errorlevel% equ 0 (
-            echo.
-            echo SUCCESS! Successfully pushed to GitHub main branch.
-        )
-    )
 ) else (
     echo.
-    echo SUCCESS! Repository pushed successfully.
+    echo Push failed. Please check your network or repository settings.
 )
 
 pause
