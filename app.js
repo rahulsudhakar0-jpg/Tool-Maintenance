@@ -43,10 +43,12 @@ function initApp() {
   initData();
   setupNavigation();
   setViewMode(appState.viewMode);
+  initFitMode();
   renderCurrentTab();
   updateSidebarBadges();
   updateGoogleSheetsBadge();
   setupGlobalClickHandlers();
+  syncSlideBar();
 
   // If Google Sheets URL is set, fetch latest data in background
   if (appState.googleSheetsUrl) {
@@ -564,6 +566,7 @@ function filterTools() {
   renderToolsGrid(filtered);
   renderToolsTable(filtered);
   applyColumnVisibility();
+  syncSlideBar();
 }
 
 function sortTable(colKey) {
@@ -1084,6 +1087,62 @@ function applyColumnVisibility() {
   });
 }
 
+function initFitMode() {
+  const savedFit = localStorage.getItem('tool_maint_fit_mode') === 'true';
+  const container = document.getElementById('registry-table-container');
+  const fitBtn = document.getElementById('btn-toggle-fit');
+  if (savedFit && container) {
+    container.classList.add('fit-columns-mode');
+    if (fitBtn) {
+      fitBtn.classList.add('active');
+      fitBtn.innerHTML = '↔ Standard View';
+    }
+  }
+}
+
+function toggleFitAllColumns() {
+  const container = document.getElementById('registry-table-container');
+  const fitBtn = document.getElementById('btn-toggle-fit');
+  if (!container) return;
+
+  const isFit = container.classList.toggle('fit-columns-mode');
+  if (fitBtn) {
+    fitBtn.classList.toggle('active', isFit);
+    fitBtn.innerHTML = isFit ? '↔ Standard View' : '🔍 Fit All Columns';
+  }
+  localStorage.setItem('tool_maint_fit_mode', isFit ? 'true' : 'false');
+  syncSlideBar();
+}
+
+function onSlideBarInput(val) {
+  const tableContainer = document.getElementById('registry-table-container');
+  if (!tableContainer) return;
+  const maxScroll = tableContainer.scrollWidth - tableContainer.clientWidth;
+  if (maxScroll > 0) {
+    tableContainer.scrollLeft = (Number(val) / 1000) * maxScroll;
+  }
+}
+
+function slideTableStep(offset) {
+  const tableContainer = document.getElementById('registry-table-container');
+  if (!tableContainer) return;
+  tableContainer.scrollBy({ left: offset, behavior: 'smooth' });
+}
+
+function syncSlideBar() {
+  const tableContainer = document.getElementById('registry-table-container');
+  const slider = document.getElementById('table-horizontal-slider');
+  if (!tableContainer || !slider) return;
+  const maxScroll = tableContainer.scrollWidth - tableContainer.clientWidth;
+  if (maxScroll > 5) {
+    slider.disabled = false;
+    slider.value = Math.min(1000, Math.round((tableContainer.scrollLeft / maxScroll) * 1000));
+  } else {
+    slider.value = 0;
+    slider.disabled = true;
+  }
+}
+
 function setupGlobalClickHandlers() {
   document.addEventListener('click', (e) => {
     const popover = document.getElementById('col-filter-popover');
@@ -1107,6 +1166,13 @@ function setupGlobalClickHandlers() {
       if (colMenu) colMenu.style.display = 'none';
     }
   });
+
+  const tableContainer = document.getElementById('registry-table-container');
+  if (tableContainer) {
+    tableContainer.addEventListener('scroll', syncSlideBar, { passive: true });
+  }
+
+  window.addEventListener('resize', syncSlideBar, { passive: true });
 }
 
 function renderToolsGrid(tools) {

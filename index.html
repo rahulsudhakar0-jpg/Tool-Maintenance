@@ -408,6 +408,29 @@
             <!-- Populated by JS -->
           </div>
 
+          <!-- Table Horizontal Slide Bar (Always Visible Controller) -->
+          <div class="table-slider-bar" id="table-slider-bar">
+            <div class="slider-info">
+              <span class="slidebar-icon">↔</span>
+              <span class="slidebar-text"><strong>Horizontal Slide Bar:</strong> Slide to view all layout & columns</span>
+            </div>
+            <div class="slider-controls">
+              <button type="button" class="slider-nav-btn" onclick="slideTableStep(-280)" title="Slide Left">◀ Slide Left</button>
+              <div class="slider-track-wrap">
+                <input type="range" id="table-horizontal-slider" min="0" max="1000" value="0" step="1" oninput="onSlideBarInput(this.value)" class="table-range-slider" title="Drag slide bar to scroll columns">
+                <div class="slider-hint">
+                  <span>Part / Customer</span>
+                  <span>Press / Col AD</span>
+                  <span>Strokes / Life % / Status</span>
+                </div>
+              </div>
+              <button type="button" class="slider-nav-btn" onclick="slideTableStep(280)" title="Slide Right">Slide Right ▶</button>
+              <button type="button" class="slider-nav-btn slider-fit-btn" id="btn-toggle-fit" onclick="toggleFitAllColumns()" title="Fit all columns onto screen">
+                🔍 Fit All Columns
+              </button>
+            </div>
+          </div>
+
           <!-- Table Container -->
           <div id="registry-table-container" class="table-responsive" style="display: block;">
             <table class="data-table" id="registry-table">
