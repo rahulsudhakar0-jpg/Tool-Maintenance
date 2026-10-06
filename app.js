@@ -1236,9 +1236,13 @@ function getStrokeColor(pct) {
 // Google Sheets Cloud Database Integration
 // ==========================================================================
 
+const DEFAULT_GS_URL = "https://docs.google.com/spreadsheets/d/1-3RKcRJC_ENe-xCWMIYYHqYYaKj0cyCG8n-MwMWQMXM/edit?gid=587870018#gid=587870018";
+
 function openGoogleSheetsModal() {
   const urlInput = document.getElementById('gs-web-app-url');
-  if (urlInput) urlInput.value = appState.googleSheetsUrl || '';
+  if (urlInput) {
+    urlInput.value = appState.googleSheetsUrl || DEFAULT_GS_URL;
+  }
   updateGoogleSheetsModalStatus();
   document.getElementById('modal-google-sheets').classList.add('show');
 }
@@ -1250,7 +1254,7 @@ function updateGoogleSheetsBadge() {
 
   if (appState.googleSheetsUrl) {
     indicator.style.backgroundColor = '#10b981';
-    text.textContent = 'Google Sheet: Connected';
+    text.textContent = 'Google Sheet: Linked';
   } else {
     indicator.style.backgroundColor = '#94a3b8';
     text.textContent = 'Google Sheets DB';
@@ -1263,7 +1267,7 @@ function updateGoogleSheetsModalStatus() {
 
   if (appState.googleSheetsUrl) {
     badge.className = 'status-pill operational';
-    badge.textContent = 'Connected & Active';
+    badge.textContent = 'Linked to Google Sheet';
   } else {
     badge.className = 'status-pill pipeline-pending';
     badge.textContent = 'Local Storage Mode';
@@ -1272,8 +1276,8 @@ function updateGoogleSheetsModalStatus() {
 
 function saveGoogleSheetsConfig() {
   const url = (document.getElementById('gs-web-app-url')?.value || '').trim();
-  if (url && !url.startsWith('https://script.google.com/')) {
-    alert('Please enter a valid Google Apps Script Web App URL (starts with https://script.google.com/...)');
+  if (!url) {
+    disconnectGoogleSheets();
     return;
   }
 
@@ -1282,67 +1286,135 @@ function saveGoogleSheetsConfig() {
   updateGoogleSheetsBadge();
   closeModal('modal-google-sheets');
 
-  if (url) {
-    testAndFetchGoogleSheets(false);
-  }
+  testAndFetchGoogleSheets(false);
 }
 
 function disconnectGoogleSheets() {
-  if (confirm('Disconnect Google Sheets and revert to local storage?')) {
-    appState.googleSheetsUrl = '';
-    localStorage.removeItem('tool_maint_gs_url');
-    document.getElementById('gs-web-app-url').value = '';
-    updateGoogleSheetsBadge();
-    updateGoogleSheetsModalStatus();
-    alert('Disconnected from Google Sheets.');
-  }
+  appState.googleSheetsUrl = '';
+  localStorage.removeItem('tool_maint_gs_url');
+  const urlInput = document.getElementById('gs-web-app-url');
+  if (urlInput) urlInput.value = '';
+  updateGoogleSheetsBadge();
+  updateGoogleSheetsModalStatus();
 }
 
 async function testAndFetchGoogleSheets(silent = false) {
-  const url = appState.googleSheetsUrl || (document.getElementById('gs-web-app-url')?.value || '').trim();
-  if (!url) {
-    if (!silent) alert('Please enter your Google Apps Script Web App URL first.');
+  const rawUrl = appState.googleSheetsUrl || (document.getElementById('gs-web-app-url')?.value || '').trim() || DEFAULT_GS_URL;
+  if (!rawUrl) {
+    if (!silent) alert('Please enter your Google Sheet URL or Apps Script Web App URL.');
     return;
   }
 
   try {
-    const res = await fetch(url);
-    const result = await res.json();
+    // Mode A: Google Apps Script Web App (script.google.com)
+    if (rawUrl.includes('script.google.com')) {
+      const res = await fetch(rawUrl);
+      const result = await res.json();
 
-    if (result.status === 'success' && result.data) {
-      if (result.data.tools && result.data.tools.length > 0) {
-        appState.tools = result.data.tools;
-      }
-      if (result.data.workOrders && result.data.workOrders.length > 0) {
-        appState.workOrders = result.data.workOrders;
-      }
-      if (result.data.maintenanceHistory && result.data.maintenanceHistory.length > 0) {
-        appState.maintenanceHistory = result.data.maintenanceHistory;
-      }
+      if (result.status === 'success' && result.data) {
+        if (result.data.tools && result.data.tools.length > 0) appState.tools = result.data.tools;
+        if (result.data.workOrders && result.data.workOrders.length > 0) appState.workOrders = result.data.workOrders;
+        if (result.data.maintenanceHistory && result.data.maintenanceHistory.length > 0) appState.maintenanceHistory = result.data.maintenanceHistory;
 
-      saveState();
-      renderCurrentTab();
-      updateSidebarBadges();
-      updateGoogleSheetsBadge();
+        saveState();
+        renderCurrentTab();
+        updateSidebarBadges();
+        updateGoogleSheetsBadge();
 
-      if (!silent) {
-        alert(`Successfully fetched database from Google Sheet!\n• Tools: ${appState.tools.length}\n• Work Orders: ${appState.workOrders.length}\n• History: ${appState.maintenanceHistory.length}`);
+        if (!silent) {
+          alert(`Successfully synced with Google Sheet!\n• Tools: ${appState.tools.length}\n• Work Orders: ${appState.workOrders.length}\n• History: ${appState.maintenanceHistory.length}`);
+        }
+        return;
+      } else {
+        throw new Error(result.message || 'Invalid response from Apps Script');
       }
-    } else {
-      throw new Error(result.message || 'Unknown response from Google Sheet');
     }
+
+    // Mode B: Direct Google Sheet URL (docs.google.com/spreadsheets/d/...)
+    const idMatch = rawUrl.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
+    if (idMatch) {
+      const sheetId = idMatch[1];
+      const gidMatch = rawUrl.match(/[#&?]gid=([0-9]+)/);
+      const gid = gidMatch ? gidMatch[1] : '0';
+
+      const gvizUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&gid=${gid}`;
+      const res = await fetch(gvizUrl);
+      if (!res.ok) {
+        throw new Error(`Google Sheet returned HTTP ${res.status}. Ensure the sheet sharing is set to "Anyone with the link can view".`);
+      }
+
+      const text = await res.text();
+      const jsonMatch = text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\);?/);
+      if (!jsonMatch) {
+        throw new Error('Could not parse Google Sheet data. Please check permissions.');
+      }
+
+      const gvizData = JSON.parse(jsonMatch[1]);
+      if (gvizData.status === 'error') {
+        throw new Error(gvizData.errors?.[0]?.detailed_message || 'Permission denied on Google Sheet');
+      }
+
+      // Convert rows to objects
+      const cols = gvizData.table.cols.map(c => (c.label || c.id || '').trim());
+      const rawRows = gvizData.table.rows;
+
+      if (rawRows && rawRows.length > 0) {
+        // Parse rows into tool objects
+        const parsedTools = [];
+        rawRows.forEach((r, idx) => {
+          const cells = r.c || [];
+          const getVal = (colIdx) => (cells[colIdx] ? (cells[colIdx].v !== null ? cells[colIdx].v : cells[colIdx].f) : '');
+
+          const partNum = String(getVal(0) || '').trim();
+          const desc = String(getVal(1) || '').trim();
+          if (partNum && partNum.toLowerCase() !== 'part number') {
+            parsedTools.push({
+              id: `TL-${String(idx + 1).padStart(3, '0')}`,
+              partNumber: partNum,
+              description: desc,
+              criticality: String(getVal(2) || 'MINOR').toUpperCase(),
+              samplesQty: Number(getVal(3)) || 10,
+              pipelineStatus: String(getVal(4) || 'Sent to JR-TH'),
+              remarks: String(getVal(6) || ''),
+              toolId: `DIE-${partNum.replace(/[^a-zA-Z0-9]/g, '').slice(0, 8)}`,
+              strokesCurrent: 50000,
+              strokesMax: 250000,
+              healthStatus: 'Operational',
+              image: `images/image${(idx % 14) + 1}.png`
+            });
+          }
+        });
+
+        if (parsedTools.length > 0) {
+          appState.tools = parsedTools;
+          saveState();
+          renderCurrentTab();
+          updateSidebarBadges();
+          updateGoogleSheetsBadge();
+
+          if (!silent) {
+            alert(`Successfully loaded ${parsedTools.length} parts directly from your Google Sheet!`);
+          }
+          return;
+        }
+      }
+    }
+
+    throw new Error('Unrecognized Google Sheet format. Please use a valid Google Sheet or Apps Script Web App URL.');
   } catch (err) {
-    console.error('Google Sheets fetch failed:', err);
+    console.warn('Google Sheets fetch failed:', err);
     if (!silent) {
-      alert('Failed to connect to Google Sheets: ' + err.message + '\n\nMake sure your Web App deployment is set to "Who has access: Anyone".');
+      alert(`Google Sheet Connection Notice:\n\n${err.message}\n\n👉 To allow the web app to read and write directly:\n1. Open your Google Sheet\n2. Click "Share" (top-right) and set "General access: Anyone with the link (Viewer)"\n3. Or deploy the Google Apps Script via Extensions > Apps Script for two-way sync!`);
     }
   }
 }
 
 async function pushToGoogleSheets(silent = false) {
   const url = appState.googleSheetsUrl || (document.getElementById('gs-web-app-url')?.value || '').trim();
-  if (!url) {
-    if (!silent) alert('Please enter your Google Apps Script Web App URL first.');
+  if (!url || !url.includes('script.google.com')) {
+    if (!silent) {
+      alert('To push and save data to Google Sheets, you need a Google Apps Script Web App URL deployed on your spreadsheet.\n\nSee the quick instructions in the Google Sheets DB modal!');
+    }
     return;
   }
 
@@ -1363,33 +1435,25 @@ async function pushToGoogleSheets(silent = false) {
 
     const result = await res.json();
     if (result.status === 'success') {
-      if (!silent) {
-        alert('All local tooling data, work orders, and history have been pushed to your Google Sheet!');
-      }
+      if (!silent) alert('Successfully synchronized all data to your Google Sheet!');
     } else {
       throw new Error(result.message || 'Failed to update Google Sheet');
     }
   } catch (err) {
     console.error('Google Sheets push failed:', err);
-    if (!silent) {
-      alert('Error updating Google Sheet: ' + err.message);
-    }
+    if (!silent) alert('Error pushing to Google Sheet: ' + err.message);
   }
 }
 
 function copyAppsScriptCode() {
-  const code = `// Google Apps Script for Tool Maintenance Database
-// (Full code available in google_apps_script.js file in your repo)
-// Paste google_apps_script.js content into Extensions > Apps Script in Google Sheets.`;
-
-  // Fetch from local file or copy prompt
   fetch('google_apps_script.js')
     .then(r => r.text())
     .then(text => {
       navigator.clipboard.writeText(text);
-      alert('Google Apps Script code copied to your clipboard!\n\nOpen your Google Sheet, go to Extensions > Apps Script, paste and Deploy as Web app.');
+      alert('Google Apps Script code copied to your clipboard!\n\nIn your Google Sheet, go to Extensions > Apps Script, paste and Deploy as Web app.');
     })
     .catch(() => {
       alert('Please open google_apps_script.js in your project folder to copy the script code.');
     });
 }
+
