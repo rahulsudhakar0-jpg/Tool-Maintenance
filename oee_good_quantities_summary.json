@@ -276,10 +276,19 @@
     ]
   },
   {
-    "partNo": "48187110",
-    "partName": "Arc stack side right,#4",
-    "totalGoodQuantity": 1278,
+    "partNo": "48187102",
+    "partName": "Arc stack side Left",
+    "totalGoodQuantity": 258,
     "runs": 1,
+    "presses": [
+      "13# 110T"
+    ]
+  },
+  {
+    "partNo": "48187110",
+    "partName": "Arc stack side right",
+    "totalGoodQuantity": 1328,
+    "runs": 2,
     "presses": [
       "13# 110T"
     ]
@@ -287,8 +296,8 @@
   {
     "partNo": "51207070",
     "partName": "BIMETAL (137)",
-    "totalGoodQuantity": 32241254,
-    "runs": 398,
+    "totalGoodQuantity": 32583384,
+    "runs": 401,
     "presses": [
       "3# OCP-110T",
       "5# OCP-110T"
@@ -297,8 +306,8 @@
   {
     "partNo": "51207117",
     "partName": "ARC PLATE  (14)",
-    "totalGoodQuantity": 41050525,
-    "runs": 54,
+    "totalGoodQuantity": 42939381,
+    "runs": 56,
     "presses": [
       "2# MHS-80T"
     ]
@@ -409,8 +418,8 @@
   {
     "partNo": "48187097AA",
     "partName": "Medium Arc Platel",
-    "totalGoodQuantity": 3102050,
-    "runs": 46,
+    "totalGoodQuantity": 3214079,
+    "runs": 48,
     "presses": [
       "1# OCP-80T",
       "4# SN1-110T",
@@ -533,8 +542,8 @@
   {
     "partNo": "W113791670114",
     "partName": "SORTIE BOBINE BORNE A2",
-    "totalGoodQuantity": 964745,
-    "runs": 61,
+    "totalGoodQuantity": 1001471,
+    "runs": 63,
     "presses": [
       "3# OCP-110T",
       "5# OCP-110T"
@@ -591,8 +600,8 @@
   {
     "partNo": "48187311AA",
     "partName": "CLAMP PLATE",
-    "totalGoodQuantity": 791812,
-    "runs": 16,
+    "totalGoodQuantity": 927584,
+    "runs": 18,
     "presses": [
       "4# SN1-110T"
     ]
@@ -756,8 +765,8 @@
   {
     "partNo": "TM-755A-1",
     "partName": "UPPER PLATE",
-    "totalGoodQuantity": 903775,
-    "runs": 194,
+    "totalGoodQuantity": 917090,
+    "runs": 196,
     "presses": [
       "7# GTX-300T",
       "9# OCP-110T",
@@ -920,8 +929,8 @@
   {
     "partNo": "BRU53717",
     "partName": "Gland plate",
-    "totalGoodQuantity": 155537,
-    "runs": 121,
+    "totalGoodQuantity": 159737,
+    "runs": 122,
     "presses": [
       "7# GTX-300T",
       "8# GTX-500T",
@@ -991,8 +1000,8 @@
   {
     "partNo": "TM-860A-1",
     "partName": "OUTER",
-    "totalGoodQuantity": 268797,
-    "runs": 56,
+    "totalGoodQuantity": 276406,
+    "runs": 58,
     "presses": [
       "8# GTX-500T"
     ]
@@ -1218,8 +1227,8 @@
   {
     "partNo": "SB-070C-1",
     "partName": "HEAT SHIELD",
-    "totalGoodQuantity": 73095,
-    "runs": 68,
+    "totalGoodQuantity": 74099,
+    "runs": 70,
     "presses": [
       "9# OCP-110T"
     ]
@@ -1391,8 +1400,8 @@
   {
     "partNo": "BRU53715",
     "partName": "U BOX 600mm",
-    "totalGoodQuantity": 26327,
-    "runs": 52,
+    "totalGoodQuantity": 27829,
+    "runs": 54,
     "presses": [
       "10# OCP-260 T",
       "12# 200T"
@@ -1487,8 +1496,8 @@
   {
     "partNo": "BRU53720",
     "partName": "Cover EZ100 600mm 24w",
-    "totalGoodQuantity": 9224,
-    "runs": 20,
+    "totalGoodQuantity": 11126,
+    "runs": 24,
     "presses": [
       "10# OCP-260 T",
       "11# 200T",
@@ -1660,8 +1669,8 @@
   {
     "partNo": "BRU53743",
     "partName": "Door 450mm",
-    "totalGoodQuantity": 9658,
-    "runs": 24,
+    "totalGoodQuantity": 11325,
+    "runs": 26,
     "presses": [
       "10# OCP-260 T",
       "11# 200T",
