@@ -3,7 +3,7 @@
  * Total Tools: 253
  * Stroke values linked to Column AD 'Good quantity' sum from OEE Production Logs
  * Warranty & Current Total Tool Shots linked to Jinrong Tool Shot Template (Col AH & AI)
- * Synchronized: 2026-10-07T11:31:43.300Z
+ * Synchronized: 2026-10-07T12:30:03.898Z
  */
 
 var INITIAL_DATA = {
@@ -20,7 +20,7 @@ var INITIAL_DATA = {
         "strokeDataSource": "OEE-2026 (Col AD Good Quantity Sum across 13 Press Logs)",
         "lastUpdated": "2026-10-07T08:47:11.432Z",
         "lastOeeSync": "2026-10-07T08:47:11.432Z",
-        "lastJinrongSync": "2026-10-07T11:31:43.300Z",
+        "lastJinrongSync": "2026-10-07T12:30:03.898Z",
         "totalJinrongLinked": 123,
         "jinrongSourceFile": "Tool Shot Tempalte-Jinrong CH-TH(9).xlsx (Gid: 767889023)"
     },

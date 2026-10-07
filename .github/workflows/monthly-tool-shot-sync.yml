@@ -1,0 +1,40 @@
+name: Monthly Jinrong Tool Shot Sync
+
+on:
+  schedule:
+    # Runs on the 1st day of every month at 00:00 UTC (07:00 AM Bangkok time)
+    - cron: '0 0 1 * *'
+  workflow_dispatch: # Allows manual trigger from GitHub Actions anytime
+
+permissions:
+  contents: write
+
+jobs:
+  sync-monthly-shots:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Apply Monthly Tool Shot Linkages
+        run: |
+          node apply_jinrong_linkage.js
+          node update_unified_csv.js
+
+      - name: Commit and Push if updated
+        run: |
+          git config --global user.name "GitHub Actions [Monthly Tool Shot Sync]"
+          git config --global user.email "actions@github.com"
+          git add data.js excel_data.json unified_tools_2024_2025_2026.csv jinrong_tool_shots.json jinrong_linkage_summary.json
+          if git diff --staged --quiet; then
+            echo "No changes detected in monthly tool shot template."
+          else
+            git commit -m "Automated Monthly Sync: Updated Jinrong Current Total Tool Shots (Col AI) and Warranty (Col AH)"
+            git push origin main
+            echo "Successfully pushed monthly tool shot updates to main!"
+          fi

@@ -2563,3 +2563,286 @@ function copyAppsScriptCode() {
     });
 }
 
+// ==========================================================================
+// Monthly Tool Shot Sync (Jinrong Col AI / Col AH)
+// ==========================================================================
+
+let pendingMonthlyUpdates = null;
+
+function openMonthlySyncModal() {
+  const modal = document.getElementById('modal-monthly-sync');
+  if (modal) {
+    modal.style.display = 'flex';
+    initMonthlyDropZone();
+  }
+}
+
+function initMonthlyDropZone() {
+  const dropZone = document.getElementById('monthly-drop-zone');
+  if (!dropZone || dropZone._initialized) return;
+  dropZone._initialized = true;
+
+  ['dragenter', 'dragover'].forEach(eventName => {
+    dropZone.addEventListener(eventName, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      dropZone.style.borderColor = '#2563eb';
+      dropZone.style.background = '#eff6ff';
+    }, false);
+  });
+
+  ['dragleave', 'drop'].forEach(eventName => {
+    dropZone.addEventListener(eventName, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      dropZone.style.borderColor = '#94a3b8';
+      dropZone.style.background = '#f8fafc';
+    }, false);
+  });
+
+  dropZone.addEventListener('drop', (e) => {
+    const dt = e.dataTransfer;
+    const files = dt.files;
+    if (files.length > 0) {
+      processMonthlyExcelFile(files[0]);
+    }
+  }, false);
+}
+
+function handleMonthlyExcelUpload(e) {
+  const file = e.target.files[0];
+  if (file) {
+    processMonthlyExcelFile(file);
+  }
+}
+
+function processMonthlyExcelFile(file) {
+  if (typeof XLSX === 'undefined') {
+    alert('SheetJS library is still loading. Please try again in a few seconds.');
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = new Uint8Array(e.target.result);
+      const workbook = XLSX.read(data, { type: 'array' });
+      
+      const sheetName = workbook.SheetNames.find(n => n.toLowerCase().includes('jinrong') || n.toLowerCase().includes('th-chn')) || workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[sheetName];
+      if (!worksheet) {
+        alert('Could not locate "Jinrong-TH-CHN" sheet in the selected workbook.');
+        return;
+      }
+
+      const rows = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+      if (!rows || rows.length < 2) {
+        alert('Worksheet appears to be empty.');
+        return;
+      }
+
+      const parsedShots = [];
+      for (let r = 1; r < rows.length; r++) {
+        const row = rows[r];
+        if (!row || (!row[0] && !row[1])) continue;
+
+        const toolNo = String(row[0] || '').trim();
+        const toolName = String(row[1] || '').trim();
+        const actual = Number(row[5]) || null;
+        const warranty = Number(row[33]) || null;
+        const currentTotal = Number(row[34]) || null;
+
+        if (toolNo) {
+          parsedShots.push({
+            toolNumber: toolNo,
+            toolName: toolName,
+            actual: actual,
+            warranty: warranty,
+            currentTotal: currentTotal
+          });
+        }
+      }
+
+      console.log(`Parsed ${parsedShots.length} shot records from Excel file: ${file.name}`);
+      matchAndPreviewMonthlyShots(parsedShots, file.name);
+
+    } catch (err) {
+      console.error('Error parsing Excel file:', err);
+      alert('Error parsing Excel file: ' + err.message);
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+function matchAndPreviewMonthlyShots(parsedShots, fileName) {
+  function expandCodes(str) {
+    const codes = new Set();
+    if (!str) return [];
+    let s = str.trim().toUpperCase();
+    if (/^\d+\.?\d*E\+?\d+$/i.test(s)) {
+      codes.add(Math.round(Number(s)).toString());
+      return Array.from(codes);
+    }
+    if (s.includes('SIB')) s = s.replace(/SIB/g, 'S1B');
+    const tokens = s.match(/[A-Z0-9\-\,\/\_]+/g) || [];
+    tokens.forEach(tok => {
+      const sub = tok.match(/[A-Z0-9]+/g) || [];
+      sub.forEach(st => { if (st.length >= 4) codes.add(st); });
+      const prefixMatch = tok.match(/^([A-Z]+)(\d+)(.*)$/);
+      if (prefixMatch) {
+        const prefix = prefixMatch[1], baseNum = prefixMatch[2];
+        codes.add(prefix + baseNum); codes.add(baseNum);
+        const restParts = prefixMatch[3].match(/\d+/g) || [];
+        restParts.forEach(rp => {
+          if (rp.length === baseNum.length) { codes.add(prefix + rp); codes.add(rp); }
+          else if (rp.length < baseNum.length) {
+            const exp = baseNum.slice(0, baseNum.length - rp.length) + rp;
+            codes.add(prefix + exp); codes.add(exp);
+          }
+        });
+      }
+      const numPrefixMatch = tok.match(/^(\d{5,8})[\-\/](\d{2,8})/);
+      if (numPrefixMatch) {
+        const baseNum = numPrefixMatch[1], secondNum = numPrefixMatch[2];
+        codes.add(baseNum);
+        if (secondNum.length === baseNum.length) codes.add(secondNum);
+        else if (secondNum.length < baseNum.length) codes.add(baseNum.slice(0, baseNum.length - secondNum.length) + secondNum);
+      }
+    });
+    return Array.from(codes);
+  }
+
+  parsedShots.forEach(s => {
+    s._tokens = expandCodes(s.toolNumber);
+  });
+
+  const updates = [];
+  appState.tools.forEach(tool => {
+    let pNo = tool.partNumber || '';
+    if (/7\.51701\d+E7/i.test(pNo)) pNo = Math.round(Number(pNo)).toString();
+    const pTokens = expandCodes(pNo + ' ' + (tool.manufactureNo || '') + ' ' + (tool.toolId || ''));
+    const pName = (tool.partName || tool.description || '').toUpperCase();
+
+    let bestShot = null;
+    let highestScore = 0;
+
+    for (const shot of parsedShots) {
+      let score = 0;
+      for (const pt of pTokens) {
+        if (pt.length < 4) continue;
+        for (const st of shot._tokens) {
+          if (st.length < 4) continue;
+          if (pt === st) {
+            const s = 100 + pt.length; if (s > score) score = s;
+          } else if (pt.startsWith(st) && st.length >= 6) {
+            const s = 85 + st.length; if (s > score) score = s;
+          } else if (st.startsWith(pt) && pt.length >= 6) {
+            const s = 85 + pt.length; if (s > score) score = s;
+          }
+        }
+      }
+
+      if (score < 80) {
+        const distinctKws = ['BIMETAL', 'PRIMARY LATCH', 'SECONDARY LATCH', 'MIDDLE TERMINAL', 'LOAD TERM', 'MAGNET LOOP', 'PADLOCKING', 'YOKE', 'UPPER LINK', 'LOWER LINK', 'ARMATURE', 'CRADLE', 'DEFLECTEUR', 'MOVING CONTACT', 'FIXED CONTACT', 'SHUNT', 'LOCKING LEVER', 'OUTPUT CONNECTOR', 'INPUT CONNECTOR', 'CLAMP PLATE', 'ARC STACK', 'HANDLE ARM', 'PLATE THREAD', 'LOCK SLIDE', 'BETA ARC', 'UPPER PLATE', 'GLAND PLATE', 'EARTHPAD', 'NEUTRAL BUSBAR', 'NEUTRAL BRIDGE', 'METAL BOX', 'COVER'];
+        for (const kw of distinctKws) {
+          if (pName.includes(kw) && shot.toolName.toUpperCase().includes(kw)) {
+            let kwScore = 40 + kw.length + (tool.customer === 'STL' ? 15 : 0);
+            if (kwScore > score) score = kwScore;
+          }
+        }
+      }
+
+      if (tool.id === 'TL-083' && shot.toolNumber.includes('725905')) score = 99;
+
+      if (score > highestScore) {
+        highestScore = score;
+        bestShot = shot;
+      }
+    }
+
+    if (bestShot && highestScore >= 50) {
+      const oldVal = tool.currentTotalShot != null ? Number(tool.currentTotalShot) : null;
+      const newVal = bestShot.currentTotal != null ? Number(bestShot.currentTotal) : null;
+      const delta = (newVal != null && oldVal != null) ? newVal - oldVal : 0;
+      updates.push({
+        tool: tool,
+        shot: bestShot,
+        oldVal: oldVal,
+        newVal: newVal,
+        delta: delta,
+        warranty: bestShot.warranty
+      });
+    }
+  });
+
+  pendingMonthlyUpdates = updates;
+
+  const tbody = document.getElementById('monthly-preview-tbody');
+  const previewDiv = document.getElementById('monthly-parse-preview');
+  const countBadge = document.getElementById('monthly-preview-count');
+  const applyBtn = document.getElementById('btn-apply-monthly-updates');
+
+  if (tbody && previewDiv) {
+    tbody.innerHTML = updates.map(u => {
+      const deltaColor = u.delta > 0 ? '#15803d' : '#64748b';
+      const deltaText = u.delta > 0 ? `+${u.delta.toLocaleString()}` : (u.delta === 0 ? 'No change' : u.delta.toLocaleString());
+      return `
+        <tr>
+          <td><strong>${u.tool.partNumber}</strong></td>
+          <td>${u.tool.description || u.tool.partName || ''}</td>
+          <td><code>${u.shot.toolNumber}</code></td>
+          <td>${u.oldVal != null ? u.oldVal.toLocaleString() : '—'}</td>
+          <td><strong style="color: #059669;">${u.newVal != null ? u.newVal.toLocaleString() : '—'}</strong></td>
+          <td style="color: ${deltaColor}; font-weight: 700;">${deltaText}</td>
+          <td>${u.warranty != null ? u.warranty.toLocaleString() : '—'}</td>
+        </tr>
+      `;
+    }).join('');
+
+    previewDiv.style.display = 'block';
+    if (countBadge) countBadge.textContent = `${updates.length} tools matched (${fileName})`;
+    if (applyBtn) applyBtn.style.display = 'inline-block';
+  }
+}
+
+function applyMonthlyExcelUpdates() {
+  if (!pendingMonthlyUpdates || pendingMonthlyUpdates.length === 0) {
+    alert('No pending monthly updates to apply.');
+    return;
+  }
+
+  let count = 0;
+  pendingMonthlyUpdates.forEach(u => {
+    const t = u.tool;
+    if (u.newVal != null) {
+      t.currentTotalShot = u.newVal;
+      if (!t.colAD_ToolShot) {
+        t.strokesCurrent = Math.round(u.newVal);
+      }
+    }
+    if (u.warranty != null && u.warranty > 0) {
+      t.warrantyToolShots = u.warranty;
+      t.strokesMax = u.warranty;
+    }
+    t.matchedToolShotId = u.shot.toolNumber;
+    t.matchedToolShotName = u.shot.toolName;
+    
+    const pct = t.strokesMax > 0 ? (t.strokesCurrent / t.strokesMax) * 100 : 0;
+    if (pct >= 90) t.healthStatus = 'Critical Attention';
+    else if (pct >= 70) t.healthStatus = 'Needs Maintenance';
+    else t.healthStatus = 'Healthy Operational';
+
+    count++;
+  });
+
+  localStorage.setItem('tool_maint_tools', JSON.stringify(appState.tools));
+  localStorage.setItem('tool_maint_last_monthly_sync', new Date().toISOString());
+
+  filterTools();
+  renderMetrics();
+  if (donutChartInstance) updateDonutChart();
+
+  closeModal('modal-monthly-sync');
+  alert(`✓ Successfully applied monthly update to ${count} tooling assets!\n\nAll table views, wear meters, and detail cards have been refreshed with the new monthly values.`);
+}
+
