@@ -293,6 +293,7 @@
                 <label for="filter-view-preset" style="font-size: 12px; font-weight: 700; color: var(--primary); white-space: nowrap;">👁️ Filter View:</label>
                 <select id="filter-view-preset" class="filter-select preset-select" onchange="applyViewPreset(this.value)" style="border-color: #3b82f6; font-weight: 600; background-color: #f0f7ff;">
                   <option value="ALL">All Tools (253 Tools)</option>
+                  <option value="JINRONG_LINKED">🔗 Jinrong Linked Tools (123 Tools with Col AI/AH)</option>
                   <option value="150T">🏭 6# STD-150T Line (888k+ Good Qty)</option>
                   <option value="110T">🏭 110T Press Lines (3#, 4#, 5#, 9#, 13#)</option>
                   <option value="80T">🏭 80T Press Lines (1# & 2#)</option>
@@ -376,6 +377,8 @@
                   <label class="columns-dropdown-item"><input type="checkbox" data-col="matchedToolShotId" checked onchange="toggleColumnVisibility('matchedToolShotId', this.checked)"> Linked Die ID</label>
                   <label class="columns-dropdown-item"><input type="checkbox" data-col="pressTonnage" checked onchange="toggleColumnVisibility('pressTonnage', this.checked)"> Press / Mech</label>
                   <label class="columns-dropdown-item"><input type="checkbox" data-col="colAD_ToolShot" checked onchange="toggleColumnVisibility('colAD_ToolShot', this.checked)"> Col AD Shots</label>
+                  <label class="columns-dropdown-item"><input type="checkbox" data-col="currentTotalShot" checked onchange="toggleColumnVisibility('currentTotalShot', this.checked)"> Current Total (Col AI)</label>
+                  <label class="columns-dropdown-item"><input type="checkbox" data-col="warrantyToolShots" checked onchange="toggleColumnVisibility('warrantyToolShots', this.checked)"> Warranty Shots (Col AH)</label>
                   <label class="columns-dropdown-item"><input type="checkbox" data-col="strokesCurrent" checked onchange="toggleColumnVisibility('strokesCurrent', this.checked)"> Total Strokes</label>
                   <label class="columns-dropdown-item"><input type="checkbox" data-col="strokeWearPercent" checked onchange="toggleColumnVisibility('strokeWearPercent', this.checked)"> Life %</label>
                   <label class="columns-dropdown-item"><input type="checkbox" data-col="healthStatus" checked onchange="toggleColumnVisibility('healthStatus', this.checked)"> Health Status</label>
@@ -485,6 +488,18 @@
                     <div class="th-content">
                       <span class="th-title" onclick="sortTable('colAD_ToolShot')">COL AD SHOTS <span class="sort-icon" id="sort-icon-colAD_ToolShot">↕</span></span>
                       <button class="th-filter-btn" id="btn-col-filter-colAD_ToolShot" onclick="openColFilter(event, 'colAD_ToolShot')" title="Filter Col AD Shots">▾</button>
+                    </div>
+                  </th>
+                  <th class="th-sortable" data-col="currentTotalShot">
+                    <div class="th-content">
+                      <span class="th-title" onclick="sortTable('currentTotalShot')">CURRENT TOTAL (COL AI) <span class="sort-icon" id="sort-icon-currentTotalShot">↕</span></span>
+                      <button class="th-filter-btn" id="btn-col-filter-currentTotalShot" onclick="openColFilter(event, 'currentTotalShot')" title="Filter Current Total">▾</button>
+                    </div>
+                  </th>
+                  <th class="th-sortable" data-col="warrantyToolShots">
+                    <div class="th-content">
+                      <span class="th-title" onclick="sortTable('warrantyToolShots')">WARRANTY SHOTS (COL AH) <span class="sort-icon" id="sort-icon-warrantyToolShots">↕</span></span>
+                      <button class="th-filter-btn" id="btn-col-filter-warrantyToolShots" onclick="openColFilter(event, 'warrantyToolShots')" title="Filter Warranty Shots">▾</button>
                     </div>
                   </th>
                   <th class="th-sortable" data-col="strokesCurrent">

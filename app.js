@@ -25,6 +25,8 @@ let appState = {
     matchedToolShotId: true,
     pressTonnage: true,
     colAD_ToolShot: true,
+    currentTotalShot: true,
+    warrantyToolShots: true,
     strokesCurrent: true,
     strokeWearPercent: true,
     healthStatus: true
@@ -487,7 +489,13 @@ function filterTools() {
         if (!val || val === 'ALL') continue;
         if (key === 'partNumber' && !t.partNumber.toLowerCase().includes(val.toLowerCase())) return false;
         if (key === 'partName' && !(t.description || t.partName || '').toLowerCase().includes(val.toLowerCase())) return false;
-        if (key === 'matchedToolShotId' && !(t.matchedToolShotId || t.toolId || '').toLowerCase().includes(val.toLowerCase())) return false;
+        if (key === 'matchedToolShotId') {
+          if (val === 'LINKED') {
+            if (!t.matchedToolShotId) return false;
+          } else if (!(t.matchedToolShotId || t.toolId || '').toLowerCase().includes(val.toLowerCase())) {
+            return false;
+          }
+        }
         if (key === 'strokeWearPercent') {
           const wear = (Number(t.strokesCurrent) / (Number(t.strokesMax) || 1)) * 100;
           if (val === 'OVER_LIMIT' && wear < 100) return false;
@@ -539,6 +547,14 @@ function filterTools() {
           valA = Number(a.colAD_ToolShot) || 0;
           valB = Number(b.colAD_ToolShot) || 0;
           break;
+        case 'currentTotalShot':
+          valA = Number(a.currentTotalShot != null ? a.currentTotalShot : a.strokesCurrent) || 0;
+          valB = Number(b.currentTotalShot != null ? b.currentTotalShot : b.strokesCurrent) || 0;
+          break;
+        case 'warrantyToolShots':
+          valA = Number(a.warrantyToolShots || a.strokesMax) || 0;
+          valB = Number(b.warrantyToolShots || b.strokesMax) || 0;
+          break;
         case 'strokesCurrent':
           valA = Number(a.strokesCurrent) || 0;
           valB = Number(b.strokesCurrent) || 0;
@@ -575,14 +591,14 @@ function sortTable(colKey) {
     appState.sortDirection = appState.sortDirection === 'asc' ? 'desc' : 'asc';
   } else {
     appState.sortColumn = colKey;
-    const isNum = ['colAD_ToolShot', 'strokesCurrent', 'strokeWearPercent', 'year'].includes(colKey);
+    const isNum = ['colAD_ToolShot', 'currentTotalShot', 'warrantyToolShots', 'strokesCurrent', 'strokeWearPercent', 'year'].includes(colKey);
     appState.sortDirection = isNum ? 'desc' : 'asc';
   }
   filterTools();
 }
 
 function updateSortAndFilterIndicators() {
-  const sortCols = ['year', 'partNumber', 'partName', 'customer', 'matchedToolShotId', 'pressTonnage', 'colAD_ToolShot', 'strokesCurrent', 'strokeWearPercent', 'healthStatus'];
+  const sortCols = ['year', 'partNumber', 'partName', 'customer', 'matchedToolShotId', 'pressTonnage', 'colAD_ToolShot', 'currentTotalShot', 'warrantyToolShots', 'strokesCurrent', 'strokeWearPercent', 'healthStatus'];
   
   sortCols.forEach(col => {
     const icon = document.getElementById(`sort-icon-${col}`);
@@ -691,6 +707,7 @@ function updateActiveFilterChips(filteredCount) {
     const colLabels = {
       year: 'Year', partNumber: 'Part No', partName: 'Part Name', customer: 'Customer',
       matchedToolShotId: 'Linked Die', pressTonnage: 'Press', colAD_ToolShot: 'Col AD Shots',
+      currentTotalShot: 'Col AI Total', warrantyToolShots: 'Col AH Warranty',
       strokesCurrent: 'Strokes', strokeWearPercent: 'Life %', healthStatus: 'Status'
     };
     const cName = colLabels[appState.sortColumn] || appState.sortColumn;
@@ -752,6 +769,11 @@ function applyViewPreset(preset) {
   appState.columnFilters = {};
 
   switch (preset) {
+    case 'JINRONG_LINKED':
+      appState.columnFilters.matchedToolShotId = 'LINKED';
+      appState.sortColumn = 'currentTotalShot';
+      appState.sortDirection = 'desc';
+      break;
     case '150T':
       if (pressSelect) pressSelect.value = '150T';
       appState.sortColumn = 'colAD_ToolShot';
@@ -886,13 +908,15 @@ function renderColFilterPopoverContent(colKey) {
     matchedToolShotId: 'LINKED DIE ID',
     pressTonnage: 'PRESS / MECH',
     colAD_ToolShot: 'COL AD SHOTS',
+    currentTotalShot: 'CURRENT TOTAL (COL AI)',
+    warrantyToolShots: 'WARRANTY SHOTS (COL AH)',
     strokesCurrent: 'TOTAL STROKES',
     strokeWearPercent: 'LIFE %',
     healthStatus: 'HEALTH STATUS'
   };
 
   const title = colLabels[colKey] || colKey;
-  const isNum = ['colAD_ToolShot', 'strokesCurrent', 'strokeWearPercent', 'year'].includes(colKey);
+  const isNum = ['colAD_ToolShot', 'currentTotalShot', 'warrantyToolShots', 'strokesCurrent', 'strokeWearPercent', 'year'].includes(colKey);
 
   const sortAscText = isNum ? '▲ Sort Smallest to Largest' : '▲ Sort A → Z';
   const sortDescText = isNum ? '▼ Sort Largest to Smallest' : '▼ Sort Z → A';
@@ -1229,20 +1253,20 @@ function renderToolsGrid(tools) {
 
         <div class="tool-card-meta">
           <div class="meta-item">
-            <span class="meta-label">Col AD Shots</span>
+            <span class="meta-label">Current Total (Col AI)</span>
+            <span class="meta-value" style="color: #059669; font-weight: 700;">${tool.currentTotalShot != null ? Number(tool.currentTotalShot).toLocaleString() : '—'}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Warranty (Col AH)</span>
+            <span class="meta-value" style="color: #d97706; font-weight: 700;">${tool.warrantyToolShots != null ? Number(tool.warrantyToolShots).toLocaleString() : (tool.strokesMax || 0).toLocaleString()}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Col AD Shots (OEE)</span>
             <span class="meta-value" style="color: #2563eb; font-weight: 700;">${tool.colAD_ToolShot ? Number(tool.colAD_ToolShot).toLocaleString() : '—'}</span>
           </div>
           <div class="meta-item">
             <span class="meta-label">Linked Die ID</span>
             <span class="meta-value"><code>${tool.matchedToolShotId || tool.toolId}</code></span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-label">Press & Mech</span>
-            <span class="meta-value">${tool.pressTonnage || 'N/A'} ${tool.mechNo ? '(' + tool.mechNo + ')' : ''}</span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-label">Material / Thick</span>
-            <span class="meta-value">${tool.material || 'Alloy'} ${tool.thickness ? '(' + tool.thickness + ')' : ''}</span>
           </div>
         </div>
 
@@ -1275,6 +1299,8 @@ function renderToolsTable(tools) {
       <td data-col="matchedToolShotId"><code>${tool.matchedToolShotId || tool.toolId}</code></td>
       <td data-col="pressTonnage">${tool.pressTonnage || 'N/A'} ${tool.mechNo ? '(' + tool.mechNo + ')' : ''}</td>
       <td data-col="colAD_ToolShot"><strong style="color: #2563eb;">${tool.colAD_ToolShot ? Number(tool.colAD_ToolShot).toLocaleString() : '—'}</strong></td>
+      <td data-col="currentTotalShot"><strong style="color: #059669;">${tool.currentTotalShot != null ? Number(tool.currentTotalShot).toLocaleString() : '—'}</strong></td>
+      <td data-col="warrantyToolShots"><strong style="color: #d97706;">${tool.warrantyToolShots != null ? Number(tool.warrantyToolShots).toLocaleString() : (tool.strokesMax || 0).toLocaleString()}</strong></td>
       <td data-col="strokesCurrent">${tool.strokesCurrent.toLocaleString()} / ${tool.strokesMax.toLocaleString()}</td>
       <td data-col="strokeWearPercent">
         <div class="stroke-meter" style="width: 100px;">
@@ -1625,27 +1651,32 @@ function openToolDetailModal(toolId) {
 
         <!-- Linked Tool Shot Template Box -->
         <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: var(--radius-md); padding: 12px 16px; margin-bottom: 14px;">
-          <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #1d4ed8; margin-bottom: 6px; display: flex; justify-content: space-between;">
+          <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #1d4ed8; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
             <span>Tool Shot Template Linkage (Jinrong CH-TH)</span>
-            <span>${tool.matchedToolShotId ? '✓ Linked' : 'Standard Baseline'}</span>
+            <span class="badge" style="background: ${tool.matchedToolShotId ? '#dcfce7' : '#f1f5f9'}; color: ${tool.matchedToolShotId ? '#15803d' : '#64748b'}; font-weight: 700; padding: 3px 8px; border-radius: 4px;">${tool.matchedToolShotId ? '✓ Linked' : 'Standard Baseline'}</span>
           </div>
-          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; font-size: 12px;">
-            <div>
-              <span style="color: var(--text-muted); display: block;">Col AD Shots:</span>
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; font-size: 12px;">
+            <div style="background: #ffffff; padding: 8px; border-radius: 6px; border: 1px solid #e2e8f0;">
+              <span style="color: var(--text-muted); display: block; font-size: 11px;">Current Total (Col AI):</span>
+              <strong style="color: #059669; font-size: 14px;">${tool.currentTotalShot != null ? Number(tool.currentTotalShot).toLocaleString() : '—'}</strong>
+            </div>
+            <div style="background: #ffffff; padding: 8px; border-radius: 6px; border: 1px solid #e2e8f0;">
+              <span style="color: var(--text-muted); display: block; font-size: 11px;">Warranty Shots (Col AH):</span>
+              <strong style="color: #d97706; font-size: 14px;">${tool.warrantyToolShots != null ? Number(tool.warrantyToolShots).toLocaleString() : (tool.strokesMax || 0).toLocaleString()}</strong>
+            </div>
+            <div style="background: #ffffff; padding: 8px; border-radius: 6px; border: 1px solid #e2e8f0;">
+              <span style="color: var(--text-muted); display: block; font-size: 11px;">Col AD Shots (OEE):</span>
               <strong style="color: #2563eb; font-size: 14px;">${tool.colAD_ToolShot ? Number(tool.colAD_ToolShot).toLocaleString() : '—'}</strong>
             </div>
-            <div>
-              <span style="color: var(--text-muted); display: block;">Current Total Shots:</span>
-              <strong style="color: #0f172a; font-size: 14px;">${tool.strokesCurrent.toLocaleString()}</strong>
-            </div>
-            <div>
-              <span style="color: var(--text-muted); display: block;">Warranty Limit (Col AH):</span>
-              <strong style="color: #0f172a; font-size: 14px;">${(tool.warrantyToolShots || tool.strokesMax).toLocaleString()}</strong>
+            <div style="background: #ffffff; padding: 8px; border-radius: 6px; border: 1px solid #e2e8f0;">
+              <span style="color: var(--text-muted); display: block; font-size: 11px;">Baseline Shot (Col F):</span>
+              <strong style="color: #475569; font-size: 14px;">${tool.actualToolShot != null ? Number(tool.actualToolShot).toLocaleString() : '—'}</strong>
             </div>
           </div>
           ${tool.matchedToolShotId ? `
-            <div style="font-size: 11px; color: #1e40af; margin-top: 6px; padding-top: 4px; border-top: 1px dashed #bfdbfe;">
-              Matched Die: <strong>${tool.matchedToolShotId}</strong> • ${tool.matchedToolShotName || ''} (${tool.matchReason || ''})
+            <div style="font-size: 11px; color: #1e40af; margin-top: 8px; padding-top: 6px; border-top: 1px dashed #bfdbfe; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px;">
+              <div>Matched Die: <strong>${tool.matchedToolShotId}</strong> • ${tool.matchedToolShotName || tool.matchedToolName || ''}</div>
+              <div style="color: #64748b;">${tool.matchReason || tool.matchTrace || ''}</div>
             </div>
           ` : ''}
         </div>
