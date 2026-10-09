@@ -214,8 +214,8 @@
   {
     "partNo": "48187058",
     "partName": "CRADLE",
-    "totalGoodQuantity": 1828279,
-    "runs": 180,
+    "totalGoodQuantity": 1836982,
+    "runs": 181,
     "presses": [
       "4# SN1-110T"
     ]
@@ -278,7 +278,7 @@
   {
     "partNo": "48187102",
     "partName": "Arc stack side Left",
-    "totalGoodQuantity": 258,
+    "totalGoodQuantity": 256,
     "runs": 1,
     "presses": [
       "13# 110T"
@@ -296,8 +296,8 @@
   {
     "partNo": "51207070",
     "partName": "BIMETAL (137)",
-    "totalGoodQuantity": 32583384,
-    "runs": 401,
+    "totalGoodQuantity": 32801154,
+    "runs": 403,
     "presses": [
       "3# OCP-110T",
       "5# OCP-110T"
@@ -306,8 +306,8 @@
   {
     "partNo": "51207117",
     "partName": "ARC PLATE  (14)",
-    "totalGoodQuantity": 42939381,
-    "runs": 56,
+    "totalGoodQuantity": 43098001,
+    "runs": 57,
     "presses": [
       "2# MHS-80T"
     ]
@@ -388,8 +388,8 @@
   {
     "partNo": "W113893530111",
     "partName": "ARC PLATE GV2",
-    "totalGoodQuantity": 55214026,
-    "runs": 235,
+    "totalGoodQuantity": 55683402,
+    "runs": 237,
     "presses": [
       "1# OCP-80T",
       "2# MHS-80T",
@@ -418,8 +418,8 @@
   {
     "partNo": "48187097AA",
     "partName": "Medium Arc Platel",
-    "totalGoodQuantity": 3214079,
-    "runs": 48,
+    "totalGoodQuantity": 3233945,
+    "runs": 49,
     "presses": [
       "1# OCP-80T",
       "4# SN1-110T",
@@ -471,6 +471,15 @@
     "presses": [
       "1# OCP-80T",
       "4# SN1-110T"
+    ]
+  },
+  {
+    "partNo": "AAV95851",
+    "partName": "CORNE D",
+    "totalGoodQuantity": 13900,
+    "runs": 1,
+    "presses": [
+      "1# OCP-80T"
     ]
   },
   {
@@ -542,8 +551,8 @@
   {
     "partNo": "W113791670114",
     "partName": "SORTIE BOBINE BORNE A2",
-    "totalGoodQuantity": 1001471,
-    "runs": 63,
+    "totalGoodQuantity": 1045671,
+    "runs": 65,
     "presses": [
       "3# OCP-110T",
       "5# OCP-110T"
@@ -600,8 +609,8 @@
   {
     "partNo": "48187311AA",
     "partName": "CLAMP PLATE",
-    "totalGoodQuantity": 927584,
-    "runs": 18,
+    "totalGoodQuantity": 967344,
+    "runs": 19,
     "presses": [
       "4# SN1-110T"
     ]
@@ -765,8 +774,8 @@
   {
     "partNo": "TM-755A-1",
     "partName": "UPPER PLATE",
-    "totalGoodQuantity": 917090,
-    "runs": 196,
+    "totalGoodQuantity": 920412,
+    "runs": 197,
     "presses": [
       "7# GTX-300T",
       "9# OCP-110T",
@@ -833,8 +842,8 @@
   {
     "partNo": "SB-087A-1",
     "partName": "OUTER",
-    "totalGoodQuantity": 27943,
-    "runs": 10,
+    "totalGoodQuantity": 29665,
+    "runs": 11,
     "presses": [
       "7# GTX-300T"
     ]
@@ -929,8 +938,8 @@
   {
     "partNo": "BRU53717",
     "partName": "Gland plate",
-    "totalGoodQuantity": 159737,
-    "runs": 122,
+    "totalGoodQuantity": 161867,
+    "runs": 123,
     "presses": [
       "7# GTX-300T",
       "8# GTX-500T",
@@ -991,8 +1000,8 @@
   {
     "partNo": "TM-771A-1",
     "partName": "OUTER",
-    "totalGoodQuantity": 206941,
-    "runs": 36,
+    "totalGoodQuantity": 211341,
+    "runs": 37,
     "presses": [
       "8# GTX-500T"
     ]
@@ -1000,8 +1009,8 @@
   {
     "partNo": "TM-860A-1",
     "partName": "OUTER",
-    "totalGoodQuantity": 276406,
-    "runs": 58,
+    "totalGoodQuantity": 278421,
+    "runs": 59,
     "presses": [
       "8# GTX-500T"
     ]
@@ -1227,8 +1236,8 @@
   {
     "partNo": "SB-070C-1",
     "partName": "HEAT SHIELD",
-    "totalGoodQuantity": 74099,
-    "runs": 70,
+    "totalGoodQuantity": 76055,
+    "runs": 72,
     "presses": [
       "9# OCP-110T"
     ]
@@ -1348,8 +1357,8 @@
   {
     "partNo": "NMS/BRU30892",
     "partName": "Metal Cover 8 WAY",
-    "totalGoodQuantity": 11634,
-    "runs": 17,
+    "totalGoodQuantity": 14133,
+    "runs": 19,
     "presses": [
       "10# OCP-260 T",
       "11# 200T",
@@ -1359,8 +1368,8 @@
   {
     "partNo": "NMS/BRU30893",
     "partName": "Metal Cover 10 WAY",
-    "totalGoodQuantity": 6772,
-    "runs": 8,
+    "totalGoodQuantity": 7382,
+    "runs": 9,
     "presses": [
       "10# OCP-260 T",
       "11# 200T"
@@ -1389,8 +1398,8 @@
   {
     "partNo": "BRU53718",
     "partName": "Cover EZ100 450mm 12w",
-    "totalGoodQuantity": 7409,
-    "runs": 15,
+    "totalGoodQuantity": 8436,
+    "runs": 17,
     "presses": [
       "10# OCP-260 T",
       "11# 200T",
@@ -1400,8 +1409,8 @@
   {
     "partNo": "BRU53715",
     "partName": "U BOX 600mm",
-    "totalGoodQuantity": 27829,
-    "runs": 54,
+    "totalGoodQuantity": 27854,
+    "runs": 55,
     "presses": [
       "10# OCP-260 T",
       "12# 200T"
@@ -1496,8 +1505,8 @@
   {
     "partNo": "BRU53720",
     "partName": "Cover EZ100 600mm 24w",
-    "totalGoodQuantity": 11126,
-    "runs": 24,
+    "totalGoodQuantity": 11426,
+    "runs": 25,
     "presses": [
       "10# OCP-260 T",
       "11# 200T",
@@ -1637,8 +1646,8 @@
   {
     "partNo": "BRU53744",
     "partName": "Door 600mm",
-    "totalGoodQuantity": 10667,
-    "runs": 26,
+    "totalGoodQuantity": 11417,
+    "runs": 27,
     "presses": [
       "10# OCP-260 T",
       "11# 200T",
@@ -1669,8 +1678,8 @@
   {
     "partNo": "BRU53743",
     "partName": "Door 450mm",
-    "totalGoodQuantity": 11325,
-    "runs": 26,
+    "totalGoodQuantity": 11526,
+    "runs": 27,
     "presses": [
       "10# OCP-260 T",
       "11# 200T",
@@ -1808,6 +1817,15 @@
     "partNo": "BRU53746",
     "partName": "Cover LUG250 900mm 48w",
     "totalGoodQuantity": 30,
+    "runs": 1,
+    "presses": [
+      "12# 200T"
+    ]
+  },
+  {
+    "partNo": "PDB DBS30-8-U",
+    "partName": "METAL BOX WH CSL",
+    "totalGoodQuantity": 400,
     "runs": 1,
     "presses": [
       "12# 200T"
