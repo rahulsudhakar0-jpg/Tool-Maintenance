@@ -186,8 +186,8 @@
   {
     "partNo": "10383179",
     "partName": "UPPER HOUSING",
-    "totalGoodQuantity": 16113,
-    "runs": 18,
+    "totalGoodQuantity": 19217,
+    "runs": 19,
     "presses": [
       "7# GTX-300T",
       "8# GTX-500T"
@@ -214,8 +214,8 @@
   {
     "partNo": "48187058",
     "partName": "CRADLE",
-    "totalGoodQuantity": 1836982,
-    "runs": 181,
+    "totalGoodQuantity": 1860431,
+    "runs": 183,
     "presses": [
       "4# SN1-110T"
     ]
@@ -242,8 +242,8 @@
   {
     "partNo": "48187088",
     "partName": "MECHSIDE L",
-    "totalGoodQuantity": 888091,
-    "runs": 86,
+    "totalGoodQuantity": 900097,
+    "runs": 88,
     "presses": [
       "6# STD-150T"
     ]
@@ -251,8 +251,8 @@
   {
     "partNo": "48187089",
     "partName": "MECHSIDE R",
-    "totalGoodQuantity": 888041,
-    "runs": 87,
+    "totalGoodQuantity": 900047,
+    "runs": 89,
     "presses": [
       "6# STD-150T"
     ]
@@ -296,8 +296,8 @@
   {
     "partNo": "51207070",
     "partName": "BIMETAL (137)",
-    "totalGoodQuantity": 32801154,
-    "runs": 403,
+    "totalGoodQuantity": 33012412,
+    "runs": 405,
     "presses": [
       "3# OCP-110T",
       "5# OCP-110T"
@@ -388,8 +388,8 @@
   {
     "partNo": "W113893530111",
     "partName": "ARC PLATE GV2",
-    "totalGoodQuantity": 55683402,
-    "runs": 237,
+    "totalGoodQuantity": 56274924,
+    "runs": 239,
     "presses": [
       "1# OCP-80T",
       "2# MHS-80T",
@@ -418,8 +418,8 @@
   {
     "partNo": "48187097AA",
     "partName": "Medium Arc Platel",
-    "totalGoodQuantity": 3233945,
-    "runs": 49,
+    "totalGoodQuantity": 3367880,
+    "runs": 51,
     "presses": [
       "1# OCP-80T",
       "4# SN1-110T",
@@ -551,8 +551,8 @@
   {
     "partNo": "W113791670114",
     "partName": "SORTIE BOBINE BORNE A2",
-    "totalGoodQuantity": 1045671,
-    "runs": 65,
+    "totalGoodQuantity": 1098949,
+    "runs": 67,
     "presses": [
       "3# OCP-110T",
       "5# OCP-110T"
@@ -842,8 +842,8 @@
   {
     "partNo": "SB-087A-1",
     "partName": "OUTER",
-    "totalGoodQuantity": 29665,
-    "runs": 11,
+    "totalGoodQuantity": 40425,
+    "runs": 13,
     "presses": [
       "7# GTX-300T"
     ]
@@ -1000,8 +1000,8 @@
   {
     "partNo": "TM-771A-1",
     "partName": "OUTER",
-    "totalGoodQuantity": 211341,
-    "runs": 37,
+    "totalGoodQuantity": 216806,
+    "runs": 38,
     "presses": [
       "8# GTX-500T"
     ]
@@ -1236,8 +1236,8 @@
   {
     "partNo": "SB-070C-1",
     "partName": "HEAT SHIELD",
-    "totalGoodQuantity": 76055,
-    "runs": 72,
+    "totalGoodQuantity": 79927,
+    "runs": 74,
     "presses": [
       "9# OCP-110T"
     ]
@@ -1368,8 +1368,8 @@
   {
     "partNo": "NMS/BRU30893",
     "partName": "Metal Cover 10 WAY",
-    "totalGoodQuantity": 7382,
-    "runs": 9,
+    "totalGoodQuantity": 7768,
+    "runs": 10,
     "presses": [
       "10# OCP-260 T",
       "11# 200T"
@@ -1378,8 +1378,8 @@
   {
     "partNo": "NMS/BRU30894",
     "partName": "METAL COVER 14WAY",
-    "totalGoodQuantity": 3557,
-    "runs": 7,
+    "totalGoodQuantity": 5556,
+    "runs": 9,
     "presses": [
       "10# OCP-260 T",
       "11# 200T"
@@ -1398,8 +1398,8 @@
   {
     "partNo": "BRU53718",
     "partName": "Cover EZ100 450mm 12w",
-    "totalGoodQuantity": 8436,
-    "runs": 17,
+    "totalGoodQuantity": 9011,
+    "runs": 18,
     "presses": [
       "10# OCP-260 T",
       "11# 200T",
@@ -1505,8 +1505,8 @@
   {
     "partNo": "BRU53720",
     "partName": "Cover EZ100 600mm 24w",
-    "totalGoodQuantity": 11426,
-    "runs": 25,
+    "totalGoodQuantity": 12323,
+    "runs": 27,
     "presses": [
       "10# OCP-260 T",
       "11# 200T",
@@ -1538,8 +1538,8 @@
   {
     "partNo": "BRU53727",
     "partName": "Cover LUG100 600mm 30w",
-    "totalGoodQuantity": 916,
-    "runs": 8,
+    "totalGoodQuantity": 1166,
+    "runs": 9,
     "presses": [
       "10# OCP-260 T",
       "11# 200T",
@@ -1646,8 +1646,8 @@
   {
     "partNo": "BRU53744",
     "partName": "Door 600mm",
-    "totalGoodQuantity": 11417,
-    "runs": 27,
+    "totalGoodQuantity": 14429,
+    "runs": 29,
     "presses": [
       "10# OCP-260 T",
       "11# 200T",
