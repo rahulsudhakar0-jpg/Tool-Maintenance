@@ -2,7 +2,7 @@
  * Tool Maintenance Web Application - Consolidated Multi-Year Dataset (2024, 2025, 2026)
  * Total Tools: 253
  * Stroke values linked to Column AD 'Good quantity' sum from OEE Production Logs
- * Daily Synchronized: 2026-10-11T00:05:05.986Z
+ * Daily Synchronized: 2026-10-12T00:06:05.064Z
  */
 
 var INITIAL_DATA = {
@@ -17,8 +17,8 @@ var INITIAL_DATA = {
         "consolidatedFile": "unified_tools_2024_2025_2026.csv",
         "primarySheetSource": "JRTL Tooling Lists 2024, 2025, 2026 (Google Sheets)",
         "strokeDataSource": "OEE-2026 (Col AD Good Quantity Sum across 13 Press Logs)",
-        "lastUpdated": "2026-10-11T00:05:05.986Z",
-        "lastOeeSync": "2026-10-11T00:05:05.986Z",
+        "lastUpdated": "2026-10-12T00:06:05.064Z",
+        "lastOeeSync": "2026-10-12T00:06:05.064Z",
         "lastJinrongSync": "2026-10-07T12:30:03.898Z",
         "totalJinrongLinked": 123,
         "jinrongSourceFile": "Tool Shot Tempalte-Jinrong CH-TH(9).xlsx (Gid: 767889023)"
