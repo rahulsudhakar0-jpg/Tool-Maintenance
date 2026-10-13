@@ -167,8 +167,8 @@
   {
     "partNo": "10383172",
     "partName": "UPPER HOUSING",
-    "totalGoodQuantity": 24126,
-    "runs": 26,
+    "totalGoodQuantity": 26315,
+    "runs": 27,
     "presses": [
       "7# GTX-300T",
       "8# GTX-500T"
@@ -186,8 +186,8 @@
   {
     "partNo": "10383179",
     "partName": "UPPER HOUSING",
-    "totalGoodQuantity": 19217,
-    "runs": 19,
+    "totalGoodQuantity": 23239,
+    "runs": 23,
     "presses": [
       "7# GTX-300T",
       "8# GTX-500T"
@@ -214,8 +214,8 @@
   {
     "partNo": "48187058",
     "partName": "CRADLE",
-    "totalGoodQuantity": 1860431,
-    "runs": 183,
+    "totalGoodQuantity": 1890984,
+    "runs": 186,
     "presses": [
       "4# SN1-110T"
     ]
@@ -242,8 +242,8 @@
   {
     "partNo": "48187088",
     "partName": "MECHSIDE L",
-    "totalGoodQuantity": 900097,
-    "runs": 88,
+    "totalGoodQuantity": 929955,
+    "runs": 91,
     "presses": [
       "6# STD-150T"
     ]
@@ -251,8 +251,8 @@
   {
     "partNo": "48187089",
     "partName": "MECHSIDE R",
-    "totalGoodQuantity": 900047,
-    "runs": 89,
+    "totalGoodQuantity": 929905,
+    "runs": 92,
     "presses": [
       "6# STD-150T"
     ]
@@ -296,8 +296,8 @@
   {
     "partNo": "51207070",
     "partName": "BIMETAL (137)",
-    "totalGoodQuantity": 33012412,
-    "runs": 405,
+    "totalGoodQuantity": 33240674,
+    "runs": 408,
     "presses": [
       "3# OCP-110T",
       "5# OCP-110T"
@@ -388,8 +388,8 @@
   {
     "partNo": "W113893530111",
     "partName": "ARC PLATE GV2",
-    "totalGoodQuantity": 56274924,
-    "runs": 239,
+    "totalGoodQuantity": 56841918,
+    "runs": 241,
     "presses": [
       "1# OCP-80T",
       "2# MHS-80T",
@@ -418,8 +418,8 @@
   {
     "partNo": "48187097AA",
     "partName": "Medium Arc Platel",
-    "totalGoodQuantity": 3367880,
-    "runs": 51,
+    "totalGoodQuantity": 3509764,
+    "runs": 53,
     "presses": [
       "1# OCP-80T",
       "4# SN1-110T",
@@ -551,8 +551,8 @@
   {
     "partNo": "W113791670114",
     "partName": "SORTIE BOBINE BORNE A2",
-    "totalGoodQuantity": 1098949,
-    "runs": 67,
+    "totalGoodQuantity": 1137741,
+    "runs": 70,
     "presses": [
       "3# OCP-110T",
       "5# OCP-110T"
@@ -1045,8 +1045,8 @@
   {
     "partNo": "SB-092B-1-1",
     "partName": "ACTIVE BRACKET UPPER",
-    "totalGoodQuantity": 33638,
-    "runs": 57,
+    "totalGoodQuantity": 34757,
+    "runs": 58,
     "presses": [
       "8# GTX-500T",
       "10# OCP-260 T",
@@ -1218,8 +1218,8 @@
   {
     "partNo": "5036755-AA",
     "partName": "RETAINER RING ASSEMBLY",
-    "totalGoodQuantity": 33923,
-    "runs": 51,
+    "totalGoodQuantity": 35429,
+    "runs": 53,
     "presses": [
       "9# OCP-110T"
     ]
@@ -1277,8 +1277,8 @@
   {
     "partNo": "NVE96549",
     "partName": "Resi Box Bracket",
-    "totalGoodQuantity": 101588,
-    "runs": 73,
+    "totalGoodQuantity": 105904,
+    "runs": 76,
     "presses": [
       "9# OCP-110T",
       "10# OCP-260 T",
@@ -1326,8 +1326,8 @@
   {
     "partNo": "NMS/BRU30891",
     "partName": "METAL COVER 6 WAY",
-    "totalGoodQuantity": 16317,
-    "runs": 23,
+    "totalGoodQuantity": 18707,
+    "runs": 25,
     "presses": [
       "10# OCP-260 T",
       "11# 200T",
@@ -1337,8 +1337,8 @@
   {
     "partNo": "NMS/BRU30890",
     "partName": "METAL COVER 4 WAY",
-    "totalGoodQuantity": 23174,
-    "runs": 24,
+    "totalGoodQuantity": 24871,
+    "runs": 25,
     "presses": [
       "10# OCP-260 T",
       "11# 200T",
@@ -1419,8 +1419,8 @@
   {
     "partNo": "BRU53719",
     "partName": "Cover EZ100 600mm 18w",
-    "totalGoodQuantity": 9533,
-    "runs": 15,
+    "totalGoodQuantity": 9700,
+    "runs": 17,
     "presses": [
       "10# OCP-260 T",
       "11# 200T",
@@ -1538,8 +1538,8 @@
   {
     "partNo": "BRU53727",
     "partName": "Cover LUG100 600mm 30w",
-    "totalGoodQuantity": 1166,
-    "runs": 9,
+    "totalGoodQuantity": 1804,
+    "runs": 11,
     "presses": [
       "10# OCP-260 T",
       "11# 200T",
@@ -1646,8 +1646,8 @@
   {
     "partNo": "BRU53744",
     "partName": "Door 600mm",
-    "totalGoodQuantity": 14429,
-    "runs": 29,
+    "totalGoodQuantity": 15137,
+    "runs": 30,
     "presses": [
       "10# OCP-260 T",
       "11# 200T",
