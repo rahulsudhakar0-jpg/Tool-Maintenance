@@ -156,8 +156,8 @@
   {
     "partNo": "10383086",
     "partName": "LOWER SHEET METAL ASSEMBLY",
-    "totalGoodQuantity": 34025,
-    "runs": 25,
+    "totalGoodQuantity": 34134,
+    "runs": 26,
     "presses": [
       "7# GTX-300T",
       "9# OCP-110T",
@@ -186,8 +186,8 @@
   {
     "partNo": "10383179",
     "partName": "UPPER HOUSING",
-    "totalGoodQuantity": 23239,
-    "runs": 23,
+    "totalGoodQuantity": 25281,
+    "runs": 25,
     "presses": [
       "7# GTX-300T",
       "8# GTX-500T"
@@ -214,8 +214,8 @@
   {
     "partNo": "48187058",
     "partName": "CRADLE",
-    "totalGoodQuantity": 1890984,
-    "runs": 186,
+    "totalGoodQuantity": 1913738,
+    "runs": 188,
     "presses": [
       "4# SN1-110T"
     ]
@@ -242,8 +242,8 @@
   {
     "partNo": "48187088",
     "partName": "MECHSIDE L",
-    "totalGoodQuantity": 929955,
-    "runs": 91,
+    "totalGoodQuantity": 943059,
+    "runs": 92,
     "presses": [
       "6# STD-150T"
     ]
@@ -251,8 +251,8 @@
   {
     "partNo": "48187089",
     "partName": "MECHSIDE R",
-    "totalGoodQuantity": 929905,
-    "runs": 92,
+    "totalGoodQuantity": 943009,
+    "runs": 93,
     "presses": [
       "6# STD-150T"
     ]
@@ -296,8 +296,8 @@
   {
     "partNo": "51207070",
     "partName": "BIMETAL (137)",
-    "totalGoodQuantity": 33240674,
-    "runs": 408,
+    "totalGoodQuantity": 33320046,
+    "runs": 410,
     "presses": [
       "3# OCP-110T",
       "5# OCP-110T"
@@ -377,8 +377,8 @@
   {
     "partNo": "75170162",
     "partName": "LC 600 Flat Door",
-    "totalGoodQuantity": 16893,
-    "runs": 23,
+    "totalGoodQuantity": 17103,
+    "runs": 24,
     "presses": [
       "10# OCP-260 T",
       "11# 200T",
@@ -388,8 +388,8 @@
   {
     "partNo": "W113893530111",
     "partName": "ARC PLATE GV2",
-    "totalGoodQuantity": 56841918,
-    "runs": 241,
+    "totalGoodQuantity": 57366098,
+    "runs": 243,
     "presses": [
       "1# OCP-80T",
       "2# MHS-80T",
@@ -418,8 +418,8 @@
   {
     "partNo": "48187097AA",
     "partName": "Medium Arc Platel",
-    "totalGoodQuantity": 3509764,
-    "runs": 53,
+    "totalGoodQuantity": 3613900,
+    "runs": 55,
     "presses": [
       "1# OCP-80T",
       "4# SN1-110T",
@@ -551,8 +551,8 @@
   {
     "partNo": "W113791670114",
     "partName": "SORTIE BOBINE BORNE A2",
-    "totalGoodQuantity": 1137741,
-    "runs": 70,
+    "totalGoodQuantity": 1174677,
+    "runs": 72,
     "presses": [
       "3# OCP-110T",
       "5# OCP-110T"
@@ -711,8 +711,8 @@
   {
     "partNo": "48187062AA",
     "partName": "Secondary Latch",
-    "totalGoodQuantity": 281722,
-    "runs": 14,
+    "totalGoodQuantity": 297340,
+    "runs": 15,
     "presses": [
       "6# STD-150T"
     ]
@@ -863,8 +863,8 @@
   {
     "partNo": "NMS/BRU30889",
     "partName": "Metal Box 14 WAY",
-    "totalGoodQuantity": 20337,
-    "runs": 33,
+    "totalGoodQuantity": 21262,
+    "runs": 34,
     "presses": [
       "7# GTX-300T",
       "10# OCP-260 T",
@@ -1009,8 +1009,8 @@
   {
     "partNo": "TM-860A-1",
     "partName": "OUTER",
-    "totalGoodQuantity": 278421,
-    "runs": 59,
+    "totalGoodQuantity": 292446,
+    "runs": 61,
     "presses": [
       "8# GTX-500T"
     ]
@@ -1045,8 +1045,8 @@
   {
     "partNo": "SB-092B-1-1",
     "partName": "ACTIVE BRACKET UPPER",
-    "totalGoodQuantity": 34757,
-    "runs": 58,
+    "totalGoodQuantity": 35703,
+    "runs": 59,
     "presses": [
       "8# GTX-500T",
       "10# OCP-260 T",
@@ -1218,8 +1218,8 @@
   {
     "partNo": "5036755-AA",
     "partName": "RETAINER RING ASSEMBLY",
-    "totalGoodQuantity": 35429,
-    "runs": 53,
+    "totalGoodQuantity": 35874,
+    "runs": 54,
     "presses": [
       "9# OCP-110T"
     ]
@@ -1277,8 +1277,8 @@
   {
     "partNo": "NVE96549",
     "partName": "Resi Box Bracket",
-    "totalGoodQuantity": 105904,
-    "runs": 76,
+    "totalGoodQuantity": 117603,
+    "runs": 81,
     "presses": [
       "9# OCP-110T",
       "10# OCP-260 T",
@@ -1337,8 +1337,8 @@
   {
     "partNo": "NMS/BRU30890",
     "partName": "METAL COVER 4 WAY",
-    "totalGoodQuantity": 24871,
-    "runs": 25,
+    "totalGoodQuantity": 25169,
+    "runs": 26,
     "presses": [
       "10# OCP-260 T",
       "11# 200T",
@@ -1505,8 +1505,8 @@
   {
     "partNo": "BRU53720",
     "partName": "Cover EZ100 600mm 24w",
-    "totalGoodQuantity": 12323,
-    "runs": 27,
+    "totalGoodQuantity": 13434,
+    "runs": 28,
     "presses": [
       "10# OCP-260 T",
       "11# 200T",
@@ -1538,8 +1538,8 @@
   {
     "partNo": "BRU53727",
     "partName": "Cover LUG100 600mm 30w",
-    "totalGoodQuantity": 1804,
-    "runs": 11,
+    "totalGoodQuantity": 2223,
+    "runs": 13,
     "presses": [
       "10# OCP-260 T",
       "11# 200T",
@@ -1617,8 +1617,8 @@
   {
     "partNo": "BRU53740",
     "partName": "Cover LUG250 600mm 24w",
-    "totalGoodQuantity": 858,
-    "runs": 1,
+    "totalGoodQuantity": 1308,
+    "runs": 4,
     "presses": [
       "10# OCP-260 T"
     ]
