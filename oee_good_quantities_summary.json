@@ -2,29 +2,21 @@
   {
     "partNo": "1112163",
     "partName": "CG TIE BAR 92295",
-    "totalGoodQuantity": 33171,
-    "runs": 6,
+    "totalGoodQuantity": 46283,
+    "runs": 7,
     "presses": [
+      "3# OCP-110T",
       "6# STD-150T"
     ]
   },
   {
     "partNo": "1118183",
     "partName": "CG TIE BAR",
-    "totalGoodQuantity": 26356,
-    "runs": 3,
+    "totalGoodQuantity": 32880,
+    "runs": 4,
     "presses": [
       "3# OCP-110T",
       "4# SN1-110T"
-    ]
-  },
-  {
-    "partNo": "1121416",
-    "partName": "CG BASE",
-    "totalGoodQuantity": 100,
-    "runs": 1,
-    "presses": [
-      "8# GTX-500T"
     ]
   },
   {
@@ -103,8 +95,8 @@
   {
     "partNo": "1191827",
     "partName": "CG BASE",
-    "totalGoodQuantity": 36175,
-    "runs": 10,
+    "totalGoodQuantity": 44535,
+    "runs": 12,
     "presses": [
       "8# GTX-500T"
     ]
@@ -112,8 +104,8 @@
   {
     "partNo": "5038515",
     "partName": "CJ UPPER STAY FR, LH",
-    "totalGoodQuantity": 7072,
-    "runs": 3,
+    "totalGoodQuantity": 8328,
+    "runs": 5,
     "presses": [
       "8# GTX-500T"
     ]
@@ -157,8 +149,8 @@
   {
     "partNo": "10383086",
     "partName": "LOWER SHEET METAL ASSEMBLY",
-    "totalGoodQuantity": 39062,
-    "runs": 29,
+    "totalGoodQuantity": 41928,
+    "runs": 30,
     "presses": [
       "7# GTX-300T",
       "9# OCP-110T",
@@ -168,11 +160,10 @@
   {
     "partNo": "10383172",
     "partName": "UPPER HOUSING",
-    "totalGoodQuantity": 28497,
-    "runs": 30,
+    "totalGoodQuantity": 13670,
+    "runs": 21,
     "presses": [
-      "7# GTX-300T",
-      "8# GTX-500T"
+      "7# GTX-300T"
     ]
   },
   {
@@ -187,8 +178,8 @@
   {
     "partNo": "10383179",
     "partName": "UPPER HOUSING",
-    "totalGoodQuantity": 26410,
-    "runs": 26,
+    "totalGoodQuantity": 15786,
+    "runs": 20,
     "presses": [
       "7# GTX-300T",
       "8# GTX-500T"
@@ -215,8 +206,8 @@
   {
     "partNo": "48187058",
     "partName": "CRADLE",
-    "totalGoodQuantity": 1965105,
-    "runs": 193,
+    "totalGoodQuantity": 1988182,
+    "runs": 195,
     "presses": [
       "4# SN1-110T"
     ]
@@ -234,8 +225,8 @@
   {
     "partNo": "48187061",
     "partName": "PRIMARY LATCH",
-    "totalGoodQuantity": 753573,
-    "runs": 33,
+    "totalGoodQuantity": 812065,
+    "runs": 35,
     "presses": [
       "5# OCP-110T"
     ]
@@ -243,8 +234,8 @@
   {
     "partNo": "48187088",
     "partName": "MECHSIDE L",
-    "totalGoodQuantity": 962270,
-    "runs": 93,
+    "totalGoodQuantity": 993773,
+    "runs": 95,
     "presses": [
       "6# STD-150T"
     ]
@@ -252,8 +243,8 @@
   {
     "partNo": "48187089",
     "partName": "MECHSIDE R",
-    "totalGoodQuantity": 962220,
-    "runs": 94,
+    "totalGoodQuantity": 993723,
+    "runs": 96,
     "presses": [
       "6# STD-150T"
     ]
@@ -307,8 +298,8 @@
   {
     "partNo": "51207117",
     "partName": "ARC PLATE  (14)",
-    "totalGoodQuantity": 43098001,
-    "runs": 57,
+    "totalGoodQuantity": 43944261,
+    "runs": 58,
     "presses": [
       "2# MHS-80T"
     ]
@@ -389,8 +380,8 @@
   {
     "partNo": "W113893530111",
     "partName": "ARC PLATE GV2",
-    "totalGoodQuantity": 58721525,
-    "runs": 249,
+    "totalGoodQuantity": 58858917,
+    "runs": 250,
     "presses": [
       "1# OCP-80T",
       "2# MHS-80T",
@@ -863,8 +854,8 @@
   {
     "partNo": "NMS/BRU30888",
     "partName": "Metal Box8-10WAY",
-    "totalGoodQuantity": 50472,
-    "runs": 74,
+    "totalGoodQuantity": 51557,
+    "runs": 75,
     "presses": [
       "7# GTX-300T",
       "10# OCP-260 T",
@@ -875,8 +866,8 @@
   {
     "partNo": "NMS/BRU30889",
     "partName": "Metal Box 14 WAY",
-    "totalGoodQuantity": 21262,
-    "runs": 34,
+    "totalGoodQuantity": 21904,
+    "runs": 37,
     "presses": [
       "7# GTX-300T",
       "10# OCP-260 T",
@@ -932,8 +923,8 @@
   {
     "partNo": "1186603-AA",
     "partName": "AH BUCKLE BRACKET",
-    "totalGoodQuantity": 7404,
-    "runs": 7,
+    "totalGoodQuantity": 10536,
+    "runs": 8,
     "presses": [
       "7# GTX-300T"
     ]
@@ -950,8 +941,8 @@
   {
     "partNo": "BRU53717",
     "partName": "Gland plate",
-    "totalGoodQuantity": 163301,
-    "runs": 125,
+    "totalGoodQuantity": 174097,
+    "runs": 129,
     "presses": [
       "7# GTX-300T",
       "8# GTX-500T",
@@ -978,17 +969,6 @@
     "runs": 2,
     "presses": [
       "8# GTX-500T"
-    ]
-  },
-  {
-    "partNo": "SB-068C-1-1",
-    "partName": "BRACKET",
-    "totalGoodQuantity": 38097,
-    "runs": 33,
-    "presses": [
-      "8# GTX-500T",
-      "10# OCP-260 T",
-      "11# 200T"
     ]
   },
   {
@@ -1057,8 +1037,8 @@
   {
     "partNo": "SB-092B-1-1",
     "partName": "ACTIVE BRACKET UPPER",
-    "totalGoodQuantity": 34550,
-    "runs": 57,
+    "totalGoodQuantity": 37778,
+    "runs": 61,
     "presses": [
       "8# GTX-500T",
       "10# OCP-260 T",
@@ -1219,15 +1199,6 @@
     ]
   },
   {
-    "partNo": "5038515-AA",
-    "partName": "CJ UPPER STAY FR,RH",
-    "totalGoodQuantity": 1256,
-    "runs": 2,
-    "presses": [
-      "8# GTX-500T"
-    ]
-  },
-  {
     "partNo": "5036755-AA",
     "partName": "RETAINER RING ASSEMBLY",
     "totalGoodQuantity": 37221,
@@ -1237,19 +1208,10 @@
     ]
   },
   {
-    "partNo": "SB-070B-1",
-    "partName": "HEAT SHIELD",
-    "totalGoodQuantity": 6204,
-    "runs": 16,
-    "presses": [
-      "9# OCP-110T"
-    ]
-  },
-  {
     "partNo": "SB-070C-1",
     "partName": "HEAT SHIELD",
-    "totalGoodQuantity": 79927,
-    "runs": 74,
+    "totalGoodQuantity": 86131,
+    "runs": 90,
     "presses": [
       "9# OCP-110T"
     ]
@@ -1289,8 +1251,8 @@
   {
     "partNo": "NVE96549",
     "partName": "Resi Box Bracket",
-    "totalGoodQuantity": 126440,
-    "runs": 83,
+    "totalGoodQuantity": 128638,
+    "runs": 87,
     "presses": [
       "9# OCP-110T",
       "10# OCP-260 T",
@@ -1315,6 +1277,16 @@
     "runs": 4,
     "presses": [
       "10# OCP-260 T"
+    ]
+  },
+  {
+    "partNo": "SB-068C-1-1",
+    "partName": "BRACKET",
+    "totalGoodQuantity": 21046,
+    "runs": 22,
+    "presses": [
+      "10# OCP-260 T",
+      "11# 200T"
     ]
   },
   {
