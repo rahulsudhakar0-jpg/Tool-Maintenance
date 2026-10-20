@@ -2,8 +2,8 @@
   {
     "partNo": "1112163",
     "partName": "CG TIE BAR 92295",
-    "totalGoodQuantity": 46283,
-    "runs": 7,
+    "totalGoodQuantity": 52545,
+    "runs": 8,
     "presses": [
       "3# OCP-110T",
       "6# STD-150T"
@@ -41,8 +41,8 @@
   {
     "partNo": "1185579",
     "partName": "Retainer side plate R",
-    "totalGoodQuantity": 6577,
-    "runs": 5,
+    "totalGoodQuantity": 8186,
+    "runs": 6,
     "presses": [
       "8# GTX-500T"
     ]
@@ -50,8 +50,8 @@
   {
     "partNo": "1185580",
     "partName": "Retainer side plate L",
-    "totalGoodQuantity": 6577,
-    "runs": 5,
+    "totalGoodQuantity": 8286,
+    "runs": 6,
     "presses": [
       "8# GTX-500T"
     ]
@@ -149,8 +149,8 @@
   {
     "partNo": "10383086",
     "partName": "LOWER SHEET METAL ASSEMBLY",
-    "totalGoodQuantity": 41928,
-    "runs": 30,
+    "totalGoodQuantity": 43029,
+    "runs": 32,
     "presses": [
       "7# GTX-300T",
       "9# OCP-110T",
@@ -160,10 +160,11 @@
   {
     "partNo": "10383172",
     "partName": "UPPER HOUSING",
-    "totalGoodQuantity": 13670,
-    "runs": 21,
+    "totalGoodQuantity": 28497,
+    "runs": 30,
     "presses": [
-      "7# GTX-300T"
+      "7# GTX-300T",
+      "8# GTX-500T"
     ]
   },
   {
@@ -178,8 +179,8 @@
   {
     "partNo": "10383179",
     "partName": "UPPER HOUSING",
-    "totalGoodQuantity": 15786,
-    "runs": 20,
+    "totalGoodQuantity": 26410,
+    "runs": 26,
     "presses": [
       "7# GTX-300T",
       "8# GTX-500T"
@@ -206,8 +207,8 @@
   {
     "partNo": "48187058",
     "partName": "CRADLE",
-    "totalGoodQuantity": 1988182,
-    "runs": 195,
+    "totalGoodQuantity": 2022256,
+    "runs": 199,
     "presses": [
       "4# SN1-110T"
     ]
@@ -225,8 +226,8 @@
   {
     "partNo": "48187061",
     "partName": "PRIMARY LATCH",
-    "totalGoodQuantity": 812065,
-    "runs": 35,
+    "totalGoodQuantity": 863263,
+    "runs": 39,
     "presses": [
       "5# OCP-110T"
     ]
@@ -234,8 +235,8 @@
   {
     "partNo": "48187088",
     "partName": "MECHSIDE L",
-    "totalGoodQuantity": 993773,
-    "runs": 95,
+    "totalGoodQuantity": 1006839,
+    "runs": 97,
     "presses": [
       "6# STD-150T"
     ]
@@ -243,8 +244,8 @@
   {
     "partNo": "48187089",
     "partName": "MECHSIDE R",
-    "totalGoodQuantity": 993723,
-    "runs": 96,
+    "totalGoodQuantity": 1006789,
+    "runs": 98,
     "presses": [
       "6# STD-150T"
     ]
@@ -288,8 +289,8 @@
   {
     "partNo": "51207070",
     "partName": "BIMETAL (137)",
-    "totalGoodQuantity": 33779772,
-    "runs": 416,
+    "totalGoodQuantity": 33942618,
+    "runs": 419,
     "presses": [
       "3# OCP-110T",
       "5# OCP-110T"
@@ -298,8 +299,8 @@
   {
     "partNo": "51207117",
     "partName": "ARC PLATE  (14)",
-    "totalGoodQuantity": 43944261,
-    "runs": 58,
+    "totalGoodQuantity": 45569717,
+    "runs": 60,
     "presses": [
       "2# MHS-80T"
     ]
@@ -410,8 +411,8 @@
   {
     "partNo": "48187097AA",
     "partName": "Medium Arc Platel",
-    "totalGoodQuantity": 3669868,
-    "runs": 56,
+    "totalGoodQuantity": 3754657,
+    "runs": 58,
     "presses": [
       "1# OCP-80T",
       "4# SN1-110T",
@@ -854,8 +855,8 @@
   {
     "partNo": "NMS/BRU30888",
     "partName": "Metal Box8-10WAY",
-    "totalGoodQuantity": 51557,
-    "runs": 75,
+    "totalGoodQuantity": 56054,
+    "runs": 81,
     "presses": [
       "7# GTX-300T",
       "10# OCP-260 T",
@@ -866,8 +867,8 @@
   {
     "partNo": "NMS/BRU30889",
     "partName": "Metal Box 14 WAY",
-    "totalGoodQuantity": 21904,
-    "runs": 37,
+    "totalGoodQuantity": 27994,
+    "runs": 49,
     "presses": [
       "7# GTX-300T",
       "10# OCP-260 T",
@@ -941,8 +942,8 @@
   {
     "partNo": "BRU53717",
     "partName": "Gland plate",
-    "totalGoodQuantity": 174097,
-    "runs": 129,
+    "totalGoodQuantity": 177180,
+    "runs": 132,
     "presses": [
       "7# GTX-300T",
       "8# GTX-500T",
@@ -969,6 +970,17 @@
     "runs": 2,
     "presses": [
       "8# GTX-500T"
+    ]
+  },
+  {
+    "partNo": "SB-068C-1-1",
+    "partName": "BRACKET",
+    "totalGoodQuantity": 41709,
+    "runs": 35,
+    "presses": [
+      "8# GTX-500T",
+      "10# OCP-260 T",
+      "11# 200T"
     ]
   },
   {
@@ -1037,8 +1049,8 @@
   {
     "partNo": "SB-092B-1-1",
     "partName": "ACTIVE BRACKET UPPER",
-    "totalGoodQuantity": 37778,
-    "runs": 61,
+    "totalGoodQuantity": 41785,
+    "runs": 65,
     "presses": [
       "8# GTX-500T",
       "10# OCP-260 T",
@@ -1138,8 +1150,8 @@
   {
     "partNo": "SB-092B-1-2",
     "partName": "ACTIVE BRACKET LOWER",
-    "totalGoodQuantity": 6921,
-    "runs": 6,
+    "totalGoodQuantity": 9251,
+    "runs": 7,
     "presses": [
       "8# GTX-500T"
     ]
@@ -1240,8 +1252,8 @@
   {
     "partNo": "SB-042E-2-2",
     "partName": "Passive Bracket Assembly",
-    "totalGoodQuantity": 45187,
-    "runs": 50,
+    "totalGoodQuantity": 45607,
+    "runs": 51,
     "presses": [
       "9# OCP-110T",
       "11# 200T",
@@ -1277,16 +1289,6 @@
     "runs": 4,
     "presses": [
       "10# OCP-260 T"
-    ]
-  },
-  {
-    "partNo": "SB-068C-1-1",
-    "partName": "BRACKET",
-    "totalGoodQuantity": 21046,
-    "runs": 22,
-    "presses": [
-      "10# OCP-260 T",
-      "11# 200T"
     ]
   },
   {
@@ -1414,8 +1416,8 @@
   {
     "partNo": "BRU53716",
     "partName": "U BOX 750mm",
-    "totalGoodQuantity": 4117,
-    "runs": 17,
+    "totalGoodQuantity": 5678,
+    "runs": 19,
     "presses": [
       "10# OCP-260 T",
       "12# 200T"
@@ -1435,8 +1437,8 @@
   {
     "partNo": "BRU53747",
     "partName": "Door 750mm",
-    "totalGoodQuantity": 2667,
-    "runs": 9,
+    "totalGoodQuantity": 3688,
+    "runs": 11,
     "presses": [
       "10# OCP-260 T",
       "12# 200T"
