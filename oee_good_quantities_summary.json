@@ -113,8 +113,8 @@
   {
     "partNo": "5038517",
     "partName": "CJ UPPER STAY FR, RH",
-    "totalGoodQuantity": 2928,
-    "runs": 3,
+    "totalGoodQuantity": 10128,
+    "runs": 4,
     "presses": [
       "8# GTX-500T"
     ]
@@ -149,8 +149,8 @@
   {
     "partNo": "10383086",
     "partName": "LOWER SHEET METAL ASSEMBLY",
-    "totalGoodQuantity": 43029,
-    "runs": 32,
+    "totalGoodQuantity": 43057,
+    "runs": 33,
     "presses": [
       "7# GTX-300T",
       "9# OCP-110T",
@@ -207,8 +207,8 @@
   {
     "partNo": "48187058",
     "partName": "CRADLE",
-    "totalGoodQuantity": 2022256,
-    "runs": 199,
+    "totalGoodQuantity": 2040245,
+    "runs": 201,
     "presses": [
       "4# SN1-110T"
     ]
@@ -226,8 +226,8 @@
   {
     "partNo": "48187061",
     "partName": "PRIMARY LATCH",
-    "totalGoodQuantity": 863263,
-    "runs": 39,
+    "totalGoodQuantity": 882765,
+    "runs": 40,
     "presses": [
       "5# OCP-110T"
     ]
@@ -235,8 +235,8 @@
   {
     "partNo": "48187088",
     "partName": "MECHSIDE L",
-    "totalGoodQuantity": 1006839,
-    "runs": 97,
+    "totalGoodQuantity": 1012375,
+    "runs": 98,
     "presses": [
       "6# STD-150T"
     ]
@@ -244,8 +244,8 @@
   {
     "partNo": "48187089",
     "partName": "MECHSIDE R",
-    "totalGoodQuantity": 1006789,
-    "runs": 98,
+    "totalGoodQuantity": 1012325,
+    "runs": 99,
     "presses": [
       "6# STD-150T"
     ]
@@ -289,8 +289,8 @@
   {
     "partNo": "51207070",
     "partName": "BIMETAL (137)",
-    "totalGoodQuantity": 33942618,
-    "runs": 419,
+    "totalGoodQuantity": 34098312,
+    "runs": 421,
     "presses": [
       "3# OCP-110T",
       "5# OCP-110T"
@@ -299,8 +299,8 @@
   {
     "partNo": "51207117",
     "partName": "ARC PLATE  (14)",
-    "totalGoodQuantity": 45569717,
-    "runs": 60,
+    "totalGoodQuantity": 46668457,
+    "runs": 62,
     "presses": [
       "2# MHS-80T"
     ]
@@ -308,8 +308,8 @@
   {
     "partNo": "75170145",
     "partName": "LC 600 Box",
-    "totalGoodQuantity": 16561,
-    "runs": 40,
+    "totalGoodQuantity": 17542,
+    "runs": 42,
     "presses": [
       "10# OCP-260 T"
     ]
@@ -381,7 +381,7 @@
   {
     "partNo": "W113893530111",
     "partName": "ARC PLATE GV2",
-    "totalGoodQuantity": 58858917,
+    "totalGoodQuantity": 59316051,
     "runs": 250,
     "presses": [
       "1# OCP-80T",
@@ -411,8 +411,8 @@
   {
     "partNo": "48187097AA",
     "partName": "Medium Arc Platel",
-    "totalGoodQuantity": 3754657,
-    "runs": 58,
+    "totalGoodQuantity": 3758158,
+    "runs": 59,
     "presses": [
       "1# OCP-80T",
       "4# SN1-110T",
@@ -422,7 +422,7 @@
   {
     "partNo": "48187053AA",
     "partName": "High Arc Plate",
-    "totalGoodQuantity": 2887905,
+    "totalGoodQuantity": 2895293,
     "runs": 40,
     "presses": [
       "1# OCP-80T",
@@ -432,7 +432,7 @@
   {
     "partNo": "48187199AA",
     "partName": "Arc Stack Plate",
-    "totalGoodQuantity": 761778,
+    "totalGoodQuantity": 831524,
     "runs": 14,
     "presses": [
       "1# OCP-80T"
@@ -450,8 +450,8 @@
   {
     "partNo": "48187070AA",
     "partName": "Magnet Loop",
-    "totalGoodQuantity": 1255741,
-    "runs": 48,
+    "totalGoodQuantity": 1283915,
+    "runs": 49,
     "presses": [
       "1# OCP-80T"
     ]
@@ -478,7 +478,7 @@
   {
     "partNo": "51207042AA",
     "partName": "Input Connector",
-    "totalGoodQuantity": 1761557,
+    "totalGoodQuantity": 1775080,
     "runs": 27,
     "presses": [
       "2# MHS-80T"
@@ -487,7 +487,7 @@
   {
     "partNo": "S1B13952",
     "partName": "Output Connector Steel",
-    "totalGoodQuantity": 3379010,
+    "totalGoodQuantity": 3408915,
     "runs": 59,
     "presses": [
       "2# MHS-80T"
@@ -583,8 +583,8 @@
   {
     "partNo": "48187064AA",
     "partName": "YOKE",
-    "totalGoodQuantity": 2195163,
-    "runs": 80,
+    "totalGoodQuantity": 2197921,
+    "runs": 81,
     "presses": [
       "3# OCP-110T",
       "5# OCP-110T"
@@ -715,7 +715,7 @@
   {
     "partNo": "48187062AA",
     "partName": "Secondary Latch",
-    "totalGoodQuantity": 418582,
+    "totalGoodQuantity": 436610,
     "runs": 19,
     "presses": [
       "6# STD-150T"
@@ -778,8 +778,8 @@
   {
     "partNo": "TM-755A-1",
     "partName": "UPPER PLATE",
-    "totalGoodQuantity": 920412,
-    "runs": 197,
+    "totalGoodQuantity": 932663,
+    "runs": 199,
     "presses": [
       "7# GTX-300T",
       "9# OCP-110T",
@@ -942,8 +942,8 @@
   {
     "partNo": "BRU53717",
     "partName": "Gland plate",
-    "totalGoodQuantity": 177180,
-    "runs": 132,
+    "totalGoodQuantity": 178438,
+    "runs": 133,
     "presses": [
       "7# GTX-300T",
       "8# GTX-500T",
@@ -1252,8 +1252,8 @@
   {
     "partNo": "SB-042E-2-2",
     "partName": "Passive Bracket Assembly",
-    "totalGoodQuantity": 45607,
-    "runs": 51,
+    "totalGoodQuantity": 47454,
+    "runs": 53,
     "presses": [
       "9# OCP-110T",
       "11# 200T",
@@ -1384,8 +1384,8 @@
   {
     "partNo": "BRU53718",
     "partName": "Cover EZ100 450mm 12w",
-    "totalGoodQuantity": 9011,
-    "runs": 18,
+    "totalGoodQuantity": 10499,
+    "runs": 19,
     "presses": [
       "10# OCP-260 T",
       "11# 200T",
@@ -1416,8 +1416,8 @@
   {
     "partNo": "BRU53716",
     "partName": "U BOX 750mm",
-    "totalGoodQuantity": 5678,
-    "runs": 19,
+    "totalGoodQuantity": 6116,
+    "runs": 20,
     "presses": [
       "10# OCP-260 T",
       "12# 200T"
@@ -1437,8 +1437,8 @@
   {
     "partNo": "BRU53747",
     "partName": "Door 750mm",
-    "totalGoodQuantity": 3688,
-    "runs": 11,
+    "totalGoodQuantity": 4161,
+    "runs": 12,
     "presses": [
       "10# OCP-260 T",
       "12# 200T"
@@ -1564,17 +1564,18 @@
   {
     "partNo": "BRU53734",
     "partName": "Cover EZ250 750mm 30w",
-    "totalGoodQuantity": 183,
-    "runs": 2,
+    "totalGoodQuantity": 583,
+    "runs": 4,
     "presses": [
-      "10# OCP-260 T"
+      "10# OCP-260 T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "BRU53732",
     "partName": "Cover EZ250 750mm 24w",
-    "totalGoodQuantity": 235,
-    "runs": 4,
+    "totalGoodQuantity": 537,
+    "runs": 5,
     "presses": [
       "10# OCP-260 T",
       "12# 200T"
@@ -1698,8 +1699,8 @@
   {
     "partNo": "NVE96520",
     "partName": "BOX 2+6，6 WAY",
-    "totalGoodQuantity": 21014,
-    "runs": 18,
+    "totalGoodQuantity": 22593,
+    "runs": 20,
     "presses": [
       "10# OCP-260 T",
       "11# 200T",
