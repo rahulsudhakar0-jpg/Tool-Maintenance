@@ -149,8 +149,8 @@
   {
     "partNo": "10383086",
     "partName": "LOWER SHEET METAL ASSEMBLY",
-    "totalGoodQuantity": 43057,
-    "runs": 33,
+    "totalGoodQuantity": 43982,
+    "runs": 34,
     "presses": [
       "7# GTX-300T",
       "9# OCP-110T",
@@ -207,8 +207,8 @@
   {
     "partNo": "48187058",
     "partName": "CRADLE",
-    "totalGoodQuantity": 2040245,
-    "runs": 201,
+    "totalGoodQuantity": 2056743,
+    "runs": 203,
     "presses": [
       "4# SN1-110T"
     ]
@@ -235,8 +235,8 @@
   {
     "partNo": "48187088",
     "partName": "MECHSIDE L",
-    "totalGoodQuantity": 1012375,
-    "runs": 98,
+    "totalGoodQuantity": 1047234,
+    "runs": 100,
     "presses": [
       "6# STD-150T"
     ]
@@ -244,8 +244,8 @@
   {
     "partNo": "48187089",
     "partName": "MECHSIDE R",
-    "totalGoodQuantity": 1012325,
-    "runs": 99,
+    "totalGoodQuantity": 1047715,
+    "runs": 101,
     "presses": [
       "6# STD-150T"
     ]
@@ -289,8 +289,8 @@
   {
     "partNo": "51207070",
     "partName": "BIMETAL (137)",
-    "totalGoodQuantity": 34098312,
-    "runs": 421,
+    "totalGoodQuantity": 34240506,
+    "runs": 423,
     "presses": [
       "3# OCP-110T",
       "5# OCP-110T"
@@ -308,8 +308,8 @@
   {
     "partNo": "75170145",
     "partName": "LC 600 Box",
-    "totalGoodQuantity": 17542,
-    "runs": 42,
+    "totalGoodQuantity": 19560,
+    "runs": 44,
     "presses": [
       "10# OCP-260 T"
     ]
@@ -381,8 +381,8 @@
   {
     "partNo": "W113893530111",
     "partName": "ARC PLATE GV2",
-    "totalGoodQuantity": 59316051,
-    "runs": 250,
+    "totalGoodQuantity": 59573891,
+    "runs": 251,
     "presses": [
       "1# OCP-80T",
       "2# MHS-80T",
@@ -450,8 +450,8 @@
   {
     "partNo": "48187070AA",
     "partName": "Magnet Loop",
-    "totalGoodQuantity": 1283915,
-    "runs": 49,
+    "totalGoodQuantity": 1361391,
+    "runs": 51,
     "presses": [
       "1# OCP-80T"
     ]
@@ -534,8 +534,8 @@
   {
     "partNo": "W113791660114",
     "partName": "SORTIE BOBINE BORNE A1",
-    "totalGoodQuantity": 908658,
-    "runs": 53,
+    "totalGoodQuantity": 910158,
+    "runs": 54,
     "presses": [
       "3# OCP-110T",
       "5# OCP-110T"
@@ -583,8 +583,8 @@
   {
     "partNo": "48187064AA",
     "partName": "YOKE",
-    "totalGoodQuantity": 2197921,
-    "runs": 81,
+    "totalGoodQuantity": 2230017,
+    "runs": 83,
     "presses": [
       "3# OCP-110T",
       "5# OCP-110T"
@@ -778,8 +778,8 @@
   {
     "partNo": "TM-755A-1",
     "partName": "UPPER PLATE",
-    "totalGoodQuantity": 932663,
-    "runs": 199,
+    "totalGoodQuantity": 950487,
+    "runs": 201,
     "presses": [
       "7# GTX-300T",
       "9# OCP-110T",
@@ -1031,8 +1031,8 @@
   {
     "partNo": "TM-867A-1",
     "partName": "ACTUATOR CUP",
-    "totalGoodQuantity": 385556,
-    "runs": 73,
+    "totalGoodQuantity": 389956,
+    "runs": 74,
     "presses": [
       "8# GTX-500T"
     ]
@@ -1129,8 +1129,8 @@
   {
     "partNo": "TM-806A-1",
     "partName": "OUTER",
-    "totalGoodQuantity": 72449,
-    "runs": 22,
+    "totalGoodQuantity": 81055,
+    "runs": 24,
     "presses": [
       "8# GTX-500T"
     ]
@@ -1252,8 +1252,8 @@
   {
     "partNo": "SB-042E-2-2",
     "partName": "Passive Bracket Assembly",
-    "totalGoodQuantity": 47454,
-    "runs": 53,
+    "totalGoodQuantity": 48545,
+    "runs": 55,
     "presses": [
       "9# OCP-110T",
       "11# 200T",
@@ -1699,8 +1699,8 @@
   {
     "partNo": "NVE96520",
     "partName": "BOX 2+6，6 WAY",
-    "totalGoodQuantity": 22593,
-    "runs": 20,
+    "totalGoodQuantity": 31654,
+    "runs": 24,
     "presses": [
       "10# OCP-260 T",
       "11# 200T",
