@@ -207,8 +207,8 @@
   {
     "partNo": "48187058",
     "partName": "CRADLE",
-    "totalGoodQuantity": 2083958,
-    "runs": 205,
+    "totalGoodQuantity": 2114773,
+    "runs": 207,
     "presses": [
       "4# SN1-110T"
     ]
@@ -235,8 +235,8 @@
   {
     "partNo": "48187088",
     "partName": "MECHSIDE L",
-    "totalGoodQuantity": 1085469,
-    "runs": 102,
+    "totalGoodQuantity": 1112248,
+    "runs": 104,
     "presses": [
       "6# STD-150T"
     ]
@@ -244,8 +244,8 @@
   {
     "partNo": "48187089",
     "partName": "MECHSIDE R",
-    "totalGoodQuantity": 1085950,
-    "runs": 103,
+    "totalGoodQuantity": 1112729,
+    "runs": 105,
     "presses": [
       "6# STD-150T"
     ]
@@ -381,8 +381,8 @@
   {
     "partNo": "W113893530111",
     "partName": "ARC PLATE GV2",
-    "totalGoodQuantity": 60082641,
-    "runs": 253,
+    "totalGoodQuantity": 60625549,
+    "runs": 255,
     "presses": [
       "1# OCP-80T",
       "2# MHS-80T",
@@ -450,8 +450,8 @@
   {
     "partNo": "48187070AA",
     "partName": "Magnet Loop",
-    "totalGoodQuantity": 1365716,
-    "runs": 52,
+    "totalGoodQuantity": 1377992,
+    "runs": 53,
     "presses": [
       "1# OCP-80T"
     ]
@@ -534,8 +534,8 @@
   {
     "partNo": "W113791660114",
     "partName": "SORTIE BOBINE BORNE A1",
-    "totalGoodQuantity": 914810,
-    "runs": 55,
+    "totalGoodQuantity": 929030,
+    "runs": 56,
     "presses": [
       "3# OCP-110T",
       "5# OCP-110T"
@@ -583,8 +583,8 @@
   {
     "partNo": "48187064AA",
     "partName": "YOKE",
-    "totalGoodQuantity": 2277423,
-    "runs": 85,
+    "totalGoodQuantity": 2327695,
+    "runs": 86,
     "presses": [
       "3# OCP-110T",
       "5# OCP-110T"
@@ -798,8 +798,8 @@
   {
     "partNo": "5036775-AA",
     "partName": "Retainer Ring Assembly",
-    "totalGoodQuantity": 42340,
-    "runs": 20,
+    "totalGoodQuantity": 43551,
+    "runs": 21,
     "presses": [
       "7# GTX-300T"
     ]
@@ -807,8 +807,8 @@
   {
     "partNo": "2567476-AB",
     "partName": "CG BRACKET RH",
-    "totalGoodQuantity": 135709,
-    "runs": 33,
+    "totalGoodQuantity": 140932,
+    "runs": 34,
     "presses": [
       "7# GTX-300T"
     ]
@@ -986,8 +986,8 @@
   {
     "partNo": "TM-865A-1",
     "partName": "OUTER",
-    "totalGoodQuantity": 410228,
-    "runs": 98,
+    "totalGoodQuantity": 411833,
+    "runs": 99,
     "presses": [
       "8# GTX-500T"
     ]
@@ -1070,8 +1070,8 @@
   {
     "partNo": "1185581-AA",
     "partName": "RETIANER BRACKET R",
-    "totalGoodQuantity": 7997,
-    "runs": 6,
+    "totalGoodQuantity": 8767,
+    "runs": 7,
     "presses": [
       "8# GTX-500T"
     ]
@@ -1079,8 +1079,8 @@
   {
     "partNo": "1185582-AA",
     "partName": "RETIANER BRACKET L",
-    "totalGoodQuantity": 8001,
-    "runs": 6,
+    "totalGoodQuantity": 8771,
+    "runs": 7,
     "presses": [
       "8# GTX-500T"
     ]
@@ -1120,8 +1120,8 @@
   {
     "partNo": "TM-791A-1",
     "partName": "OUTER",
-    "totalGoodQuantity": 306159,
-    "runs": 28,
+    "totalGoodQuantity": 323753,
+    "runs": 30,
     "presses": [
       "8# GTX-500T"
     ]
@@ -1416,8 +1416,8 @@
   {
     "partNo": "BRU53716",
     "partName": "U BOX 750mm",
-    "totalGoodQuantity": 6840,
-    "runs": 22,
+    "totalGoodQuantity": 7747,
+    "runs": 24,
     "presses": [
       "10# OCP-260 T",
       "12# 200T"
@@ -1502,8 +1502,8 @@
   {
     "partNo": "QGH11468",
     "partName": "Resi Cover 4-Way",
-    "totalGoodQuantity": 32147,
-    "runs": 33,
+    "totalGoodQuantity": 36347,
+    "runs": 36,
     "presses": [
       "10# OCP-260 T",
       "11# 200T",
@@ -1634,8 +1634,8 @@
   {
     "partNo": "BRU53744",
     "partName": "Door 600mm",
-    "totalGoodQuantity": 15137,
-    "runs": 30,
+    "totalGoodQuantity": 16100,
+    "runs": 32,
     "presses": [
       "10# OCP-260 T",
       "11# 200T",
