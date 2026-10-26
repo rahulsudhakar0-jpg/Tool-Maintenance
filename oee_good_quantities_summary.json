@@ -12,11 +12,10 @@
   {
     "partNo": "1118183",
     "partName": "CG TIE BAR",
-    "totalGoodQuantity": 32880,
-    "runs": 4,
+    "totalGoodQuantity": 19007,
+    "runs": 2,
     "presses": [
-      "3# OCP-110T",
-      "4# SN1-110T"
+      "3# OCP-110T"
     ]
   },
   {
@@ -149,8 +148,8 @@
   {
     "partNo": "10383086",
     "partName": "LOWER SHEET METAL ASSEMBLY",
-    "totalGoodQuantity": 43982,
-    "runs": 34,
+    "totalGoodQuantity": 46444,
+    "runs": 38,
     "presses": [
       "7# GTX-300T",
       "9# OCP-110T",
@@ -205,21 +204,11 @@
     ]
   },
   {
-    "partNo": "48187058",
-    "partName": "CRADLE",
-    "totalGoodQuantity": 2134863,
-    "runs": 209,
-    "presses": [
-      "4# SN1-110T"
-    ]
-  },
-  {
     "partNo": "48187059",
     "partName": "Lower Link",
-    "totalGoodQuantity": 168688,
-    "runs": 7,
+    "totalGoodQuantity": 75877,
+    "runs": 4,
     "presses": [
-      "4# SN1-110T",
       "5# OCP-110T"
     ]
   },
@@ -317,8 +306,8 @@
   {
     "partNo": "75170148",
     "partName": "LC 600 Gland Plate",
-    "totalGoodQuantity": 83541,
-    "runs": 116,
+    "totalGoodQuantity": 88999,
+    "runs": 124,
     "presses": [
       "9# OCP-110T",
       "11# 200T",
@@ -348,23 +337,25 @@
   {
     "partNo": "75170154",
     "partName": "LC600 COVER",
-    "totalGoodQuantity": 23131,
-    "runs": 40,
+    "totalGoodQuantity": 28582,
+    "runs": 46,
     "presses": [
       "9# OCP-110T",
       "10# OCP-260 T",
-      "11# 200T"
+      "11# 200T",
+      "13# 110T"
     ]
   },
   {
     "partNo": "75170155",
     "partName": "LC600 COVER",
-    "totalGoodQuantity": 1395,
-    "runs": 9,
+    "totalGoodQuantity": 1594,
+    "runs": 11,
     "presses": [
       "9# OCP-110T",
       "11# 200T",
-      "12# 200T"
+      "12# 200T",
+      "13# 110T"
     ]
   },
   {
@@ -401,32 +392,29 @@
   {
     "partNo": "48187063AA",
     "partName": "Armature High Amp",
-    "totalGoodQuantity": 1234551,
-    "runs": 26,
+    "totalGoodQuantity": 625407,
+    "runs": 12,
     "presses": [
-      "1# OCP-80T",
-      "4# SN1-110T"
+      "1# OCP-80T"
     ]
   },
   {
     "partNo": "48187097AA",
     "partName": "Medium Arc Platel",
-    "totalGoodQuantity": 3758158,
-    "runs": 59,
+    "totalGoodQuantity": 3116306,
+    "runs": 50,
     "presses": [
       "1# OCP-80T",
-      "4# SN1-110T",
       "5# OCP-110T"
     ]
   },
   {
     "partNo": "48187053AA",
     "partName": "High Arc Plate",
-    "totalGoodQuantity": 2895293,
-    "runs": 40,
+    "totalGoodQuantity": 2418409,
+    "runs": 33,
     "presses": [
-      "1# OCP-80T",
-      "4# SN1-110T"
+      "1# OCP-80T"
     ]
   },
   {
@@ -523,11 +511,10 @@
   {
     "partNo": "5037028-AA",
     "partName": "ANTI-ROTATION CLIP",
-    "totalGoodQuantity": 196842,
-    "runs": 9,
+    "totalGoodQuantity": 42790,
+    "runs": 3,
     "presses": [
-      "3# OCP-110T",
-      "4# SN1-110T"
+      "3# OCP-110T"
     ]
   },
   {
@@ -602,11 +589,10 @@
   {
     "partNo": "AAV18695",
     "partName": "SWITCH MECHANISM FLANGE",
-    "totalGoodQuantity": 10154,
-    "runs": 4,
+    "totalGoodQuantity": 6074,
+    "runs": 3,
     "presses": [
       "3# OCP-110T",
-      "4# SN1-110T",
       "5# OCP-110T"
     ]
   },
@@ -629,40 +615,11 @@
     ]
   },
   {
-    "partNo": "48187057AA",
-    "partName": "HANDLE ARM",
-    "totalGoodQuantity": 374034,
-    "runs": 19,
-    "presses": [
-      "4# SN1-110T"
-    ]
-  },
-  {
-    "partNo": "48187311AA",
-    "partName": "CLAMP PLATE",
-    "totalGoodQuantity": 967344,
-    "runs": 19,
-    "presses": [
-      "4# SN1-110T"
-    ]
-  },
-  {
-    "partNo": "AAV18685",
-    "partName": "SWITCH MECHANISM ROD 1",
-    "totalGoodQuantity": 13020,
-    "runs": 3,
-    "presses": [
-      "4# SN1-110T",
-      "5# OCP-110T"
-    ]
-  },
-  {
     "partNo": "3507-2027",
     "partName": "SHIELD, ASSY, RESOLVER",
-    "totalGoodQuantity": 59016,
-    "runs": 10,
+    "totalGoodQuantity": 41873,
+    "runs": 8,
     "presses": [
-      "4# SN1-110T",
       "5# OCP-110T",
       "6# STD-150T"
     ]
@@ -690,6 +647,15 @@
     "partName": "UPPER LINK",
     "totalGoodQuantity": 197564,
     "runs": 5,
+    "presses": [
+      "5# OCP-110T"
+    ]
+  },
+  {
+    "partNo": "AAV18685",
+    "partName": "SWITCH MECHANISM ROD 1",
+    "totalGoodQuantity": 2970,
+    "runs": 1,
     "presses": [
       "5# OCP-110T"
     ]
@@ -1147,13 +1113,14 @@
   {
     "partNo": "SB-104A-1-1",
     "partName": "BRKT (FE)",
-    "totalGoodQuantity": 15628,
-    "runs": 23,
+    "totalGoodQuantity": 16917,
+    "runs": 24,
     "presses": [
       "8# GTX-500T",
       "9# OCP-110T",
       "11# 200T",
-      "12# 200T"
+      "12# 200T",
+      "13# 110T"
     ]
   },
   {
