@@ -12,10 +12,11 @@
   {
     "partNo": "1118183",
     "partName": "CG TIE BAR",
-    "totalGoodQuantity": 19007,
-    "runs": 2,
+    "totalGoodQuantity": 32880,
+    "runs": 4,
     "presses": [
-      "3# OCP-110T"
+      "3# OCP-110T",
+      "4# SN1-110T"
     ]
   },
   {
@@ -204,11 +205,21 @@
     ]
   },
   {
+    "partNo": "48187058",
+    "partName": "CRADLE",
+    "totalGoodQuantity": 2155095,
+    "runs": 211,
+    "presses": [
+      "4# SN1-110T"
+    ]
+  },
+  {
     "partNo": "48187059",
     "partName": "Lower Link",
-    "totalGoodQuantity": 75877,
-    "runs": 4,
+    "totalGoodQuantity": 168688,
+    "runs": 7,
     "presses": [
+      "4# SN1-110T",
       "5# OCP-110T"
     ]
   },
@@ -278,8 +289,8 @@
   {
     "partNo": "51207070",
     "partName": "BIMETAL (137)",
-    "totalGoodQuantity": 34240506,
-    "runs": 423,
+    "totalGoodQuantity": 34288806,
+    "runs": 424,
     "presses": [
       "3# OCP-110T",
       "5# OCP-110T"
@@ -372,8 +383,8 @@
   {
     "partNo": "W113893530111",
     "partName": "ARC PLATE GV2",
-    "totalGoodQuantity": 61089117,
-    "runs": 257,
+    "totalGoodQuantity": 61517621,
+    "runs": 259,
     "presses": [
       "1# OCP-80T",
       "2# MHS-80T",
@@ -392,29 +403,32 @@
   {
     "partNo": "48187063AA",
     "partName": "Armature High Amp",
-    "totalGoodQuantity": 625407,
-    "runs": 12,
+    "totalGoodQuantity": 1234551,
+    "runs": 26,
     "presses": [
-      "1# OCP-80T"
+      "1# OCP-80T",
+      "4# SN1-110T"
     ]
   },
   {
     "partNo": "48187097AA",
     "partName": "Medium Arc Platel",
-    "totalGoodQuantity": 3116306,
-    "runs": 50,
+    "totalGoodQuantity": 3758158,
+    "runs": 59,
     "presses": [
       "1# OCP-80T",
+      "4# SN1-110T",
       "5# OCP-110T"
     ]
   },
   {
     "partNo": "48187053AA",
     "partName": "High Arc Plate",
-    "totalGoodQuantity": 2418409,
-    "runs": 33,
+    "totalGoodQuantity": 2895293,
+    "runs": 40,
     "presses": [
-      "1# OCP-80T"
+      "1# OCP-80T",
+      "4# SN1-110T"
     ]
   },
   {
@@ -438,8 +452,8 @@
   {
     "partNo": "48187070AA",
     "partName": "Magnet Loop",
-    "totalGoodQuantity": 1400746,
-    "runs": 54,
+    "totalGoodQuantity": 1471746,
+    "runs": 56,
     "presses": [
       "1# OCP-80T"
     ]
@@ -511,10 +525,11 @@
   {
     "partNo": "5037028-AA",
     "partName": "ANTI-ROTATION CLIP",
-    "totalGoodQuantity": 42790,
-    "runs": 3,
+    "totalGoodQuantity": 196842,
+    "runs": 9,
     "presses": [
-      "3# OCP-110T"
+      "3# OCP-110T",
+      "4# SN1-110T"
     ]
   },
   {
@@ -530,8 +545,8 @@
   {
     "partNo": "W113791660114",
     "partName": "SORTIE BOBINE BORNE A1",
-    "totalGoodQuantity": 977589,
-    "runs": 58,
+    "totalGoodQuantity": 984781,
+    "runs": 59,
     "presses": [
       "3# OCP-110T",
       "5# OCP-110T"
@@ -579,8 +594,8 @@
   {
     "partNo": "48187064AA",
     "partName": "YOKE",
-    "totalGoodQuantity": 2380687,
-    "runs": 88,
+    "totalGoodQuantity": 2383795,
+    "runs": 89,
     "presses": [
       "3# OCP-110T",
       "5# OCP-110T"
@@ -589,10 +604,11 @@
   {
     "partNo": "AAV18695",
     "partName": "SWITCH MECHANISM FLANGE",
-    "totalGoodQuantity": 6074,
-    "runs": 3,
+    "totalGoodQuantity": 10154,
+    "runs": 4,
     "presses": [
       "3# OCP-110T",
+      "4# SN1-110T",
       "5# OCP-110T"
     ]
   },
@@ -615,11 +631,40 @@
     ]
   },
   {
+    "partNo": "48187057AA",
+    "partName": "HANDLE ARM",
+    "totalGoodQuantity": 374034,
+    "runs": 19,
+    "presses": [
+      "4# SN1-110T"
+    ]
+  },
+  {
+    "partNo": "48187311AA",
+    "partName": "CLAMP PLATE",
+    "totalGoodQuantity": 967344,
+    "runs": 19,
+    "presses": [
+      "4# SN1-110T"
+    ]
+  },
+  {
+    "partNo": "AAV18685",
+    "partName": "SWITCH MECHANISM ROD 1",
+    "totalGoodQuantity": 13020,
+    "runs": 3,
+    "presses": [
+      "4# SN1-110T",
+      "5# OCP-110T"
+    ]
+  },
+  {
     "partNo": "3507-2027",
     "partName": "SHIELD, ASSY, RESOLVER",
-    "totalGoodQuantity": 41873,
-    "runs": 8,
+    "totalGoodQuantity": 59016,
+    "runs": 10,
     "presses": [
+      "4# SN1-110T",
       "5# OCP-110T",
       "6# STD-150T"
     ]
@@ -647,15 +692,6 @@
     "partName": "UPPER LINK",
     "totalGoodQuantity": 197564,
     "runs": 5,
-    "presses": [
-      "5# OCP-110T"
-    ]
-  },
-  {
-    "partNo": "AAV18685",
-    "partName": "SWITCH MECHANISM ROD 1",
-    "totalGoodQuantity": 2970,
-    "runs": 1,
     "presses": [
       "5# OCP-110T"
     ]
@@ -708,8 +744,8 @@
   {
     "partNo": "1185583-AA",
     "partName": "DIFFUSER",
-    "totalGoodQuantity": 13675,
-    "runs": 7,
+    "totalGoodQuantity": 17907,
+    "runs": 10,
     "presses": [
       "6# STD-150T"
     ]
@@ -753,8 +789,8 @@
   {
     "partNo": "TM-755A-1",
     "partName": "UPPER PLATE",
-    "totalGoodQuantity": 950487,
-    "runs": 201,
+    "totalGoodQuantity": 954108,
+    "runs": 202,
     "presses": [
       "7# GTX-300T",
       "9# OCP-110T",
@@ -798,10 +834,10 @@
     ]
   },
   {
-    "partNo": "SB-092A-1-5",
+    "partNo": "SB-092B-1-5",
     "partName": "SPACER PLATE",
-    "totalGoodQuantity": 9746,
-    "runs": 4,
+    "totalGoodQuantity": 18047,
+    "runs": 6,
     "presses": [
       "7# GTX-300T"
     ]
@@ -881,8 +917,8 @@
   {
     "partNo": "SB-092B-1-3",
     "partName": "STOPPER RING",
-    "totalGoodQuantity": 12061,
-    "runs": 4,
+    "totalGoodQuantity": 15990,
+    "runs": 5,
     "presses": [
       "7# GTX-300T"
     ]
@@ -961,8 +997,8 @@
   {
     "partNo": "TM-865A-1",
     "partName": "OUTER",
-    "totalGoodQuantity": 411833,
-    "runs": 99,
+    "totalGoodQuantity": 425865,
+    "runs": 102,
     "presses": [
       "8# GTX-500T"
     ]
@@ -988,8 +1024,8 @@
   {
     "partNo": "TM-860A-1",
     "partName": "OUTER",
-    "totalGoodQuantity": 302806,
-    "runs": 63,
+    "totalGoodQuantity": 303342,
+    "runs": 64,
     "presses": [
       "8# GTX-500T"
     ]
@@ -1015,8 +1051,8 @@
   {
     "partNo": "SB-068C-1-2",
     "partName": "UPPER BASE",
-    "totalGoodQuantity": 27320,
-    "runs": 15,
+    "totalGoodQuantity": 29362,
+    "runs": 16,
     "presses": [
       "8# GTX-500T"
     ]
@@ -1489,8 +1525,8 @@
   {
     "partNo": "NVE96519",
     "partName": "Resi Cover 6-Way",
-    "totalGoodQuantity": 17711,
-    "runs": 23,
+    "totalGoodQuantity": 20214,
+    "runs": 25,
     "presses": [
       "10# OCP-260 T",
       "11# 200T",
@@ -1530,8 +1566,8 @@
   {
     "partNo": "BRU53771",
     "partName": "U BOX 900mm",
-    "totalGoodQuantity": 1047,
-    "runs": 6,
+    "totalGoodQuantity": 2158,
+    "runs": 9,
     "presses": [
       "10# OCP-260 T",
       "12# 200T"
@@ -1571,10 +1607,11 @@
   {
     "partNo": "BRU53736",
     "partName": "Cover EZ250 900mm 42w",
-    "totalGoodQuantity": 111,
-    "runs": 1,
+    "totalGoodQuantity": 311,
+    "runs": 2,
     "presses": [
-      "10# OCP-260 T"
+      "10# OCP-260 T",
+      "12# 200T"
     ]
   },
   {
@@ -1590,8 +1627,8 @@
   {
     "partNo": "BRU53735",
     "partName": "Cover EZ250 900mm 36w",
-    "totalGoodQuantity": 245,
-    "runs": 3,
+    "totalGoodQuantity": 445,
+    "runs": 4,
     "presses": [
       "10# OCP-260 T",
       "12# 200T"
@@ -1610,8 +1647,8 @@
   {
     "partNo": "BRU53744",
     "partName": "Door 600mm",
-    "totalGoodQuantity": 16196,
-    "runs": 34,
+    "totalGoodQuantity": 18100,
+    "runs": 37,
     "presses": [
       "10# OCP-260 T",
       "11# 200T",
