@@ -187,8 +187,8 @@
   {
     "partNo": "48187088",
     "partName": "MECHSIDE L",
-    "totalGoodQuantity": 1116687,
-    "runs": 105,
+    "totalGoodQuantity": 1139089,
+    "runs": 106,
     "presses": [
       "6# STD-150T"
     ]
@@ -196,8 +196,8 @@
   {
     "partNo": "48187089",
     "partName": "MECHSIDE R",
-    "totalGoodQuantity": 1117168,
-    "runs": 106,
+    "totalGoodQuantity": 1139570,
+    "runs": 107,
     "presses": [
       "6# STD-150T"
     ]
@@ -241,8 +241,8 @@
   {
     "partNo": "51207070",
     "partName": "BIMETAL (137)",
-    "totalGoodQuantity": 34288806,
-    "runs": 424,
+    "totalGoodQuantity": 34296984,
+    "runs": 425,
     "presses": [
       "3# OCP-110T",
       "5# OCP-110T"
@@ -269,8 +269,8 @@
   {
     "partNo": "75170148",
     "partName": "LC 600 Gland Plate",
-    "totalGoodQuantity": 88999,
-    "runs": 124,
+    "totalGoodQuantity": 91597,
+    "runs": 126,
     "presses": [
       "9# OCP-110T",
       "11# 200T",
@@ -335,8 +335,8 @@
   {
     "partNo": "W113893530111",
     "partName": "ARC PLATE GV2",
-    "totalGoodQuantity": 62116093,
-    "runs": 261,
+    "totalGoodQuantity": 62558301,
+    "runs": 263,
     "presses": [
       "1# OCP-80T",
       "2# MHS-80T",
@@ -404,8 +404,8 @@
   {
     "partNo": "48187070AA",
     "partName": "Magnet Loop",
-    "totalGoodQuantity": 1480668,
-    "runs": 57,
+    "totalGoodQuantity": 1490208,
+    "runs": 58,
     "presses": [
       "1# OCP-80T"
     ]
@@ -497,8 +497,8 @@
   {
     "partNo": "W113791660114",
     "partName": "SORTIE BOBINE BORNE A1",
-    "totalGoodQuantity": 984781,
-    "runs": 59,
+    "totalGoodQuantity": 1007895,
+    "runs": 61,
     "presses": [
       "3# OCP-110T",
       "5# OCP-110T"
@@ -585,8 +585,8 @@
   {
     "partNo": "48187057AA",
     "partName": "HANDLE ARM",
-    "totalGoodQuantity": 374034,
-    "runs": 19,
+    "totalGoodQuantity": 429854,
+    "runs": 21,
     "presses": [
       "4# SN1-110T"
     ]
@@ -667,6 +667,15 @@
     ]
   },
   {
+    "partNo": "HRB64565",
+    "partName": "LOAD TERMINAL",
+    "totalGoodQuantity": 4558,
+    "runs": 1,
+    "presses": [
+      "5# OCP-110T"
+    ]
+  },
+  {
     "partNo": "TH-496A-2",
     "partName": "ORIFICE PLATE",
     "totalGoodQuantity": 75488,
@@ -741,8 +750,8 @@
   {
     "partNo": "TM-755A-1",
     "partName": "UPPER PLATE",
-    "totalGoodQuantity": 958202,
-    "runs": 203,
+    "totalGoodQuantity": 966599,
+    "runs": 205,
     "presses": [
       "7# GTX-300T",
       "9# OCP-110T",
@@ -788,8 +797,8 @@
   {
     "partNo": "SB-042B-2-2-1",
     "partName": "LOWER BASE",
-    "totalGoodQuantity": 4002,
-    "runs": 1,
+    "totalGoodQuantity": 6888,
+    "runs": 2,
     "presses": [
       "7# GTX-300T"
     ]
@@ -873,8 +882,8 @@
   {
     "partNo": "TM-867A-1",
     "partName": "ACTUATOR CUP",
-    "totalGoodQuantity": 401189,
-    "runs": 75,
+    "totalGoodQuantity": 420011,
+    "runs": 78,
     "presses": [
       "8# GTX-500T"
     ]
@@ -1261,8 +1270,8 @@
   {
     "partNo": "BRU53718",
     "partName": "Cover EZ100 450mm 12w",
-    "totalGoodQuantity": 10499,
-    "runs": 19,
+    "totalGoodQuantity": 11238,
+    "runs": 20,
     "presses": [
       "10# OCP-260 T",
       "11# 200T",
@@ -1272,8 +1281,8 @@
   {
     "partNo": "BRU53715",
     "partName": "U BOX 600mm",
-    "totalGoodQuantity": 30919,
-    "runs": 58,
+    "totalGoodQuantity": 32341,
+    "runs": 60,
     "presses": [
       "10# OCP-260 T",
       "12# 200T"
@@ -1314,8 +1323,8 @@
   {
     "partNo": "BRU53747",
     "partName": "Door 750mm",
-    "totalGoodQuantity": 4161,
-    "runs": 12,
+    "totalGoodQuantity": 4951,
+    "runs": 13,
     "presses": [
       "10# OCP-260 T",
       "12# 200T"
@@ -1513,8 +1522,8 @@
   {
     "partNo": "BRU53749",
     "partName": "Door 900mm",
-    "totalGoodQuantity": 570,
-    "runs": 5,
+    "totalGoodQuantity": 1066,
+    "runs": 7,
     "presses": [
       "10# OCP-260 T",
       "12# 200T"
