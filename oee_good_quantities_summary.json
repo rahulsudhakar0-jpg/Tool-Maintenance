@@ -159,8 +159,8 @@
   {
     "partNo": "48187058",
     "partName": "CRADLE",
-    "totalGoodQuantity": 2160793,
-    "runs": 212,
+    "totalGoodQuantity": 2163455,
+    "runs": 213,
     "presses": [
       "4# SN1-110T"
     ]
@@ -178,8 +178,8 @@
   {
     "partNo": "48187061",
     "partName": "PRIMARY LATCH",
-    "totalGoodQuantity": 882765,
-    "runs": 40,
+    "totalGoodQuantity": 889571,
+    "runs": 41,
     "presses": [
       "5# OCP-110T"
     ]
@@ -187,8 +187,8 @@
   {
     "partNo": "48187088",
     "partName": "MECHSIDE L",
-    "totalGoodQuantity": 1160862,
-    "runs": 108,
+    "totalGoodQuantity": 1185146,
+    "runs": 110,
     "presses": [
       "6# STD-150T"
     ]
@@ -196,8 +196,8 @@
   {
     "partNo": "48187089",
     "partName": "MECHSIDE R",
-    "totalGoodQuantity": 1161343,
-    "runs": 109,
+    "totalGoodQuantity": 1185627,
+    "runs": 111,
     "presses": [
       "6# STD-150T"
     ]
@@ -312,29 +312,31 @@
   {
     "partNo": "75170155",
     "partName": "LC600 COVER",
-    "totalGoodQuantity": 1396,
-    "runs": 9,
+    "totalGoodQuantity": 1594,
+    "runs": 11,
     "presses": [
       "9# OCP-110T",
       "11# 200T",
+      "12# 200T",
       "13# 110T"
     ]
   },
   {
     "partNo": "75170162",
     "partName": "LC 600 Flat Door",
-    "totalGoodQuantity": 18882,
-    "runs": 25,
+    "totalGoodQuantity": 20381,
+    "runs": 28,
     "presses": [
       "10# OCP-260 T",
-      "11# 200T"
+      "11# 200T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "W113893530111",
     "partName": "ARC PLATE GV2",
-    "totalGoodQuantity": 63165933,
-    "runs": 265,
+    "totalGoodQuantity": 63581125,
+    "runs": 267,
     "presses": [
       "1# OCP-80T",
       "2# MHS-80T",
@@ -402,8 +404,8 @@
   {
     "partNo": "48187070AA",
     "partName": "Magnet Loop",
-    "totalGoodQuantity": 1504000,
-    "runs": 59,
+    "totalGoodQuantity": 1542310,
+    "runs": 61,
     "presses": [
       "1# OCP-80T"
     ]
@@ -496,8 +498,8 @@
   {
     "partNo": "W113791660114",
     "partName": "SORTIE BOBINE BORNE A1",
-    "totalGoodQuantity": 1037328,
-    "runs": 63,
+    "totalGoodQuantity": 1040577,
+    "runs": 64,
     "presses": [
       "3# OCP-110T",
       "5# OCP-110T"
@@ -584,8 +586,8 @@
   {
     "partNo": "48187057AA",
     "partName": "HANDLE ARM",
-    "totalGoodQuantity": 497269,
-    "runs": 24,
+    "totalGoodQuantity": 523387,
+    "runs": 26,
     "presses": [
       "4# SN1-110T"
     ]
@@ -747,14 +749,12 @@
     ]
   },
   {
-    "partNo": "TM-755A-1",
-    "partName": "UPPER PLATE",
-    "totalGoodQuantity": 978098,
-    "runs": 207,
+    "partNo": "SB-062C-2",
+    "partName": "Orifice Plate",
+    "totalGoodQuantity": 44219,
+    "runs": 9,
     "presses": [
-      "7# GTX-300T",
-      "9# OCP-110T",
-      "13# 110T"
+      "7# GTX-300T"
     ]
   },
   {
@@ -794,6 +794,17 @@
     ]
   },
   {
+    "partNo": "TM-755A-1",
+    "partName": "UPPER PLATE",
+    "totalGoodQuantity": 40639,
+    "runs": 25,
+    "presses": [
+      "7# GTX-300T",
+      "9# OCP-110T",
+      "13# 110T"
+    ]
+  },
+  {
     "partNo": "SB-042B-2-2-1",
     "partName": "LOWER BASE",
     "totalGoodQuantity": 6888,
@@ -803,10 +814,19 @@
     ]
   },
   {
+    "partNo": "SB-068A-1-3",
+    "partName": "UPPER RING",
+    "totalGoodQuantity": 8674,
+    "runs": 2,
+    "presses": [
+      "7# GTX-300T"
+    ]
+  },
+  {
     "partNo": "TH-538A-2-1",
     "partName": "BRKT(FE)",
-    "totalGoodQuantity": 6124,
-    "runs": 18,
+    "totalGoodQuantity": 9120,
+    "runs": 22,
     "presses": [
       "8# GTX-500T",
       "9# OCP-110T",
@@ -825,8 +845,8 @@
   {
     "partNo": "SB-068C-1-1",
     "partName": "BRACKET",
-    "totalGoodQuantity": 41729,
-    "runs": 36,
+    "totalGoodQuantity": 45207,
+    "runs": 39,
     "presses": [
       "8# GTX-500T",
       "10# OCP-260 T",
@@ -900,12 +920,13 @@
   {
     "partNo": "SB-092B-1-1",
     "partName": "ACTIVE BRACKET UPPER",
-    "totalGoodQuantity": 38357,
-    "runs": 62,
+    "totalGoodQuantity": 41785,
+    "runs": 65,
     "presses": [
       "8# GTX-500T",
       "10# OCP-260 T",
-      "11# 200T"
+      "11# 200T",
+      "12# 200T"
     ]
   },
   {
@@ -956,13 +977,14 @@
   {
     "partNo": "SB-059C-2",
     "partName": "Upper Cup",
-    "totalGoodQuantity": 172151,
-    "runs": 125,
+    "totalGoodQuantity": 191833,
+    "runs": 138,
     "presses": [
       "8# GTX-500T",
       "9# OCP-110T",
       "10# OCP-260 T",
       "11# 200T",
+      "12# 200T",
       "13# 110T"
     ]
   },
@@ -987,23 +1009,25 @@
   {
     "partNo": "BRU53717",
     "partName": "Gland plate",
-    "totalGoodQuantity": 133853,
-    "runs": 94,
+    "totalGoodQuantity": 152014,
+    "runs": 111,
     "presses": [
       "8# GTX-500T",
       "10# OCP-260 T",
-      "11# 200T"
+      "11# 200T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "SB-104A-1-1",
     "partName": "BRKT (FE)",
-    "totalGoodQuantity": 15631,
-    "runs": 23,
+    "totalGoodQuantity": 16917,
+    "runs": 24,
     "presses": [
       "8# GTX-500T",
       "9# OCP-110T",
       "11# 200T",
+      "12# 200T",
       "13# 110T"
     ]
   },
@@ -1055,8 +1079,8 @@
   {
     "partNo": "TH-538A-1",
     "partName": "BRKT(FE)",
-    "totalGoodQuantity": 778,
-    "runs": 1,
+    "totalGoodQuantity": 1106,
+    "runs": 2,
     "presses": [
       "8# GTX-500T"
     ]
@@ -1091,11 +1115,12 @@
   {
     "partNo": "BRU53724",
     "partName": "Cover LUG100 450mm 12w",
-    "totalGoodQuantity": 1285,
-    "runs": 6,
+    "totalGoodQuantity": 1980,
+    "runs": 8,
     "presses": [
       "9# OCP-110T",
-      "10# OCP-260 T"
+      "10# OCP-260 T",
+      "12# 200T"
     ]
   },
   {
@@ -1111,8 +1136,8 @@
   {
     "partNo": "SB-042E-2-2",
     "partName": "Passive Bracket Assembly",
-    "totalGoodQuantity": 48545,
-    "runs": 55,
+    "totalGoodQuantity": 49346,
+    "runs": 56,
     "presses": [
       "9# OCP-110T",
       "11# 200T",
@@ -1122,12 +1147,13 @@
   {
     "partNo": "NVE96549",
     "partName": "Resi Box Bracket",
-    "totalGoodQuantity": 72102,
-    "runs": 58,
+    "totalGoodQuantity": 128638,
+    "runs": 87,
     "presses": [
       "9# OCP-110T",
       "10# OCP-260 T",
       "11# 200T",
+      "12# 200T",
       "13# 110T"
     ]
   },
@@ -1170,41 +1196,45 @@
   {
     "partNo": "NMS/BRU30891",
     "partName": "METAL COVER 6 WAY",
-    "totalGoodQuantity": 17356,
-    "runs": 21,
+    "totalGoodQuantity": 18707,
+    "runs": 25,
     "presses": [
       "10# OCP-260 T",
-      "11# 200T"
+      "11# 200T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "NMS/BRU30890",
     "partName": "METAL COVER 4 WAY",
-    "totalGoodQuantity": 18625,
-    "runs": 20,
+    "totalGoodQuantity": 25169,
+    "runs": 26,
     "presses": [
       "10# OCP-260 T",
-      "11# 200T"
+      "11# 200T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "NMS/BRU30888",
     "partName": "Metal Box8-10WAY",
-    "totalGoodQuantity": 27044,
-    "runs": 38,
+    "totalGoodQuantity": 30838,
+    "runs": 43,
     "presses": [
       "10# OCP-260 T",
-      "11# 200T"
+      "11# 200T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "NMS/BRU30889",
     "partName": "Metal Box 14WAY",
-    "totalGoodQuantity": 9871,
-    "runs": 15,
+    "totalGoodQuantity": 11045,
+    "runs": 17,
     "presses": [
       "10# OCP-260 T",
-      "11# 200T"
+      "11# 200T",
+      "12# 200T"
     ]
   },
   {
@@ -1219,11 +1249,12 @@
   {
     "partNo": "NMS/BRU30892",
     "partName": "Metal Cover 8 WAY",
-    "totalGoodQuantity": 12142,
-    "runs": 16,
+    "totalGoodQuantity": 14133,
+    "runs": 19,
     "presses": [
       "10# OCP-260 T",
-      "11# 200T"
+      "11# 200T",
+      "12# 200T"
     ]
   },
   {
@@ -1249,8 +1280,8 @@
   {
     "partNo": "BRU53714",
     "partName": "U BOX 450mm",
-    "totalGoodQuantity": 29274,
-    "runs": 47,
+    "totalGoodQuantity": 30228,
+    "runs": 48,
     "presses": [
       "10# OCP-260 T",
       "12# 200T"
@@ -1259,18 +1290,19 @@
   {
     "partNo": "BRU53718",
     "partName": "Cover EZ100 450mm 12w",
-    "totalGoodQuantity": 6028,
-    "runs": 13,
+    "totalGoodQuantity": 11238,
+    "runs": 20,
     "presses": [
       "10# OCP-260 T",
-      "11# 200T"
+      "11# 200T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "BRU53715",
     "partName": "U BOX 600mm",
-    "totalGoodQuantity": 23059,
-    "runs": 44,
+    "totalGoodQuantity": 33938,
+    "runs": 63,
     "presses": [
       "10# OCP-260 T",
       "12# 200T"
@@ -1279,37 +1311,40 @@
   {
     "partNo": "BRU53719",
     "partName": "Cover EZ100 600mm 18w",
-    "totalGoodQuantity": 3757,
-    "runs": 9,
+    "totalGoodQuantity": 9700,
+    "runs": 17,
     "presses": [
       "10# OCP-260 T",
-      "11# 200T"
+      "11# 200T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "BRU53716",
     "partName": "U BOX 750mm",
-    "totalGoodQuantity": 5128,
-    "runs": 17,
+    "totalGoodQuantity": 8111,
+    "runs": 25,
     "presses": [
-      "10# OCP-260 T"
+      "10# OCP-260 T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "BRU53722",
     "partName": "Cover EZ100 750mm 36w",
-    "totalGoodQuantity": 3213,
-    "runs": 12,
+    "totalGoodQuantity": 4935,
+    "runs": 19,
     "presses": [
       "10# OCP-260 T",
-      "11# 200T"
+      "11# 200T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "BRU53747",
     "partName": "Door 750mm",
-    "totalGoodQuantity": 4955,
-    "runs": 13,
+    "totalGoodQuantity": 5155,
+    "runs": 14,
     "presses": [
       "10# OCP-260 T",
       "12# 200T"
@@ -1318,146 +1353,161 @@
   {
     "partNo": "NVE96528",
     "partName": "BOX 2+10，10 WAY",
-    "totalGoodQuantity": 11792,
-    "runs": 14,
+    "totalGoodQuantity": 15233,
+    "runs": 17,
     "presses": [
       "10# OCP-260 T",
-      "11# 200T"
+      "11# 200T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "NVE96526",
     "partName": "Metal Cover 10-Way",
-    "totalGoodQuantity": 20320,
-    "runs": 31,
+    "totalGoodQuantity": 29411,
+    "runs": 41,
     "presses": [
       "10# OCP-260 T",
-      "11# 200T"
+      "11# 200T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "NMS/BRU30887",
     "partName": "Metal Box4-6WAY",
-    "totalGoodQuantity": 89193,
-    "runs": 119,
+    "totalGoodQuantity": 111395,
+    "runs": 150,
     "presses": [
       "10# OCP-260 T",
-      "11# 200T"
+      "11# 200T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "BRU53723",
     "partName": "Cover EZ100 750mm 42w",
-    "totalGoodQuantity": 891,
-    "runs": 4,
+    "totalGoodQuantity": 1811,
+    "runs": 9,
     "presses": [
       "10# OCP-260 T",
-      "11# 200T"
+      "11# 200T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "BRU53721",
     "partName": "Cover EZ100 600mm 30w",
-    "totalGoodQuantity": 1991,
-    "runs": 6,
+    "totalGoodQuantity": 4829,
+    "runs": 15,
     "presses": [
       "10# OCP-260 T",
-      "11# 200T"
+      "11# 200T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "BRU53720",
     "partName": "Cover EZ100 600mm 24w",
-    "totalGoodQuantity": 16149,
-    "runs": 31,
+    "totalGoodQuantity": 19465,
+    "runs": 35,
     "presses": [
       "10# OCP-260 T",
-      "11# 200T"
+      "11# 200T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "QGH11468",
     "partName": "Resi Cover 4-Way",
-    "totalGoodQuantity": 20559,
-    "runs": 20,
+    "totalGoodQuantity": 39257,
+    "runs": 38,
     "presses": [
       "10# OCP-260 T",
-      "11# 200T"
+      "11# 200T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "NVE96519",
     "partName": "Resi Cover 6-Way",
-    "totalGoodQuantity": 14678,
-    "runs": 17,
+    "totalGoodQuantity": 20214,
+    "runs": 25,
     "presses": [
       "10# OCP-260 T",
-      "11# 200T"
+      "11# 200T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "BRU53727",
     "partName": "Cover LUG100 600mm 30w",
-    "totalGoodQuantity": 1989,
-    "runs": 12,
+    "totalGoodQuantity": 2223,
+    "runs": 13,
     "presses": [
       "10# OCP-260 T",
-      "11# 200T"
+      "11# 200T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "BRU53731",
     "partName": "Cover EZ250 600mm 18w",
-    "totalGoodQuantity": 207,
-    "runs": 2,
+    "totalGoodQuantity": 411,
+    "runs": 3,
     "presses": [
-      "10# OCP-260 T"
+      "10# OCP-260 T",
+      "11# 200T"
     ]
   },
   {
     "partNo": "BRU53730",
     "partName": "Cover EZ250 600mm 12w",
-    "totalGoodQuantity": 35,
-    "runs": 1,
+    "totalGoodQuantity": 371,
+    "runs": 4,
     "presses": [
-      "10# OCP-260 T"
+      "10# OCP-260 T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "BRU53771",
     "partName": "U BOX 900mm",
-    "totalGoodQuantity": 2864,
-    "runs": 10,
+    "totalGoodQuantity": 3028,
+    "runs": 11,
     "presses": [
-      "10# OCP-260 T"
+      "10# OCP-260 T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "BRU53734",
     "partName": "Cover EZ250 750mm 30w",
-    "totalGoodQuantity": 183,
-    "runs": 2,
+    "totalGoodQuantity": 583,
+    "runs": 4,
     "presses": [
-      "10# OCP-260 T"
+      "10# OCP-260 T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "BRU53732",
     "partName": "Cover EZ250 750mm 24w",
-    "totalGoodQuantity": 125,
-    "runs": 2,
+    "totalGoodQuantity": 537,
+    "runs": 5,
     "presses": [
-      "10# OCP-260 T"
+      "10# OCP-260 T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "BRU53737",
     "partName": "Cover EZ250 900mm 48w",
-    "totalGoodQuantity": 626,
-    "runs": 3,
+    "totalGoodQuantity": 706,
+    "runs": 4,
     "presses": [
       "10# OCP-260 T",
-      "11# 200T"
+      "11# 200T",
+      "12# 200T"
     ]
   },
   {
@@ -1473,26 +1523,28 @@
   {
     "partNo": "BRU53740",
     "partName": "Cover LUG250 600mm 24w",
-    "totalGoodQuantity": 1479,
-    "runs": 6,
+    "totalGoodQuantity": 1563,
+    "runs": 7,
     "presses": [
-      "10# OCP-260 T"
+      "10# OCP-260 T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "BRU53735",
     "partName": "Cover EZ250 900mm 36w",
-    "totalGoodQuantity": 170,
-    "runs": 2,
+    "totalGoodQuantity": 445,
+    "runs": 4,
     "presses": [
-      "10# OCP-260 T"
+      "10# OCP-260 T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "BRU53749",
     "partName": "Door 900mm",
-    "totalGoodQuantity": 824,
-    "runs": 5,
+    "totalGoodQuantity": 1466,
+    "runs": 9,
     "presses": [
       "10# OCP-260 T",
       "12# 200T"
@@ -1501,11 +1553,12 @@
   {
     "partNo": "BRU53744",
     "partName": "Door 600mm",
-    "totalGoodQuantity": 12542,
-    "runs": 29,
+    "totalGoodQuantity": 19520,
+    "runs": 39,
     "presses": [
       "10# OCP-260 T",
-      "11# 200T"
+      "11# 200T",
+      "12# 200T"
     ]
   },
   {
@@ -1521,88 +1574,169 @@
   {
     "partNo": "BRU53726",
     "partName": "Cover LUG100 600mm 24w",
-    "totalGoodQuantity": 2826,
-    "runs": 11,
+    "totalGoodQuantity": 3242,
+    "runs": 13,
     "presses": [
       "10# OCP-260 T",
-      "11# 200T"
+      "11# 200T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "BRU53743",
     "partName": "Door 450mm",
-    "totalGoodQuantity": 7360,
-    "runs": 18,
+    "totalGoodQuantity": 12525,
+    "runs": 29,
     "presses": [
       "10# OCP-260 T",
-      "11# 200T"
+      "11# 200T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "NVE96533",
     "partName": "Resi Cover 14-Way",
-    "totalGoodQuantity": 80,
-    "runs": 2,
+    "totalGoodQuantity": 120,
+    "runs": 3,
     "presses": [
       "10# OCP-260 T",
-      "11# 200T"
+      "11# 200T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "NVE96542",
     "partName": "Resi Cover 18Way",
-    "totalGoodQuantity": 107,
-    "runs": 3,
+    "totalGoodQuantity": 201,
+    "runs": 6,
     "presses": [
       "10# OCP-260 T",
-      "11# 200T"
+      "11# 200T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "NVE96520",
     "partName": "BOX 2+6，6 WAY",
-    "totalGoodQuantity": 20144,
-    "runs": 16,
+    "totalGoodQuantity": 34999,
+    "runs": 27,
     "presses": [
       "10# OCP-260 T",
-      "11# 200T"
+      "11# 200T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "PDB DBF60-8-U",
     "partName": "METAL BOX",
-    "totalGoodQuantity": 200,
-    "runs": 1,
+    "totalGoodQuantity": 300,
+    "runs": 2,
     "presses": [
-      "10# OCP-260 T"
+      "10# OCP-260 T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "BRU53729",
     "partName": "Cover LUG100 750mm 42w",
-    "totalGoodQuantity": 846,
-    "runs": 8,
+    "totalGoodQuantity": 1355,
+    "runs": 15,
     "presses": [
       "10# OCP-260 T",
-      "11# 200T"
+      "11# 200T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "NVE96535",
     "partName": "BOX 2+14，14 WAY",
-    "totalGoodQuantity": 73,
-    "runs": 2,
+    "totalGoodQuantity": 161,
+    "runs": 4,
     "presses": [
-      "11# 200T"
+      "11# 200T",
+      "12# 200T"
     ]
   },
   {
     "partNo": "BRU53745",
     "partName": "Cover LUG250 750mm 42w",
-    "totalGoodQuantity": 122,
-    "runs": 2,
+    "totalGoodQuantity": 183,
+    "runs": 3,
     "presses": [
-      "11# 200T"
+      "11# 200T",
+      "12# 200T"
+    ]
+  },
+  {
+    "partNo": "PDB DBF45-8-U",
+    "partName": "METAL BOX",
+    "totalGoodQuantity": 800,
+    "runs": 3,
+    "presses": [
+      "12# 200T"
+    ]
+  },
+  {
+    "partNo": "QGH14027",
+    "partName": "ResiCover 8+4Way",
+    "totalGoodQuantity": 146,
+    "runs": 3,
+    "presses": [
+      "12# 200T"
+    ]
+  },
+  {
+    "partNo": "QGH13944",
+    "partName": "Resi Cover 4+4-Way",
+    "totalGoodQuantity": 72,
+    "runs": 3,
+    "presses": [
+      "12# 200T"
+    ]
+  },
+  {
+    "partNo": "QGH14032",
+    "partName": "Resi Cover 8+8Way",
+    "totalGoodQuantity": 151,
+    "runs": 3,
+    "presses": [
+      "12# 200T"
+    ]
+  },
+  {
+    "partNo": "NVE96543",
+    "partName": "BOX 2+18，18 WAY",
+    "totalGoodQuantity": 70,
+    "runs": 1,
+    "presses": [
+      "12# 200T"
+    ]
+  },
+  {
+    "partNo": "BRU53738",
+    "partName": "Cover LUG250 450mm 12w",
+    "totalGoodQuantity": 37,
+    "runs": 1,
+    "presses": [
+      "12# 200T"
+    ]
+  },
+  {
+    "partNo": "BRU53746",
+    "partName": "Cover LUG250 900mm 48w",
+    "totalGoodQuantity": 30,
+    "runs": 1,
+    "presses": [
+      "12# 200T"
+    ]
+  },
+  {
+    "partNo": "PDB DBS30-8-U",
+    "partName": "METAL BOX WH CSL",
+    "totalGoodQuantity": 400,
+    "runs": 1,
+    "presses": [
+      "12# 200T"
     ]
   }
 ]
